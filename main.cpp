@@ -1,6 +1,12 @@
-#include <iostream>
+#include "Game.h"
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
+int main(int argc, char* argv[]) {
+    if(Game::getInstance()->initialise()){
+        while(Game::getInstance()->isRunning()){
+            Game::getInstance()->handleInput();
+            Game::getInstance()->update();
+            Game::getInstance()->render();
+        }
+    }
     return 0;
 }
