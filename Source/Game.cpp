@@ -1,4 +1,5 @@
 #include "../Header/Game.h"
+#include "../Header/TextureManager.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -17,15 +18,9 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
 //        SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 255, 255);
 
-
-//        m_pMap = new Map();
-        testLine = new Line(100, 100, 200, 200);
-        testNode = new Node(new Point(100, 130), new Point(225, 109), new Point(200, 200), new Point(311, 195));
-
-
         m_pMap = new Map();
 
-
+        TextureManager::getInstance()->loadSvg(m_pRenderer,"../Assets/player.svg","playa");
 
 
 
@@ -62,9 +57,10 @@ void Game::render() {
     SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
 
     // SDL_RenderCopy( /* ... */ );
-//    SDL_RenderDrawLine(m_pRenderer, testLine);
-//    testNode->draw(m_pRenderer);
+//    SDL_RenderCopy(m_pRenderer, TextureManager::getInstance()->getTexture("playa"), NULL, NULL);
 
+
+    TextureManager::getInstance()->draw(m_pRenderer, "playa", 100, 100, 220, 220);
     m_pMap->draw(m_pRenderer);
 
     SDL_RenderPresent(m_pRenderer);

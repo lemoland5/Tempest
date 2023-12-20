@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="640"
+   height="640"
+   viewBox="0 0 169.3344 169.33335"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <g
+     id="layer1">
+    <g
+       id="g9025"
+       transform="matrix(6.1529759,0,0,6.1529759,-0.41511724,-0.51651672)">
+      <rect
+         style="fill:#627270;stroke:none;stroke-width:1.58565;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
+         id="rect234"
+         width="27.682268"
+         height="27.682268"
+         x="0.08055874"
+         y="0.10023659"
+         ry="0" />
+      <ellipse
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
+         id="path952"
+         cx="15.628155"
+         cy="21.767651"
+         rx="3.9721811"
+         ry="4.0145416" />
+      <ellipse
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
+         id="path952-1"
+         cx="5.931263"
+         cy="13.719919"
+         rx="3.9721811"
+         ry="4.0145416" />
+      <ellipse
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
+         id="path952-0"
+         cx="20.909737"
+         cy="8.3900042"
+         rx="3.9721811"
+         ry="4.0145416" />
+    </g>
+  </g>
+</svg>

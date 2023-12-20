@@ -4,8 +4,6 @@
 #include <SDL.h>
 #include <vector>
 
-const int MAX_SEGMENTS = 16;
-
 class Map {
 public:
 //    Map(Node* nodes[]);

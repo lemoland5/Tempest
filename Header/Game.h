@@ -29,6 +29,4 @@ private:
     Map* m_pMap;
     bool m_isRunning;
 
-    Line* testLine;
-    Node* testNode;
 };
