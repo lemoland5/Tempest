@@ -73,6 +73,14 @@ build CMakeFiles\Tempest.dir\Source\Map.cpp.obj: CXX_COMPILER__Tempest_unscanned
   TARGET_COMPILE_PDB = CMakeFiles\Tempest.dir\
   TARGET_PDB = Tempest.pdb
 
+build CMakeFiles\Tempest.dir\Source\MapLoader.cpp.obj: CXX_COMPILER__Tempest_unscanned_Debug C$:\Users\Niep\Desktop\Tempest\Source\MapLoader.cpp || cmake_object_order_depends_target_Tempest
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
+  INCLUDES = -external:IC:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\include -external:IC:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\include\SDL2 -external:W0
+  OBJECT_DIR = CMakeFiles\Tempest.dir
+  OBJECT_FILE_DIR = CMakeFiles\Tempest.dir\Source
+  TARGET_COMPILE_PDB = CMakeFiles\Tempest.dir\
+  TARGET_PDB = Tempest.pdb
+
 build CMakeFiles\Tempest.dir\Source\Game.cpp.obj: CXX_COMPILER__Tempest_unscanned_Debug C$:\Users\Niep\Desktop\Tempest\Source\Game.cpp || cmake_object_order_depends_target_Tempest
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
   INCLUDES = -external:IC:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\include -external:IC:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\include\SDL2 -external:W0
@@ -105,7 +113,7 @@ build CMakeFiles\Tempest.dir\Source\TextureManager.cpp.obj: CXX_COMPILER__Tempes
 #############################################
 # Link the executable Tempest.exe
 
-build Tempest.exe: CXX_EXECUTABLE_LINKER__Tempest_Debug CMakeFiles\Tempest.dir\Source\main.cpp.obj CMakeFiles\Tempest.dir\Source\Node.cpp.obj CMakeFiles\Tempest.dir\Source\Map.cpp.obj CMakeFiles\Tempest.dir\Source\Game.cpp.obj CMakeFiles\Tempest.dir\Source\Actor.cpp.obj CMakeFiles\Tempest.dir\Source\TextureManager.cpp.obj | C$:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\manual-link\SDL2maind.lib C$:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\SDL2_imaged.lib C$:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\SDL2d.lib
+build Tempest.exe: CXX_EXECUTABLE_LINKER__Tempest_Debug CMakeFiles\Tempest.dir\Source\main.cpp.obj CMakeFiles\Tempest.dir\Source\Node.cpp.obj CMakeFiles\Tempest.dir\Source\Map.cpp.obj CMakeFiles\Tempest.dir\Source\MapLoader.cpp.obj CMakeFiles\Tempest.dir\Source\Game.cpp.obj CMakeFiles\Tempest.dir\Source\Actor.cpp.obj CMakeFiles\Tempest.dir\Source\TextureManager.cpp.obj | C$:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\manual-link\SDL2maind.lib C$:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\SDL2_imaged.lib C$:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\SDL2d.lib
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = C:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\manual-link\SDL2maind.lib  C:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\SDL2_imaged.lib  shell32.lib  C:\Users\Niep\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\SDL2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

@@ -10,6 +10,8 @@ add_executable(Tempest
         Header/Node.h
         Source/Map.cpp
         Header/Map.h
+        Source/MapLoader.cpp
+        Header/MapLoader.h
         Source/Game.cpp
         Header/Game.h
         Source/Actor.cpp
