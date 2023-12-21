@@ -1,0 +1,10 @@
+^C:\USERS\MAX\DESKTOP\TEMPEST\HELLO WORLDF\BUILD\CMAKEFILES\DAD838BC7C7DFF97C1576B7ADC2CCC0D\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/MAX/Desktop/Tempest/hello worldf/build" "-BC:/Users/MAX/Desktop/Tempest/hello worldf/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/MAX/Desktop/Tempest/hello worldf/build/Tutorial.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
