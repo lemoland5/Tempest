@@ -1,2 +1,0 @@
-C:/Users/MAX/Desktop/Tempest/hello worldf/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/MAX/Desktop/Tempest/hello worldf/build/CMakeFiles/ZERO_CHECK.dir
