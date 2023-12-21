@@ -7,8 +7,31 @@
    viewBox="0 0 169.3344 169.33335"
    version="1.1"
    id="svg5"
+   sodipodi:docname="player.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.3078125"
+     inkscape:cx="238.56631"
+     inkscape:cy="321.14695"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g9025" />
   <defs
      id="defs2" />
   <g
@@ -17,7 +40,7 @@
        id="g9025"
        transform="matrix(6.1529759,0,0,6.1529759,-0.41511724,-0.51651672)">
       <rect
-         style="fill:#627270;stroke:none;stroke-width:1.58565;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
+         style="fill:#880031;stroke:none;stroke-width:1.58565;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers;fill-opacity:1"
          id="rect234"
          width="27.682268"
          height="27.682268"
@@ -25,21 +48,21 @@
          y="0.10023659"
          ry="0" />
       <ellipse
-         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
+         style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
          id="path952"
          cx="15.628155"
          cy="21.767651"
          rx="3.9721811"
          ry="4.0145416" />
       <ellipse
-         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
+         style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
          id="path952-1"
          cx="5.931263"
          cy="13.719919"
          rx="3.9721811"
          ry="4.0145416" />
       <ellipse
-         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
+         style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
          id="path952-0"
          cx="20.909737"
          cy="8.3900042"

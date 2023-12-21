@@ -26,3 +26,4 @@ target_link_libraries(${PROJECT_NAME}
         $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
         $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
 )
+cmake_minimum_required(VERSION 3.26)
