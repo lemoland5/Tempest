@@ -17,7 +17,9 @@ add_executable(Tempest
         Source/Actor.cpp
         Header/Actor.h
         Source/TextureManager.cpp
-        Header/TextureManager.h)
+        Header/TextureManager.h
+        Source/EventHandler.cpp
+        Header/EventHandler.h)
 
 find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_image CONFIG REQUIRED)

@@ -1,6 +1,7 @@
 #include "../Header/Game.h"
 #include "../Header/MapLoader.h"
 #include "../Header/TextureManager.h"
+#include "../Header/EventHandler.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -37,6 +38,8 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 }
 
 void Game::handleInput() {
+    EventHandler::getInstance()->update();
+
     SDL_Event event;
     SDL_PollEvent(&event);
 
@@ -50,6 +53,11 @@ void Game::handleInput() {
             }
             break;
     }
+
+//    if(EventHandler::getInstance()->isKeyDown(SDL_SCANCODE_W)){
+//        std::cout<<"W \n";
+//    }
+
 }
 
 void Game::update() {
