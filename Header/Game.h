@@ -2,6 +2,7 @@
 
 #include "Map.h"
 #include "SDL_overload.h"
+#include "Player.h"
 #include <string>
 
 const unsigned int WINDOW_WIDTH = 640;
@@ -32,6 +33,7 @@ private:
     SDL_Window *m_pWindow;
     SDL_Renderer *m_pRenderer;
     Map *m_pMap;
+    Player* m_pPlayer;
     bool m_isRunning;
 
 };

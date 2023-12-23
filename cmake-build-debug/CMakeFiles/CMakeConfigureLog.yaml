@@ -17,17 +17,17 @@ events:
       - "CMakeLists.txt:2 (project)"
     message: |
       Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-      Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x64/cl.exe 
+      Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe 
       Build flags: 
       Id flags:  
       
       The output was:
       0
-      Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31942 for x64
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.36.32537 for x64
       Copyright (C) Microsoft Corporation.  All rights reserved.
       
       CMakeCCompilerId.c
-      Microsoft (R) Incremental Linker Version 14.34.31942.0
+      Microsoft (R) Incremental Linker Version 14.36.32537.0
       Copyright (C) Microsoft Corporation.  All rights reserved.
       
       /out:CMakeCCompilerId.exe 
@@ -39,7 +39,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
       
       The C compiler identification is MSVC, found in:
-        C:/Users/Niep/Desktop/Tempest/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/CMakeCCompilerId.exe
+        C:/Users/MAX/CLionProjects/Temp/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/CMakeCCompilerId.exe
       
   -
     kind: "message-v1"
@@ -51,7 +51,7 @@ events:
     message: |
       Detecting C compiler /showIncludes prefix:
         main.c
-        Note: including file: C:\\Users\\Niep\\Desktop\\Tempest\\cmake-build-debug\\CMakeFiles\\ShowIncludes\\foo.h
+        Note: including file: C:\\Users\\MAX\\CLionProjects\\Temp\\cmake-build-debug\\CMakeFiles\\ShowIncludes\\foo.h
         
       Found prefix "Note: including file: "
   -
@@ -63,17 +63,17 @@ events:
       - "CMakeLists.txt:2 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-      Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x64/cl.exe 
+      Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe 
       Build flags: 
       Id flags:  
       
       The output was:
       0
-      Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31942 for x64
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.36.32537 for x64
       Copyright (C) Microsoft Corporation.  All rights reserved.
       
       CMakeCXXCompilerId.cpp
-      Microsoft (R) Incremental Linker Version 14.34.31942.0
+      Microsoft (R) Incremental Linker Version 14.36.32537.0
       Copyright (C) Microsoft Corporation.  All rights reserved.
       
       /out:CMakeCXXCompilerId.exe 
@@ -85,7 +85,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
       
       The CXX compiler identification is MSVC, found in:
-        C:/Users/Niep/Desktop/Tempest/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/CMakeCXXCompilerId.exe
+        C:/Users/MAX/CLionProjects/Temp/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/CMakeCXXCompilerId.exe
       
   -
     kind: "message-v1"
@@ -97,7 +97,7 @@ events:
     message: |
       Detecting CXX compiler /showIncludes prefix:
         main.c
-        Note: including file: C:\\Users\\Niep\\Desktop\\Tempest\\cmake-build-debug\\CMakeFiles\\ShowIncludes\\foo.h
+        Note: including file: C:\\Users\\MAX\\CLionProjects\\Temp\\cmake-build-debug\\CMakeFiles\\ShowIncludes\\foo.h
         
       Found prefix "Note: including file: "
   -
@@ -109,23 +109,23 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/Niep/Desktop/Tempest/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-m2caxp"
-      binary: "C:/Users/Niep/Desktop/Tempest/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-m2caxp"
+      source: "C:/Users/MAX/CLionProjects/Temp/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-w1mdjr"
+      binary: "C:/Users/MAX/CLionProjects/Temp/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-w1mdjr"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
-      Z_VCPKG_ROOT_DIR: "C:/Users/Niep/.vcpkg-clion/vcpkg"
+      Z_VCPKG_ROOT_DIR: "C:/Users/MAX/.vcpkg-clion/vcpkg"
     buildResult:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: C:/Users/Niep/Desktop/Tempest/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-m2caxp
+        Change Dir: C:/Users/MAX/CLionProjects/Temp/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-w1mdjr
         
-        Run Build Command(s):C:/Program Files/JetBrains/CLion 2023.2.2/bin/ninja/win/x64/ninja.exe -v cmTC_00557 && [1/2] C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1434~1.319\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_00557.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_00557.dir\\ /FS -c "C:\\Program Files\\JetBrains\\CLion 2023.2.2\\bin\\cmake\\win\\x64\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.2.2\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_00557.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1434~1.319\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_00557.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_00557.exe /implib:cmTC_00557.lib /pdb:cmTC_00557.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\Niep\\Desktop\\Tempest\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-m2caxp && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/Niep/.vcpkg-clion/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/Niep/Desktop/Tempest/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-m2caxp/cmTC_00557.exe -installedDir C:/Users/Niep/.vcpkg-clion/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        Run Build Command(s):C:/Program Files/JetBrains/CLion 2023.2.2/bin/ninja/win/x64/ninja.exe -v cmTC_d264f && [1/2] C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_d264f.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_d264f.dir\\ /FS -c "C:\\Program Files\\JetBrains\\CLion 2023.2.2\\bin\\cmake\\win\\x64\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.2.2\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_d264f.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_d264f.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_d264f.exe /implib:cmTC_d264f.lib /pdb:cmTC_d264f.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\MAX\\CLionProjects\\Temp\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-w1mdjr && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/MAX/.vcpkg-clion/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/MAX/CLionProjects/Temp/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-w1mdjr/cmTC_d264f.exe -installedDir C:/Users/MAX/.vcpkg-clion/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
         
       exitCode: 0
   -
@@ -137,23 +137,23 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/Niep/Desktop/Tempest/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-xjjln3"
-      binary: "C:/Users/Niep/Desktop/Tempest/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-xjjln3"
+      source: "C:/Users/MAX/CLionProjects/Temp/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-v7vofh"
+      binary: "C:/Users/MAX/CLionProjects/Temp/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-v7vofh"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
-      Z_VCPKG_ROOT_DIR: "C:/Users/Niep/.vcpkg-clion/vcpkg"
+      Z_VCPKG_ROOT_DIR: "C:/Users/MAX/.vcpkg-clion/vcpkg"
     buildResult:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: C:/Users/Niep/Desktop/Tempest/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-xjjln3
+        Change Dir: C:/Users/MAX/CLionProjects/Temp/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-v7vofh
         
-        Run Build Command(s):C:/Program Files/JetBrains/CLion 2023.2.2/bin/ninja/win/x64/ninja.exe -v cmTC_a4f4e && [1/2] C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1434~1.319\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /EHsc  /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_a4f4e.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_a4f4e.dir\\ /FS -c "C:\\Program Files\\JetBrains\\CLion 2023.2.2\\bin\\cmake\\win\\x64\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.2.2\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_a4f4e.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1434~1.319\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a4f4e.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_a4f4e.exe /implib:cmTC_a4f4e.lib /pdb:cmTC_a4f4e.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\Niep\\Desktop\\Tempest\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-xjjln3 && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/Niep/.vcpkg-clion/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/Niep/Desktop/Tempest/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-xjjln3/cmTC_a4f4e.exe -installedDir C:/Users/Niep/.vcpkg-clion/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        Run Build Command(s):C:/Program Files/JetBrains/CLion 2023.2.2/bin/ninja/win/x64/ninja.exe -v cmTC_c06da && [1/2] C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /EHsc  /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_c06da.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_c06da.dir\\ /FS -c "C:\\Program Files\\JetBrains\\CLion 2023.2.2\\bin\\cmake\\win\\x64\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.2.2\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_c06da.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1436~1.325\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_c06da.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_c06da.exe /implib:cmTC_c06da.lib /pdb:cmTC_c06da.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\MAX\\CLionProjects\\Temp\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-v7vofh && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/MAX/.vcpkg-clion/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/MAX/CLionProjects/Temp/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-v7vofh/cmTC_c06da.exe -installedDir C:/Users/MAX/.vcpkg-clion/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
         
       exitCode: 0
 ...

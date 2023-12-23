@@ -15,6 +15,7 @@ public:
 
 protected:
     Point* m_Position;
+    Point* m_MapPosition;
     int m_Width;
     int m_Height;
     std::string m_TextureId;
