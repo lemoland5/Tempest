@@ -7,11 +7,12 @@
 class Actor {
 public:
     Actor() {};
-    Actor(int x, int y, int width, int height): m_Position(new Point(x,y)), m_Width(width), m_Height(height){};
+    Actor(int x, int y, int width, int height, std::string id): m_Position(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(id){};
     Actor(Point* point, int width, int height): m_Position(point), m_Width(width), m_Height(height){};
 
     virtual void update() = 0;
     virtual void draw(SDL_Renderer* renderer);
+
 
 protected:
     Point* m_Position;

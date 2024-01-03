@@ -30,6 +30,10 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
 
 
+        std::cout<<"inited";
+
+        m_pPlayer = new Player(100,200,90,90,"player");
+
 
         m_isRunning = true;
         return true;
@@ -61,7 +65,7 @@ void Game::handleInput() {
 }
 
 void Game::update() {
-    /* ... */
+    m_pPlayer->update();
 }
 
 void Game::render() {
@@ -74,8 +78,9 @@ void Game::render() {
 //    SDL_RenderDrawLine(m_pRenderer, testLine);
 //    testNode->draw(m_pRenderer);
 
-    TextureManager::getInstance()->draw(m_pRenderer, "player", 320, 240, 150, 150);
+//    TextureManager::getInstance()->draw(m_pRenderer, "player", 320, 240, 150, 150);
     m_pMap->draw(m_pRenderer);
+    m_pPlayer->draw(m_pRenderer);
 
     SDL_RenderPresent(m_pRenderer);
 }
