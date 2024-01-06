@@ -14,6 +14,7 @@ public:
     static Game *getInstance();
 
     [[nodiscard]] bool isRunning() const;
+    [[nodiscard]] Map* getMap() const;
 
     bool initialise(const std::string &windowName = WINDOW_NAME, unsigned int width = WINDOW_WIDTH,
                     unsigned int height = WINDOW_HEIGHT);

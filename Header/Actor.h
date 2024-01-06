@@ -13,7 +13,6 @@ public:
     virtual void update() = 0;
     virtual void draw(SDL_Renderer* renderer);
 
-
 protected:
     Point* m_Position;
     Point* m_MapPosition;

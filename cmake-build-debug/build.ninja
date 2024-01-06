@@ -112,6 +112,13 @@ build CMakeFiles/Tempest.dir/Source/Player.cpp.o: CXX_COMPILER__Tempest_unscanne
   OBJECT_DIR = CMakeFiles/Tempest.dir
   OBJECT_FILE_DIR = CMakeFiles/Tempest.dir/Source
 
+build CMakeFiles/Tempest.dir/Source/Shapes.cpp.o: CXX_COMPILER__Tempest_unscanned_Debug /Users/lukasz/Desktop/Tempest/Source/Shapes.cpp || cmake_object_order_depends_target_Tempest
+  DEP_FILE = CMakeFiles/Tempest.dir/Source/Shapes.cpp.o.d
+  FLAGS = -g -std=gnu++17 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.6 -fcolor-diagnostics
+  INCLUDES = -isystem /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/include -isystem /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/include/SDL2
+  OBJECT_DIR = CMakeFiles/Tempest.dir
+  OBJECT_FILE_DIR = CMakeFiles/Tempest.dir/Source
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Tempest
@@ -120,7 +127,7 @@ build CMakeFiles/Tempest.dir/Source/Player.cpp.o: CXX_COMPILER__Tempest_unscanne
 #############################################
 # Link the executable Tempest
 
-build Tempest: CXX_EXECUTABLE_LINKER__Tempest_Debug CMakeFiles/Tempest.dir/Source/main.cpp.o CMakeFiles/Tempest.dir/Source/Node.cpp.o CMakeFiles/Tempest.dir/Source/Map.cpp.o CMakeFiles/Tempest.dir/Source/MapLoader.cpp.o CMakeFiles/Tempest.dir/Source/Game.cpp.o CMakeFiles/Tempest.dir/Source/Actor.cpp.o CMakeFiles/Tempest.dir/Source/TextureManager.cpp.o CMakeFiles/Tempest.dir/Source/EventHandler.cpp.o CMakeFiles/Tempest.dir/Source/Player.cpp.o | /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2maind.a /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2d.a /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2_imaged.a /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2d.a /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libpng16d.a /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libz.a
+build Tempest: CXX_EXECUTABLE_LINKER__Tempest_Debug CMakeFiles/Tempest.dir/Source/main.cpp.o CMakeFiles/Tempest.dir/Source/Node.cpp.o CMakeFiles/Tempest.dir/Source/Map.cpp.o CMakeFiles/Tempest.dir/Source/MapLoader.cpp.o CMakeFiles/Tempest.dir/Source/Game.cpp.o CMakeFiles/Tempest.dir/Source/Actor.cpp.o CMakeFiles/Tempest.dir/Source/TextureManager.cpp.o CMakeFiles/Tempest.dir/Source/EventHandler.cpp.o CMakeFiles/Tempest.dir/Source/Player.cpp.o CMakeFiles/Tempest.dir/Source/Shapes.cpp.o | /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2maind.a /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2d.a /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2_imaged.a /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2d.a /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libpng16d.a /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libz.a
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.6
   LINK_LIBRARIES = /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2maind.a  /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2d.a  /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2_imaged.a  /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libSDL2d.a  -lm  -liconv  -Wl,-framework,CoreVideo  -Wl,-framework,Cocoa  -Wl,-framework,IOKit  -Wl,-framework,ForceFeedback  -Wl,-framework,Carbon  -Wl,-framework,CoreAudio  -Wl,-framework,AudioToolbox  -Wl,-framework,AVFoundation  -Wl,-framework,Foundation  -Wl,-weak_framework,GameController  -Wl,-weak_framework,Metal  -Wl,-weak_framework,QuartzCore  -Wl,-weak_framework,CoreHaptics  /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libpng16d.a  /Users/lukasz/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libz.a
   OBJECT_DIR = CMakeFiles/Tempest.dir

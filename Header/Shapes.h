@@ -16,7 +16,10 @@ public:
     Line(Point* begin, Point* end): begin(*begin), end(*end){};
     Line(): begin(1,1), end(2,1){};
 
+    float getLength();
+
+    [[nodiscard]] Point calculateTValuePoint(float t) const;
+
     Point begin;
     Point end;
 };
-

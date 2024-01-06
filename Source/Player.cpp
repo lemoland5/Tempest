@@ -8,14 +8,18 @@
 
 void Player::draw(SDL_Renderer *renderer) {
     Actor::draw(renderer);
-    std::cout<<m_TextureId<<": "<<m_Position->x<<", "<<m_Position->y<<"\n";
 }
 
 void Player::handleInput() {
+//    EventHandler::getInstance()->update();
+
     if(EventHandler::getInstance()->isKeyDown(SDL_SCANCODE_RIGHT)){
-        ++m_Position->x;
+        m_MapPosition->x += 2;
     }
     if(EventHandler::getInstance()->isKeyDown(SDL_SCANCODE_LEFT)){
-        --m_Position->x;
+        m_MapPosition->x -= 2;
     }
+
+
+
 }

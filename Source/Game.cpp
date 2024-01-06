@@ -88,3 +88,7 @@ void Game::render() {
 bool Game::isRunning() const {
     return m_isRunning;
 }
+
+Map *Game::getMap() const {
+    return m_pMap;
+}
