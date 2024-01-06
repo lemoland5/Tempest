@@ -7,8 +7,8 @@
 class Actor {
 public:
     Actor() {};
-    Actor(int x, int y, int width, int height, std::string id): m_Position(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(id){};
-    Actor(Point* point, int width, int height): m_Position(point), m_Width(width), m_Height(height){};
+    Actor(int x, int y, int width, int height, std::string id): m_MapPosition(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(id){};
+    Actor(Point* point, int width, int height): m_MapPosition(point), m_Width(width), m_Height(height){};
 
     virtual void update() = 0;
     virtual void draw(SDL_Renderer* renderer);
@@ -16,6 +16,7 @@ public:
 protected:
     Point* m_Position;
     Point* m_MapPosition;
+    float m_Anchor = 0.5f;
     int m_Width;
     int m_Height;
     std::string m_TextureId;

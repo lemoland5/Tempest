@@ -32,7 +32,7 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
         std::cout<<"inited";
 
-        m_pPlayer = new Player(100,200,90,90,"player");
+        m_pPlayer = new Player(0,0,90,90,"player");
 
 
         m_isRunning = true;

@@ -10,6 +10,7 @@ public:
     Map();
 
     void draw(SDL_Renderer* renderer);
+    [[nodiscard]] Node* getNode(wint_t a) const {return m_NodeList[a];};
 
 private:
     std::vector<Node*> m_NodeList;

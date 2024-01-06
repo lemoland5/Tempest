@@ -18,7 +18,7 @@ public:
 
     float getLength();
 
-    [[nodiscard]] Point calculateTValuePoint(float t) const;
+    [[nodiscard]] Point* calculateTValuePoint(float t) const;
 
     Point begin;
     Point end;
