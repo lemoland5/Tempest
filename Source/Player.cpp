@@ -4,16 +4,14 @@
 #include <iostream>
  void Player::update() {
     handleInput();
-     std::cout<<m_MapPosition->x<<"\n";
 
      if(m_MapPosition->x < 0){
-         m_MapPosition->x = (int)Game::getInstance()->getMap()->getNodeCount() + m_MapPosition->x;
+         m_MapPosition->x = (int)Game::getInstance()->getMap()->getNodeCount() - 1 + m_MapPosition->x;
      }
-     if(m_MapPosition->x < 0){
-         m_MapPosition->x = (int)Game::getInstance()->getMap()->getNodeCount() + m_MapPosition->x;
+     if(m_MapPosition->x == (int)Game::getInstance()->getMap()->getNodeCount() - 1){
+         m_MapPosition->x = 0;
      }
-
-
+     
      m_Position = Game::getInstance()->getMap()->getNode(m_MapPosition->x%4)->getAxis()->calculateTValuePoint(m_MapPosition->y);
 }
 
