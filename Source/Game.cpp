@@ -45,19 +45,24 @@ void Game::handleInput() {
     EventHandler::getInstance()->update();
 
     SDL_Event event;
-    SDL_PollEvent(&event);
-
-    switch (event.type) {
-        case SDL_QUIT:
-            m_isRunning = false;
-            break;
-        case SDL_KEYDOWN:
-            if(event.key.keysym.sym == SDLK_ESCAPE){
+    if(SDL_PollEvent(&event)) {
+        switch (event.type) {
+            case SDL_QUIT:
                 m_isRunning = false;
-            }
-            break;
+                break;
+            case SDL_KEYDOWN:
+                if (event.key.keysym.sym == SDLK_ESCAPE) {
+                    m_isRunning = false;
+                }
+                if(event.key.keysym.sym == SDLK_RIGHT){
+                    m_pPlayer->moveX(1);
+                }
+                if(event.key.keysym.sym == SDLK_LEFT){
+                    m_pPlayer->moveX(-1);
+                 }
+                break;
+        }
     }
-
 //    if(EventHandler::getInstance()->isKeyDown(SDL_SCANCODE_W)){
 //        std::cout<<"W \n";
 //    }
