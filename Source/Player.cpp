@@ -1,7 +1,9 @@
-#include "../Header/Player.h"
+#include "../Header/Bullet.h"
 #include "../Header/EventHandler.h"
 #include "../Header/Game.h"
+#include "../Header/Player.h"
 #include <iostream>
+
  void Player::update() {
     handleInput();
 
@@ -11,12 +13,7 @@
      if(m_MapPosition->x == (int)Game::getInstance()->getMap()->getNodeCount() - 1){
          m_MapPosition->x = 0;
      }
-     
-     m_Position = Game::getInstance()->getMap()->getNode(m_MapPosition->x%4)->getAxis()->calculateTValuePoint(m_MapPosition->y);
-}
-
-void Player::draw(SDL_Renderer *renderer) {
-    Actor::draw(renderer);
+    Actor::update();
 }
 
 void Player::handleInput() {
@@ -39,4 +36,8 @@ void Player::handleInput() {
 //        }
 //    }
 
+}
+
+void Player::shoot(){
+    Game::getInstance()->spawn<Bullet>(m_MapPosition->x, m_MapPosition->y, 30, 30, "bullet");
 }

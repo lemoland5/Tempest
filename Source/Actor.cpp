@@ -1,4 +1,5 @@
 #include "../Header/Actor.h"
+#include "../Header/Game.h"
 #include "../Header/TextureManager.h"
 #include <iostream>
 
@@ -12,4 +13,8 @@ void Actor::moveX(int x) {
 }
 void Actor::moveY(int y) {
     m_MapPosition->y += y;
+}
+
+void Actor::update() {
+    m_Position = Game::getInstance()->getMap()->getNode(m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / 100.0f);
 }

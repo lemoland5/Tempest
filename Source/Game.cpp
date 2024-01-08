@@ -18,6 +18,9 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         m_pWindow = SDL_CreateWindow(windowName.c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
         m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 
+        m_frameCount = 0;
+        m_isRunning = true;
+
 //        SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 255, 255);
 
 
@@ -27,15 +30,15 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         m_pMap = new Map();
 
         TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/player.svg","player");
+        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/bullet.svg","bullet");
 
 
 
-        std::cout<<"inited";
+        std::cout<<"inited \n";
 
-        m_pPlayer = new Player(0,0,90,90,"player");
+        m_pPlayer = new Player(0,15,90,90,"player");
 
 
-        m_isRunning = true;
         return true;
     }
     return true;
@@ -59,7 +62,10 @@ void Game::handleInput() {
                 }
                 if(event.key.keysym.sym == SDLK_LEFT){
                     m_pPlayer->moveX(-1);
-                 }
+                }
+                if(event.key.keysym.sym == SDLK_SPACE){
+                    m_pPlayer->shoot();
+                }
                 break;
         }
     }
@@ -70,7 +76,15 @@ void Game::handleInput() {
 }
 
 void Game::update() {
+    m_frameCount++;
+
     m_pPlayer->update();
+    for(int i = 0; i < m_pActors.size(); i++){
+        m_pActors[i]->update();
+        if(m_pActors[i]->isMarkedForDeletion()){
+            m_pActors.erase(m_pActors.begin() + i);
+        }
+    }
 }
 
 void Game::render() {
@@ -86,6 +100,10 @@ void Game::render() {
 //    TextureManager::getInstance()->draw(m_pRenderer, "player", 320, 240, 150, 150);
     m_pMap->draw(m_pRenderer);
     m_pPlayer->draw(m_pRenderer);
+
+    for(auto & actor : m_pActors){
+        actor->draw(m_pRenderer);
+    }
 
     SDL_RenderPresent(m_pRenderer);
 }

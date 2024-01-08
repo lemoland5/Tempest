@@ -22,7 +22,9 @@ add_executable(Tempest
         Header/EventHandler.h
         Header/Player.h
         Source/Player.cpp
-        Source/Shapes.cpp)
+        Source/Shapes.cpp
+        Source/Bullet.cpp
+        Header/Bullet.h)
 
 find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_image CONFIG REQUIRED)

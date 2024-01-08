@@ -1,8 +1,9 @@
 #pragma once
 
+#include "Bullet.h"
 #include "Map.h"
-#include "SDL_overload.h"
 #include "Player.h"
+#include "SDL_overload.h"
 #include <string>
 
 const unsigned int WINDOW_WIDTH = 640;
@@ -20,11 +21,13 @@ public:
                     unsigned int height = WINDOW_HEIGHT);
 
     void handleInput();
-
     void update();
-
     void render();
 
+    template <class T>
+    void spawn(int x, int y, int width, int height,std::string textureId) {
+        m_pActors.push_back(new T(x, y, width, height, textureId));
+    }
 
 private:
     static Game *s_pInstance;
@@ -35,6 +38,8 @@ private:
     SDL_Renderer *m_pRenderer;
     Map *m_pMap;
     Player* m_pPlayer;
+    std::vector<Actor*> m_pActors;
     bool m_isRunning;
+    int m_frameCount;
 
 };
