@@ -24,6 +24,8 @@ public:
     void update();
     void render();
 
+    void checkSpawn();
+
     template <class T>
     void spawn(int x, int y, int width, int height,std::string textureId) {
         m_pActors.push_back(new T(x, y, width, height, textureId));

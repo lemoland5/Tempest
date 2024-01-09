@@ -1,7 +1,9 @@
+#include "../Header/Flipper.h"
 #include "../Header/Game.h"
 #include "../Header/MapLoader.h"
 #include "../Header/TextureManager.h"
 #include "../Header/EventHandler.h"
+#include <cstdlib>
 
 Game* Game::s_pInstance = nullptr;
 
@@ -82,9 +84,12 @@ void Game::update() {
     for(int i = 0; i < m_pActors.size(); i++){
         m_pActors[i]->update();
         if(m_pActors[i]->isMarkedForDeletion()){
+            delete m_pActors[i];
             m_pActors.erase(m_pActors.begin() + i);
         }
     }
+
+    checkSpawn();
 }
 
 void Game::render() {
@@ -106,6 +111,12 @@ void Game::render() {
     }
 
     SDL_RenderPresent(m_pRenderer);
+}
+
+void Game::checkSpawn() {
+    if(m_frameCount % 60 == 0){
+        spawn<Flipper>(0,100,30,30,"player");
+    }
 }
 
 bool Game::isRunning() const {
