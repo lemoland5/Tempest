@@ -1,4 +1,5 @@
 #include "../Header/Flipper.h"
+#include "../Header/Fuseball.h"
 #include "../Header/Game.h"
 #include "../Header/MapLoader.h"
 #include "../Header/TextureManager.h"
@@ -33,8 +34,7 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
         TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/player.svg","player");
         TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/bullet.svg","bullet");
-
-
+        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/fuseball.svg","fuseball");
 
         std::cout<<"inited \n";
 
@@ -116,6 +116,9 @@ void Game::render() {
 void Game::checkSpawn() {
     if(m_frameCount % 60 == 0){
         spawn<Flipper>(0,100,30,30,"player");
+    }
+    if(m_frameCount % 45 == 0) {
+        spawn<Fuseball>(1,100,45,45,"fuseball");
     }
 }
 

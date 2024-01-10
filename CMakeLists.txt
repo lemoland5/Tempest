@@ -26,7 +26,9 @@ add_executable(Tempest
         Source/Bullet.cpp
         Header/Bullet.h
         Source/Flipper.cpp
-        Header/Flipper.h)
+        Header/Flipper.h
+        Source/Fuseball.cpp
+        Header/Fuseball.h)
 
 find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_image CONFIG REQUIRED)
