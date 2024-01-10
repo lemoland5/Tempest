@@ -7,12 +7,7 @@
  void Player::update() {
     handleInput();
 
-     if(m_MapPosition->x < 0){
-         m_MapPosition->x = (int)Game::getInstance()->getMap()->getNodeCount() - 1 + m_MapPosition->x;
-     }
-     if(m_MapPosition->x == (int)Game::getInstance()->getMap()->getNodeCount() - 1){
-         m_MapPosition->x = 0;
-     }
+
     Actor::update();
 }
 

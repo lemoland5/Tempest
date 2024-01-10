@@ -17,7 +17,7 @@ Game* Game::getInstance() {
 bool Game::initialise(const std::string& windowName, unsigned int width, unsigned int height) {
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0){
 
-        m_pWindow = SDL_CreateWindow(windowName.c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+        m_pWindow = SDL_CreateWindow(windowName.c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (int)width, (int)height, SDL_WINDOW_SHOWN);
         m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 
         m_frameCount = 0;
@@ -43,7 +43,7 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
         return true;
     }
-    return true;
+    return false;
 }
 
 void Game::handleInput() {
@@ -125,4 +125,8 @@ bool Game::isRunning() const {
 
 Map *Game::getMap() const {
     return m_pMap;
+}
+
+int Game::getFrameCount() const {
+    return m_frameCount;
 }

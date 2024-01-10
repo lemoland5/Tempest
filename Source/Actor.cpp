@@ -15,7 +15,17 @@ void Actor::moveY(int y) {
     m_MapPosition->y += y;
 }
 
+
 void Actor::update() {
+        // m_MapPosition rollback
+    if(m_MapPosition->x < 0){
+        m_MapPosition->x = (int)Game::getInstance()->getMap()->getNodeCount() - 1 + m_MapPosition->x;
+    }
+    if(m_MapPosition->x == (int)Game::getInstance()->getMap()->getNodeCount() - 1){
+        m_MapPosition->x = 0;
+    }
+
+        // m_Position calculation.
     m_Position = Game::getInstance()->getMap()->getNode(m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / 100.0f);
 }
 
