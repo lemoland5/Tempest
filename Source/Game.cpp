@@ -117,7 +117,7 @@ void Game::checkSpawn() {
     if(m_frameCount % 60 == 0){
         spawn<Flipper>(0,100,30,30,"player");
     }
-    if(m_frameCount % 45 == 0) {
+    if(m_frameCount % 90 == 0) {
         spawn<Fuseball>(1,100,45,45,"fuseball");
     }
 }

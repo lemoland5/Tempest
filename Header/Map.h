@@ -19,3 +19,5 @@ public:
 private:
     std::vector<Node*> m_NodeList;
 };
+
+const SDL_Color COLOR_MAP_PURPLE = {0, 10, 130, 255};
