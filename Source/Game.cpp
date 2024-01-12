@@ -6,6 +6,12 @@
 #include "../Header/EventHandler.h"
 #include <cstdlib>
 
+void Game::NodeRepUpdate() {
+    for (int i = 0; i<m_NodeRep.size(); i++) {
+        m_NodeRep[i] = 0;
+    }
+}
+
 Game* Game::s_pInstance = nullptr;
 
 Game* Game::getInstance() {
@@ -39,12 +45,16 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         std::cout<<"inited \n";
 
         m_pPlayer = new Player(0,15,90,90,"player");
+        m_pActors.push_back(m_pPlayer);
+        //m_NodeRep.max_size(NodeCount);
+        m_NodeRep = {1,0,0,0};
 
 
         return true;
     }
     return false;
 }
+
 
 void Game::handleInput() {
     EventHandler::getInstance()->update();
@@ -81,9 +91,15 @@ void Game::update() {
     m_frameCount++;
 
     m_pPlayer->update();
+
+    CollisionManager::ObjectsColliding<Actor>(m_NodeRep, m_pActors);
+
+    NodeRepUpdate();
     for(int i = 0; i < m_pActors.size(); i++){
         m_pActors[i]->update();
-        if(m_pActors[i]->isMarkedForDeletion()){
+        m_NodeRep[m_pActors[i]->getMapPosition()->x]++;
+        if(m_pActors[i]->isMarkedForDeletion()) {
+            m_NodeRep[m_pActors[i]->getMapPosition()->x]--;
             delete m_pActors[i];
             m_pActors.erase(m_pActors.begin() + i);
         }

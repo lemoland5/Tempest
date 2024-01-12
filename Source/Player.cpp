@@ -11,6 +11,18 @@
     Actor::update();
 }
 
+void Player::onCollide(Type type) {
+    switch (type) {
+        case TYPE_PLAYER:
+            break;
+        case TYPE_ENEMY:
+            // do smth
+            break;
+        case TYPE_BULLET:
+            break;
+    }
+}
+
 void Player::handleInput() {
 //    EventHandler::getInstance()->update();
 

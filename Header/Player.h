@@ -8,7 +8,12 @@ public:
 
     void update() override;
 
+    Type getType() override {return TYPE_PLAYER;};
+
     void handleInput();
 
+    void onCollide(Type type) override;
+
     void shoot();
+private:
 };

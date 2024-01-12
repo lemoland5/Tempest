@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Bullet.h"
+#include "CollisionManager.h"
 #include "Map.h"
 #include "Player.h"
 #include "SDL_overload.h"
@@ -25,11 +26,14 @@ public:
     void update();
     void render();
 
+    void NodeRepUpdate();
+
     void checkSpawn();
 
     template <class T>
     void spawn(int x, int y, int width, int height,std::string textureId) {
-        m_pActors.push_back(new T(x, y, width, height, textureId));
+        Actor* tmp = new T(x, y, width, height, textureId);
+        m_pActors.push_back(tmp);
     }
 
 private:
@@ -44,5 +48,7 @@ private:
     std::vector<Actor*> m_pActors;
     bool m_isRunning;
     int m_frameCount;
+
+    std::vector<int> m_NodeRep;
 
 };

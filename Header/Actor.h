@@ -4,6 +4,12 @@
 #include <SDL.h>
 #include <string>
 
+enum Type {
+    TYPE_PLAYER = 0,
+    TYPE_ENEMY = 1,
+    TYPE_BULLET = 2
+};
+
 class Actor {
 public:
     Actor() {};
@@ -12,8 +18,11 @@ public:
 
     virtual void update();
     virtual void draw(SDL_Renderer* renderer);
+    virtual void onCollide(Type type);
+    virtual Type getType() = 0;
 
     [[nodiscard]] bool isMarkedForDeletion() const {return m_MarkedForDeletion;};
+    [[nodiscard]] Point* getMapPosition() const {return m_MapPosition;};
 
     void moveX(int x);
     void moveY(int y);

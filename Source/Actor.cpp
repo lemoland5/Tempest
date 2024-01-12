@@ -8,6 +8,10 @@ void Actor::draw(SDL_Renderer* renderer) {
 
 }
 
+void Actor::onCollide(Type type) {
+
+}
+
 void Actor::moveX(int x) {
     m_MapPosition->x += x;
 }
