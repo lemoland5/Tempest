@@ -14,10 +14,12 @@ public:
             }
             for(int j = 0; j < tmp.size(); j++) {
                 for (int k = j+1; k < tmp.size(); k++) {
-                    if (tmp[j]->getMapPosition()->y == tmp[k]->getMapPosition()->y) {
+                    if (tmp[j]->getMapPosition()->y > tmp[k]->getMapPosition()->y && tmp[j]->getMapPosition()->y < tmp[k]->getMapPosition()->y + 10) {
                         //std::cout << "Collision Detected Between: " << tmp[j] << " & " << tmp[k] << std::endl;
-                        tmp[j]->onCollide(tmp[k]->getType());
-                        tmp[k]->onCollide(tmp[j]->getType());
+                        tmp[j]->addCollision(tmp[k]->getType());
+                        tmp[k]->addCollision(tmp[j]->getType());
+
+//                        std::cout<<"pushed collisions! \n";
                     }
                 }
             }

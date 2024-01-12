@@ -25,3 +25,11 @@ void Fuseball::update() {
 
     Actor::update();
 }
+
+void Fuseball::handleCollisions() {
+    if(!m_CollisionStack.empty()){
+        m_MarkedForDeletion = true;
+        m_CollisionStack.pop();
+
+    }
+}

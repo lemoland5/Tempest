@@ -9,6 +9,8 @@ public:
     Type getType() override {return TYPE_ENEMY;};
 
     void update() override;
+    void handleCollisions() override;
+
 private:
     int m_Cycle;
 };

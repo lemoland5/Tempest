@@ -6,12 +6,6 @@
 #include "../Header/EventHandler.h"
 #include <cstdlib>
 
-void Game::NodeRepUpdate() {
-    for (int i = 0; i<m_NodeRep.size(); i++) {
-        m_NodeRep[i] = 0;
-    }
-}
-
 Game* Game::s_pInstance = nullptr;
 
 Game* Game::getInstance() {
@@ -95,6 +89,7 @@ void Game::update() {
     CollisionManager::ObjectsColliding<Actor>(m_NodeRep, m_pActors);
 
     NodeRepUpdate();
+
     for(int i = 0; i < m_pActors.size(); i++){
         m_pActors[i]->update();
         m_NodeRep[m_pActors[i]->getMapPosition()->x]++;
@@ -135,6 +130,12 @@ void Game::checkSpawn() {
     }
     if(m_frameCount % 90 == 0) {
         spawn<Fuseball>(1,100,45,45,"fuseball");
+    }
+}
+
+void Game::NodeRepUpdate() {
+    for (int i = 0; i<m_NodeRep.size(); i++) {
+        m_NodeRep[i] = 0;
     }
 }
 

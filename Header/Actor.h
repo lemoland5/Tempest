@@ -2,6 +2,7 @@
 
 #include "Shapes.h"
 #include <SDL.h>
+#include <stack>
 #include <string>
 
 enum Type {
@@ -18,7 +19,7 @@ public:
 
     virtual void update();
     virtual void draw(SDL_Renderer* renderer);
-    virtual void onCollide(Type type);
+    virtual void handleCollisions() = 0;
     virtual Type getType() = 0;
 
     [[nodiscard]] bool isMarkedForDeletion() const {return m_MarkedForDeletion;};
@@ -26,6 +27,7 @@ public:
 
     void moveX(int x);
     void moveY(int y);
+    void addCollision(Type type);
 
 protected:
     Point* m_Position;
@@ -35,4 +37,5 @@ protected:
     int m_Height;
     std::string m_TextureId;
     bool m_MarkedForDeletion;
+    std::stack<Type> m_CollisionStack;
 };

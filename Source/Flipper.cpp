@@ -21,3 +21,11 @@ void Flipper::update() {
 
     Actor::update();
 }
+
+void Flipper::handleCollisions() {
+    if(!m_CollisionStack.empty()){
+        m_MarkedForDeletion = true;
+        m_CollisionStack.pop();
+
+    }
+}

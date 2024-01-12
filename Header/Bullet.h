@@ -9,6 +9,8 @@ public:
     Type getType() override {return TYPE_BULLET;};
 
     void update() override;
+    void handleCollisions() override;
+
 private:
     Type m_Type = TYPE_BULLET;
 };

@@ -8,10 +8,6 @@ void Actor::draw(SDL_Renderer* renderer) {
 
 }
 
-void Actor::onCollide(Type type) {
-
-}
-
 void Actor::moveX(int x) {
     m_MapPosition->x += x;
 }
@@ -19,8 +15,8 @@ void Actor::moveY(int y) {
     m_MapPosition->y += y;
 }
 
-
 void Actor::update() {
+    handleCollisions();
         // m_MapPosition rollback
     if(m_MapPosition->x < 0){
         m_MapPosition->x = (int)Game::getInstance()->getMap()->getNodeCount() - 1 + m_MapPosition->x;
@@ -35,4 +31,8 @@ void Actor::update() {
 
 Actor::Actor(int x, int y, int width, int height, std::string id): m_MapPosition(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(id), m_MarkedForDeletion(false) {
     m_Position = Game::getInstance()->getMap()->getNode(m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / 100.0f);
+}
+
+void Actor::addCollision(Type type) {
+    m_CollisionStack.push(type);
 }

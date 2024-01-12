@@ -11,18 +11,6 @@
     Actor::update();
 }
 
-void Player::onCollide(Type type) {
-    switch (type) {
-        case TYPE_PLAYER:
-            break;
-        case TYPE_ENEMY:
-            // do smth
-            break;
-        case TYPE_BULLET:
-            break;
-    }
-}
-
 void Player::handleInput() {
 //    EventHandler::getInstance()->update();
 
@@ -47,4 +35,20 @@ void Player::handleInput() {
 
 void Player::shoot(){
     Game::getInstance()->spawn<Bullet>(m_MapPosition->x, m_MapPosition->y, 30, 30, "bullet");
+//    std::cout<<m_CollisionStack.top()<<"\n";
+}
+
+void Player::handleCollisions() {
+    while(!m_CollisionStack.empty()){
+        switch (m_CollisionStack.top()) {
+            case TYPE_ENEMY:
+//                m_MarkedForDeletion = true;
+                std::cout<<"Chinese person! \n";
+                m_CollisionStack.pop();
+                break;
+            default:
+                m_CollisionStack.pop();
+                break;
+        }
+    }
 }
