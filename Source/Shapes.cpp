@@ -6,9 +6,9 @@ Point* Line::calculateTValuePoint(float t) const {
 //    float dt = d * t;
 //    float ratio = dt/d;
 
-    return new Point((begin.x * (1 - t)) + (end.x * t), (begin.y * (1 - t)) + (end.y * t));
+    return new Point((m_pBegin->x * (1 - t)) + (m_pEnd->x * t), (m_pBegin->y * (1 - t)) + (m_pEnd->y * t));
 }
 
 float Line::getLength() {
-    return sqrt(pow(begin.x - end.x, 2) + pow(begin.y - end.y, 2));
+    return sqrt(pow(m_pBegin->x - m_pEnd->x, 2) + pow(m_pBegin->y - m_pEnd->y, 2));
 }

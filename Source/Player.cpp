@@ -34,7 +34,7 @@ void Player::handleInput() {
 }
 
 void Player::shoot(){
-    Game::getInstance()->spawn<Bullet>(m_MapPosition->x, m_MapPosition->y, 30, 30, "bullet");
+    Game::getInstance()->spawn<Bullet>(m_MapPosition->x, m_MapPosition->y, 10, 10, "bullet");
 //    std::cout<<m_CollisionStack.top()<<"\n";
 }
 

@@ -1,7 +1,7 @@
-#include "../Header/Flipper.h"
+#include "../Header/FlipperTanker.h"
 #include "../Header/Game.h"
 
-void Flipper::update() {
+void FlipperTanker::update() {
 
     if(m_MapPosition->y > 0){
         moveY(-1);
@@ -22,7 +22,7 @@ void Flipper::update() {
     Actor::update();
 }
 
-void Flipper::handleCollisions() {
+void FlipperTanker::handleCollisions() {
     if(!m_CollisionStack.empty()){
         m_MarkedForDeletion = true;
         m_CollisionStack.pop();

@@ -2,6 +2,8 @@
 #include "iostream"
 #include "vector"
 
+const int COLLISION_DISTANCE = 10;
+
 class CollisionManager {
 public:
     template<class T>
@@ -14,7 +16,7 @@ public:
             }
             for(int j = 0; j < tmp.size(); j++) {
                 for (int k = j+1; k < tmp.size(); k++) {
-                    if (tmp[j]->getMapPosition()->y > tmp[k]->getMapPosition()->y && tmp[j]->getMapPosition()->y < tmp[k]->getMapPosition()->y + 10) {
+                    if (tmp[j]->getMapPosition()->y > tmp[k]->getMapPosition()->y && tmp[j]->getMapPosition()->y < tmp[k]->getMapPosition()->y + COLLISION_DISTANCE || tmp[k]->getMapPosition()->y > tmp[j]->getMapPosition()->y && tmp[k]->getMapPosition()->y < tmp[j]->getMapPosition()->y + COLLISION_DISTANCE) {
                         //std::cout << "Collision Detected Between: " << tmp[j] << " & " << tmp[k] << std::endl;
                         tmp[j]->addCollision(tmp[k]->getType());
                         tmp[k]->addCollision(tmp[j]->getType());

@@ -4,5 +4,5 @@
 #include "SDL2/SDL.h"
 
 inline int SDL_RenderDrawLine(SDL_Renderer* renderer, Line* line){
-    return SDL_RenderDrawLine(renderer, line->begin.x, line->begin.y, line->end.x, line->end.y);
+    return SDL_RenderDrawLine(renderer, line->m_pBegin->x, line->m_pBegin->y, line->m_pEnd->x, line->m_pEnd->y);
 }

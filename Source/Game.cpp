@@ -1,9 +1,11 @@
+#include "../Header/EventHandler.h"
 #include "../Header/Flipper.h"
+#include "../Header/FlipperTanker.h"
 #include "../Header/Fuseball.h"
 #include "../Header/Game.h"
 #include "../Header/MapLoader.h"
+#include "../Header/Pulsar.h"
 #include "../Header/TextureManager.h"
-#include "../Header/EventHandler.h"
 #include <cstdlib>
 
 Game* Game::s_pInstance = nullptr;
@@ -21,29 +23,27 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         m_pWindow = SDL_CreateWindow(windowName.c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (int)width, (int)height, SDL_WINDOW_SHOWN);
         m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 
-        m_frameCount = 0;
+        m_FrameCount = 0;
         m_isRunning = true;
-
+        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/bullet.svg","bullet");
+        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/flipper.svg","flipper");
+        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/flipperTanker.svg","flipperTanker");
+        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/fuseball.svg","fuseball");
+        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/player.svg","player");
+        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/pulsar.svg","pulsar");
 //        SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 255, 255);
-
-
 //        m_pMap = new Map();
-
 
         m_pMap = new Map();
 
-        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/player.svg","player");
-        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/bullet.svg","bullet");
-        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/fuseball.svg","fuseball");
 
-        std::cout<<"inited \n";
-
-        m_pPlayer = new Player(0,15,90,90,"player");
+        m_pPlayer = new Player(0,0,30,30,"player");
         m_pActors.push_back(m_pPlayer);
+
         //m_NodeRep.max_size(NodeCount);
         m_NodeRep = {1,0,0,0};
 
-
+        std::cout<<"inited \n";
         return true;
     }
     return false;
@@ -82,7 +82,7 @@ void Game::handleInput() {
 }
 
 void Game::update() {
-    m_frameCount++;
+    m_FrameCount++;
 
     m_pPlayer->update();
 
@@ -125,16 +125,22 @@ void Game::render() {
 }
 
 void Game::checkSpawn() {
-    if(m_frameCount % 60 == 0){
-        spawn<Flipper>(0,100,30,30,"player");
-    }
-    if(m_frameCount % 90 == 0) {
-        spawn<Fuseball>(1,100,45,45,"fuseball");
-    }
+//    if(m_FrameCount % 120 == 0){
+//        spawn<Flipper>(rand() % m_pMap->getNodeCount(),100,60,30,"flipper");
+//    }
+//    if(m_FrameCount % 120 == 0){
+//        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),120,80,30,"flipperTanker");
+//    }
+//    if(m_FrameCount % 100 == 0) {
+//        spawn<Fuseball>(rand() % m_pMap->getNodeCount(),100,30,30,"fuseball");
+//    }
+//    if(m_FrameCount % 60 == 0){
+//        spawn<Pulsar>(2,100,9,30,"pulsar");
+//    }
 }
 
 void Game::NodeRepUpdate() {
-    for (int i = 0; i<m_NodeRep.size(); i++) {
+    for (int i = 0; i < m_NodeRep.size(); i++) {
         m_NodeRep[i] = 0;
     }
 }
@@ -148,5 +154,5 @@ Map *Game::getMap() const {
 }
 
 int Game::getFrameCount() const {
-    return m_frameCount;
+    return m_FrameCount;
 }

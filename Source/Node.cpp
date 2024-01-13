@@ -24,7 +24,7 @@ Node::Node(Line* inner, Line* outer) {
 void Node::draw(SDL_Renderer* renderer) {
     SDL_RenderDrawLine(renderer, m_Inner);
     SDL_RenderDrawLine(renderer, m_Outer);
-    SDL_RenderDrawLine(renderer, m_Inner->begin.x, m_Inner->begin.y, m_Outer->begin.x, m_Outer->begin.y);
-    SDL_RenderDrawLine(renderer, m_Inner->end.x, m_Inner->end.y, m_Outer->end.x, m_Outer->end.y);
+    SDL_RenderDrawLine(renderer, m_Inner->m_pBegin->x, m_Inner->m_pBegin->y, m_Outer->m_pBegin->x, m_Outer->m_pBegin->y);
+    SDL_RenderDrawLine(renderer, m_Inner->m_pEnd->x, m_Inner->m_pEnd->y, m_Outer->m_pEnd->x, m_Outer->m_pEnd->y);
     SDL_RenderDrawLine(renderer, m_Axis);
 }

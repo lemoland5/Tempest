@@ -30,6 +30,10 @@ add_executable(Tempest
         Source/Fuseball.cpp
         Header/Fuseball.h
         Header/CollisionManager.h
+        Source/Pulsar.cpp
+        Header/Pulsar.h
+        Source/FlipperTanker.cpp
+        Header/FlipperTanker.h
 )
 
 find_package(SDL2 CONFIG REQUIRED)

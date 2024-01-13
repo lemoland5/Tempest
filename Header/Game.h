@@ -8,7 +8,7 @@
 #include <string>
 
 const unsigned int WINDOW_WIDTH = 640;
-const unsigned int WINDOW_HEIGHT = 480;
+const unsigned int WINDOW_HEIGHT = 640;
 const std::string WINDOW_NAME = "Tempest";
 
 class Game {
@@ -47,7 +47,7 @@ private:
     Player* m_pPlayer;
     std::vector<Actor*> m_pActors;
     bool m_isRunning;
-    int m_frameCount;
+    int m_FrameCount;
 
     std::vector<int> m_NodeRep;
 
