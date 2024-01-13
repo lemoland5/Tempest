@@ -7,7 +7,7 @@ void Flipper::update() {
         moveY(-1);
     }
     else{
-        m_MarkedForDeletion = true;
+        Enemy::kill();
     }
 
     if(Game::getInstance()->getFrameCount() % 70 == 0){
@@ -19,12 +19,12 @@ void Flipper::update() {
         }
     }
 
-    Actor::update();
+    Enemy::update();
 }
 
 void Flipper::handleCollisions() {
     if(!m_CollisionStack.empty()){
-        m_MarkedForDeletion = true;
+        Enemy::kill();
         m_CollisionStack.pop();
     }
 }

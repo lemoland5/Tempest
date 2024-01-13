@@ -3,6 +3,7 @@
 #include "../Header/FlipperTanker.h"
 #include "../Header/Fuseball.h"
 #include "../Header/Game.h"
+#include "../Header/HudManager.h"
 #include "../Header/MapLoader.h"
 #include "../Header/Pulsar.h"
 #include "../Header/TextureManager.h"
@@ -18,7 +19,7 @@ Game* Game::getInstance() {
 }
 
 bool Game::initialise(const std::string& windowName, unsigned int width, unsigned int height) {
-    if(SDL_Init(SDL_INIT_EVERYTHING) == 0){
+    if(SDL_Init(SDL_INIT_EVERYTHING) == 0 && TTF_Init() == 0){
 
         m_pWindow = SDL_CreateWindow(windowName.c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (int)width, (int)height, SDL_WINDOW_SHOWN);
         m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
@@ -31,6 +32,8 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/fuseball.svg","fuseball");
         TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/player.svg","player");
         TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/pulsar.svg","pulsar");
+
+        HudManager::getInstance()->loadFont("../Assets/AtariClassic-gry3.ttf",24,"atari");
 //        SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 255, 255);
 //        m_pMap = new Map();
 
@@ -39,6 +42,8 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
         m_pPlayer = new Player(0,0,30,30,"player");
         m_pActors.push_back(m_pPlayer);
+
+        resetScore();
 
         //m_NodeRep.max_size(NodeCount);
         m_NodeRep = {1,0,0,0};
@@ -83,6 +88,7 @@ void Game::handleInput() {
 
 void Game::update() {
     m_FrameCount++;
+//    addScore(1);
 
     m_pPlayer->update();
 
@@ -121,13 +127,15 @@ void Game::render() {
         actor->draw(m_pRenderer);
     }
 
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 200, m_DisplayScore.length() * 100, 100, "atari", m_DisplayScore, {255,255,255});
+
     SDL_RenderPresent(m_pRenderer);
 }
 
 void Game::checkSpawn() {
-//    if(m_FrameCount % 120 == 0){
-//        spawn<Flipper>(rand() % m_pMap->getNodeCount(),100,60,30,"flipper");
-//    }
+    if(m_FrameCount % 120 == 0){
+        spawn<Flipper>(rand() % m_pMap->getNodeCount(),100,60,30,"flipper");
+    }
 //    if(m_FrameCount % 120 == 0){
 //        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),120,80,30,"flipperTanker");
 //    }
@@ -140,8 +148,8 @@ void Game::checkSpawn() {
 }
 
 void Game::NodeRepUpdate() {
-    for (int i = 0; i < m_NodeRep.size(); i++) {
-        m_NodeRep[i] = 0;
+    for (int & i : m_NodeRep) {
+        i = 0;
     }
 }
 
@@ -155,4 +163,22 @@ Map *Game::getMap() const {
 
 int Game::getFrameCount() const {
     return m_FrameCount;
+}
+
+void Game::addScore(int score) {
+    m_Score += score;
+
+    std::string prefix;
+
+    for(int i = 0; i < 4 - log10(m_Score) + 1; i++){
+        prefix += "0";
+    }
+
+    m_DisplayScore = prefix + std::to_string(m_Score);
+//    std::cout<<m_DisplayScore<<"\n";
+}
+
+void Game::resetScore() {
+    m_Score = 0;
+    m_DisplayScore = "000000";
 }

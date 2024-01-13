@@ -19,16 +19,16 @@ void Fuseball::update() {
     }
 
     if(m_Cycle >= 3){
-        m_MarkedForDeletion = true;
+        Enemy::kill();
     }
 
 
-    Actor::update();
+    Enemy::update();
 }
 
 void Fuseball::handleCollisions() {
     if(!m_CollisionStack.empty()){
-        m_MarkedForDeletion = true;
+        Enemy::kill();
         m_CollisionStack.pop();
 
     }

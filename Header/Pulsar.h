@@ -1,12 +1,10 @@
 #pragma once
 
-#include "Actor.h"
+#include "Enemy.h"
 
-class Pulsar: public Actor {
+class Pulsar: public Enemy {
 public:
-    Pulsar(int x, int y, int width, int height, std::string id): Actor(x, y, width, height, id){};
-
-    Type getType() override {return TYPE_ENEMY;};
+    Pulsar(int x, int y, int width, int height, std::string id): Enemy(x, y, width, height, id, 200){};
 
     void update() override;
     void handleCollisions() override;

@@ -9,7 +9,7 @@ void Bullet::update() {
         moveY(3);
     }
     else{
-        m_MarkedForDeletion = true;
+        Actor::kill();
     }
 
 
@@ -20,7 +20,7 @@ void Bullet::handleCollisions() {
     while(!m_CollisionStack.empty()){
         switch (m_CollisionStack.top()) {
             case TYPE_ENEMY:
-                m_MarkedForDeletion = true;
+                Actor::kill();
                 m_CollisionStack.pop();
                 break;
             default:

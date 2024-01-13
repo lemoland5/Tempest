@@ -42,7 +42,7 @@ void Player::handleCollisions() {
     while(!m_CollisionStack.empty()){
         switch (m_CollisionStack.top()) {
             case TYPE_ENEMY:
-//                m_MarkedForDeletion = true;
+//                Actor::kill();
                 std::cout<<"Chinese person! \n";
                 m_CollisionStack.pop();
                 break;

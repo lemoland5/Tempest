@@ -29,10 +29,14 @@ void Actor::update() {
     m_Position = Game::getInstance()->getMap()->getNode(m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / 100.0f);
 }
 
-Actor::Actor(int x, int y, int width, int height, std::string id): m_MapPosition(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(id), m_MarkedForDeletion(false) {
+Actor::Actor(int x, int y, int width, int height, std::string id): m_MapPosition(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(id){
     m_Position = Game::getInstance()->getMap()->getNode(m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / 100.0f);
 }
 
 void Actor::addCollision(Type type) {
     m_CollisionStack.push(type);
+}
+
+void Actor::kill() {
+    m_MarkedForDeletion = true;
 }

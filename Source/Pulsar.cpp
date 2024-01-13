@@ -7,15 +7,15 @@ void Pulsar::update() {
         moveY(-1);
     }
 //    else{
-//        m_MarkedForDeletion = true;
+//        Enemy::kill();
 //    }
 
-    Actor::update();
+    Enemy::update();
 }
 
 void Pulsar::handleCollisions() {
     if(!m_CollisionStack.empty()){
-        m_MarkedForDeletion = true;
+        Enemy::kill();
         m_CollisionStack.pop();
     }
 }

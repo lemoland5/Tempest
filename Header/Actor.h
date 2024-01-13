@@ -20,8 +20,9 @@ public:
     virtual void update();
     virtual void draw(SDL_Renderer* renderer);
     virtual void handleCollisions() = 0;
-    virtual Type getType() = 0;
+    virtual void kill();
 
+    virtual Type getType() = 0;
     [[nodiscard]] bool isMarkedForDeletion() const {return m_MarkedForDeletion;};
     [[nodiscard]] Point* getMapPosition() const {return m_MapPosition;};
 
@@ -36,6 +37,6 @@ protected:
     int m_Width;
     int m_Height;
     std::string m_TextureId;
-    bool m_MarkedForDeletion;
+    bool m_MarkedForDeletion = false;
     std::stack<Type> m_CollisionStack;
 };

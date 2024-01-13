@@ -9,12 +9,16 @@
 
 const unsigned int WINDOW_WIDTH = 640;
 const unsigned int WINDOW_HEIGHT = 640;
+const unsigned int WINDOW_CENTER_HORIZONTAL = WINDOW_WIDTH / 2;
+const unsigned int WINDOW_CENTER_VERTICAL = WINDOW_HEIGHT / 2;
 const std::string WINDOW_NAME = "Tempest";
 
 class Game {
 public:
     static Game *getInstance();
 
+    void addScore(int score);
+    void resetScore();
     [[nodiscard]] bool isRunning() const;
     [[nodiscard]] Map* getMap() const;
     [[nodiscard]] int getFrameCount() const;
@@ -48,7 +52,7 @@ private:
     std::vector<Actor*> m_pActors;
     bool m_isRunning;
     int m_FrameCount;
-
+    int m_Score;
+    std::string m_DisplayScore;
     std::vector<int> m_NodeRep;
-
 };
