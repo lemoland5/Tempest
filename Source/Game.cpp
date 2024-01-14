@@ -127,23 +127,32 @@ void Game::render() {
         actor->draw(m_pRenderer);
     }
 
-    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 200, m_DisplayScore.length() * 100, 100, "atari", m_DisplayScore, {255,255,255});
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 175, (int)m_DisplayScore.length() * 100, 100, "atari", m_DisplayScore, {255,255,255});
 
     SDL_RenderPresent(m_pRenderer);
 }
 
 void Game::checkSpawn() {
-    if(m_FrameCount % 120 == 0){
-        spawn<Flipper>(rand() % m_pMap->getNodeCount(),100,60,30,"flipper");
-    }
 //    if(m_FrameCount % 120 == 0){
-//        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),120,80,30,"flipperTanker");
+//        spawn<Flipper>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
 //    }
+
+//    if(m_FrameCount % 120 == 0){
+//        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
+//    }
+
+//    if(m_FrameCount % 120 == 0){
+//        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
+//    }
+
+    if(m_FrameCount % 120 == 0){
+        spawn<FlipperTanker>(0,LINE_T_SCALE,80,30,"flipperTanker");
+    }
 //    if(m_FrameCount % 100 == 0) {
-//        spawn<Fuseball>(rand() % m_pMap->getNodeCount(),100,30,30,"fuseball");
+//        spawn<Fuseball>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,30,30,"fuseball");
 //    }
 //    if(m_FrameCount % 60 == 0){
-//        spawn<Pulsar>(2,100,9,30,"pulsar");
+//        spawn<Pulsar>(2,LINE_T_SCALE,9,30,"pulsar");
 //    }
 }
 

@@ -3,7 +3,7 @@
 
 void Pulsar::update() {
 
-    if(m_MapPosition->y > 50){
+    if(m_MapPosition->y > LINE_T_SCALE / 2){
         moveY(-1);
     }
 //    else{
@@ -14,8 +14,5 @@ void Pulsar::update() {
 }
 
 void Pulsar::handleCollisions() {
-    if(!m_CollisionStack.empty()){
-        Enemy::kill();
-        m_CollisionStack.pop();
-    }
+Enemy::handleCollisions();
 }

@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <vector>
 
+
 class Map {
 public:
 //    Map(Node* nodes[]);

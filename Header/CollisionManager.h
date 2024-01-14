@@ -1,8 +1,9 @@
 #pragma once
+
 #include "iostream"
 #include "vector"
 
-const int COLLISION_DISTANCE = 10;
+const int COLLISION_DISTANCE = LINE_T_SCALE * 0.035f;
 
 class CollisionManager {
 public:

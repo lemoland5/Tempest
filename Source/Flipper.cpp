@@ -3,6 +3,8 @@
 
 void Flipper::update() {
 
+//    m_Anchor += 0.1f;
+
     if(m_MapPosition->y > 0){
         moveY(-1);
     }
@@ -22,9 +24,9 @@ void Flipper::update() {
     Enemy::update();
 }
 
-void Flipper::handleCollisions() {
-    if(!m_CollisionStack.empty()){
-        Enemy::kill();
-        m_CollisionStack.pop();
-    }
-}
+//void Flipper::handleCollisions() {
+//    if(!m_CollisionStack.empty()){
+//        Enemy::kill();
+//        m_CollisionStack.pop();
+//    }
+//}

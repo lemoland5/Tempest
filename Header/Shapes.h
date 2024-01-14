@@ -1,5 +1,7 @@
 #pragma once
 
+const int LINE_T_SCALE = 200;
+
 struct Point{
 public:
     Point( int x,  int y): x(x), y(y) {};

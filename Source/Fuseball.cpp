@@ -10,7 +10,7 @@ void Fuseball::update() {
         }
     }
     else{
-        if(m_MapPosition->y < 100){
+        if(m_MapPosition->y < LINE_T_SCALE){
             moveY(1);
         }
         else{

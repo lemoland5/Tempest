@@ -8,7 +8,7 @@
 #include <string>
 
 const unsigned int WINDOW_WIDTH = 640;
-const unsigned int WINDOW_HEIGHT = 640;
+const unsigned int WINDOW_HEIGHT = 710;
 const unsigned int WINDOW_CENTER_HORIZONTAL = WINDOW_WIDTH / 2;
 const unsigned int WINDOW_CENTER_VERTICAL = WINDOW_HEIGHT / 2;
 const std::string WINDOW_NAME = "Tempest";

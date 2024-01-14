@@ -7,7 +7,7 @@ public:
 
     Enemy(int x, int y, int width, int height, std::string id, int scoreValue): Actor(x, y, width, height, id), m_ScoreValue(scoreValue){};
 
-    void kill() override;
+    void handleCollisions() override;
 
     Type getType() override {return TYPE_ENEMY;};
 
