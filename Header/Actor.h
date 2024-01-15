@@ -13,8 +13,9 @@ enum Type {
 
 class Actor {
 public:
-    Actor() {};
+    Actor() = default;
     Actor(int x, int y, int width, int height, std::string id);
+    virtual ~Actor() = default;
 //    Actor(Point* point, int width, int height): m_MapPosition(point), m_Width(width), m_Height(height), m_MarkedForDeletion(false){};
 
     virtual void update();

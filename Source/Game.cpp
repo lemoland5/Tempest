@@ -3,7 +3,6 @@
 #include "../Header/FlipperTanker.h"
 #include "../Header/Fuseball.h"
 #include "../Header/Game.h"
-#include "../Header/HudManager.h"
 #include "../Header/MapLoader.h"
 #include "../Header/Pulsar.h"
 #include "../Header/TextureManager.h"
@@ -32,6 +31,9 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/fuseball.svg","fuseball");
         TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/player.svg","player");
         TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/pulsar.svg","pulsar");
+
+        m_pMenuOptions.push_back(new MenuOption("PLAY"));
+        m_pMenuOptions.push_back(new MenuOption("QUIT"));
 
         HudManager::getInstance()->loadFont("../Assets/AtariClassic-gry3.ttf",24,"atari");
 //        SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 255, 255);
@@ -68,14 +70,27 @@ void Game::handleInput() {
                 if (event.key.keysym.sym == SDLK_ESCAPE) {
                     m_isRunning = false;
                 }
-                if(event.key.keysym.sym == SDLK_RIGHT){
-                    m_pPlayer->moveX(1);
+                if(m_GameState == STATE_INGAME){
+                    if(event.key.keysym.sym == SDLK_RIGHT){
+                        m_pPlayer->moveX(1);
+                    }
+                    if(event.key.keysym.sym == SDLK_LEFT){
+                        m_pPlayer->moveX(-1);
+                    }
+                    if(event.key.keysym.sym == SDLK_SPACE){
+                        m_pPlayer->shoot();
+                    }
                 }
-                if(event.key.keysym.sym == SDLK_LEFT){
-                    m_pPlayer->moveX(-1);
-                }
-                if(event.key.keysym.sym == SDLK_SPACE){
-                    m_pPlayer->shoot();
+                else{
+                    if(event.key.keysym.sym == SDLK_UP){
+                        m_MenuSelected++;
+                    }
+                    if(event.key.keysym.sym == SDLK_DOWN){
+                        m_MenuSelected--;
+                    }
+                    if(event.key.keysym.sym == SDLK_SPACE || event.key.keysym.sym == SDLK_RETURN){
+                        checkMenu();
+                    }
                 }
                 break;
         }
@@ -87,6 +102,17 @@ void Game::handleInput() {
 }
 
 void Game::update() {
+    switch (m_GameState) {
+        case STATE_MENU:
+            updateMenu();
+            break;
+        case STATE_INGAME:
+            updateIngame();
+            break;
+    }
+}
+
+void Game::updateIngame() {
     m_FrameCount++;
 //    addScore(1);
 
@@ -109,10 +135,20 @@ void Game::update() {
     checkSpawn();
 }
 
+void Game::updateMenu() {
+//    std::cout<<"updatin \n";
+//    std::cout<<m_MenuSelected<<"\n";
+
+    if(m_MenuSelected < 0) m_MenuSelected = (int)m_pMenuOptions.size() - 1;
+    if(m_MenuSelected >= m_pMenuOptions.size()) m_MenuSelected = 0;
+
+    resetMenuSelection();
+    m_pMenuOptions[m_MenuSelected]->setSelected(true);
+}
+
 void Game::render() {
     SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 0);
     SDL_RenderClear(m_pRenderer);
-
     SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
 
     // SDL_RenderCopy( /* ... */ );
@@ -120,6 +156,32 @@ void Game::render() {
 //    testNode->draw(m_pRenderer);
 
 //    TextureManager::getInstance()->draw(m_pRenderer, "player", 320, 240, 150, 150);
+
+
+    switch (m_GameState) {
+        case STATE_MENU:
+            renderMenu();
+            break;
+        case STATE_INGAME:
+            renderIngame();
+            break;
+    }
+
+    SDL_RenderPresent(m_pRenderer);
+}
+
+
+void Game::renderMenu() {
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, 80, WINDOW_WIDTH, 100, "atari", "TEMPEST MMXXIV", COLOR_TEXT_SELECTED);
+
+    for(int i = 0; i < m_pMenuOptions.size(); i++){
+        m_pMenuOptions[i]->draw(m_pRenderer, WINDOW_CENTER_HORIZONTAL, (int)WINDOW_CENTER_VERTICAL + (100 * i), 300, 100, "atari");
+    }
+
+
+}
+
+void Game::renderIngame() {
     m_pMap->draw(m_pRenderer);
     m_pPlayer->draw(m_pRenderer);
 
@@ -128,9 +190,9 @@ void Game::render() {
     }
 
     HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 175, (int)m_DisplayScore.length() * 100, 100, "atari", m_DisplayScore, {255,255,255});
-
-    SDL_RenderPresent(m_pRenderer);
 }
+
+
 
 void Game::checkSpawn() {
 //    if(m_FrameCount % 120 == 0){
@@ -191,3 +253,21 @@ void Game::resetScore() {
     m_Score = 0;
     m_DisplayScore = "000000";
 }
+
+void Game::resetMenuSelection() {
+    for(auto & option : m_pMenuOptions){
+        option->setSelected(false);
+    }
+}
+
+void Game::checkMenu() {
+    switch(m_MenuSelected){
+        case 0:
+            m_GameState = STATE_INGAME;
+            break;
+        case 1:
+            m_isRunning = false;
+            break;
+    }
+}
+

@@ -40,3 +40,12 @@ void HudManager::drawText(SDL_Renderer* renderer, int x, int y, int w, int h, st
 void HudManager::drawText(SDL_Renderer *renderer, int x, int y, int w, int h, std::string fontId, std::string text) {
     drawText(renderer, x, y, w, h, fontId, text, {255,255,255,255});
 }
+
+void MenuOption::draw(SDL_Renderer *renderer, int x, int y, int w, int h, std::string fontId) {
+    if(m_isSelected){
+        HudManager::getInstance()->drawText(renderer, x, y, w, h, fontId, m_Text, COLOR_TEXT_SELECTED);
+    }
+    else{
+        HudManager::getInstance()->drawText(renderer, x, y, w, h, fontId, m_Text, COLOR_TEXT_UNSELECTED);
+    }
+}

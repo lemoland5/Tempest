@@ -2,6 +2,7 @@
 
 #include "Bullet.h"
 #include "CollisionManager.h"
+#include "HudManager.h"
 #include "Map.h"
 #include "Player.h"
 #include "SDL_overload.h"
@@ -12,6 +13,11 @@ const unsigned int WINDOW_HEIGHT = 710;
 const unsigned int WINDOW_CENTER_HORIZONTAL = WINDOW_WIDTH / 2;
 const unsigned int WINDOW_CENTER_VERTICAL = WINDOW_HEIGHT / 2;
 const std::string WINDOW_NAME = "Tempest";
+
+enum GameState{
+    STATE_MENU,
+    STATE_INGAME
+};
 
 class Game {
 public:
@@ -30,6 +36,12 @@ public:
     void update();
     void render();
 
+    void updateIngame();
+    void updateMenu();
+
+    void renderIngame();
+    void renderMenu();
+
     void NodeRepUpdate();
 
     void checkSpawn();
@@ -42,8 +54,15 @@ public:
 
 private:
     static Game *s_pInstance;
+    Game() = default;
 
-    Game() {};
+    void resetMenuSelection();
+    void checkMenu();
+
+    GameState m_GameState = STATE_MENU;
+
+    int m_MenuSelected = 0;
+    std::vector<MenuOption*> m_pMenuOptions;
 
     SDL_Window *m_pWindow;
     SDL_Renderer *m_pRenderer;
