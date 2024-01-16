@@ -26,11 +26,11 @@ void Actor::update() {
     }
 
         // m_Position calculation.
-    m_Position = Game::getInstance()->getMap()->getNode(m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / LINE_T_SCALE);
+    m_Position = Game::getInstance()->getMap()->getNode((int)m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / LINE_T_SCALE);
 }
 
 Actor::Actor(int x, int y, int width, int height, std::string id): m_MapPosition(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(id){
-    m_Position = Game::getInstance()->getMap()->getNode(m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / LINE_T_SCALE);
+    m_Position = Game::getInstance()->getMap()->getNode((int)m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / LINE_T_SCALE);
 }
 
 void Actor::addCollision(Type type) {

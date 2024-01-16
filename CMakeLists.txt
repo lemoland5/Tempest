@@ -38,6 +38,10 @@ add_executable(Tempest
         Header/HudManager.h
         Source/Enemy.cpp
         Header/Enemy.h
+        Source/Path.cpp
+        Header/Path.h
+        Source/PathLoader.cpp
+        Header/PathLoader.h
 )
 
 find_package(SDL2 CONFIG REQUIRED)

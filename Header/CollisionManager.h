@@ -22,7 +22,6 @@ public:
                         tmp[j]->addCollision(tmp[k]->getType());
                         tmp[k]->addCollision(tmp[j]->getType());
 
-//                        std::cout<<"pushed collisions! \n";
                     }
                 }
             }

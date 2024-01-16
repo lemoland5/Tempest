@@ -4,6 +4,7 @@
 #include "CollisionManager.h"
 #include "HudManager.h"
 #include "Map.h"
+#include "Path.h"
 #include "Player.h"
 #include "SDL_overload.h"
 #include <string>
@@ -53,6 +54,8 @@ public:
     }
 
 private:
+    Path* TestPath;
+
     static Game *s_pInstance;
     Game() = default;
 
