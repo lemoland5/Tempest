@@ -1,6 +1,12 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
 #include <cmath>
+
+//// Windowsowy cmath nie zawiera M_PI, bruh
+//#if defined(_WIN32) || defined(WIN32)
+//#define M_PI 3.1415
+//#endif
 
 const int LINE_T_SCALE = 200;
 

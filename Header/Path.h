@@ -8,6 +8,8 @@ class Path {
 public:
     Path();
     void draw(SDL_Renderer* renderer);
+    void moveX(double x);
+    void moveY(double y);
     void rotate(double angle);
 
 private:

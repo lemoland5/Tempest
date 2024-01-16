@@ -1,10 +1,10 @@
 #include "../Header/Path.h"
-#include "../Header/Pathloader.h"
+#include "../Header/PathManager.h"
 #include "../Header/SDL_overload.h"
 #include <iostream>
 
 Path::Path() {
-    m_pLines = PathLoader::getInstance()->loadPath("../Assets/player.path");
+    m_pLines = PathManager::getInstance()->loadPath("../Assets/player.path");
     m_pLines.pop_back();
     m_pCenter = getPathCenter(m_pLines);
     std::cout<<m_pCenter->x<<" - "<<m_pCenter->y<<"\n";
@@ -31,6 +31,23 @@ void Path::rotate(double angle) {
         line->m_pBegin = rotatePoint(m_pCenter, line->m_pBegin, angle);
         line->m_pEnd = rotatePoint(m_pCenter, line->m_pEnd, angle);
     }
+}
+
+void Path::moveX(double x) {
+    for(auto & line : m_pLines){
+        line->m_pBegin->x += x;
+        line->m_pEnd->x += x;
+    }
+    m_pCenter = getPathCenter(m_pLines);
+}
+
+void Path::moveY(double y) {
+    for(auto & line : m_pLines){
+        line->m_pBegin->y += y;
+        line->m_pEnd->y += y;
+    }
+    m_pCenter = getPathCenter(m_pLines);
+
 }
 
 Point* getPathCenter(std::vector<Line*> path){

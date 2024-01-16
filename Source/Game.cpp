@@ -110,6 +110,9 @@ void Game::handleInput() {
 
 void Game::update() {
 
+    TestPath->rotate(1);
+    TestPath->moveX(1);
+    TestPath->moveY(1);
 
     switch (m_GameState) {
         case STATE_MENU:

@@ -1,11 +1,11 @@
-#include "../Header/PathLoader.h"
+#include "../Header/PathManager.h"
 #include <fstream>
 #include <string>
 
-PathLoader *PathLoader::s_pInstance = nullptr;
+PathManager *PathManager::s_pInstance = nullptr;
 
-PathLoader *PathLoader::getInstance() {
-    if(!s_pInstance) s_pInstance = new PathLoader;
+PathManager *PathManager::getInstance() {
+    if(!s_pInstance) s_pInstance = new PathManager;
     return s_pInstance;
 }
 
@@ -25,7 +25,7 @@ Line* stringToLine(std::string line) {
     return new Line(new Point(values[0], values[1]), new Point(values[2], values[3]));
 }
 
-std::vector<Line *> PathLoader::loadPath(std::string path) {
+std::vector<Line *> PathManager::loadPath(std::string path) {
     std::ifstream file;
     std::string line;
     file.open(path);
