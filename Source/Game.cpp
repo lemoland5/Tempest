@@ -4,6 +4,7 @@
 #include "../Header/Fuseball.h"
 #include "../Header/Game.h"
 #include "../Header/MapLoader.h"
+#include "../Header/PathManager.h"
 #include "../Header/Pulsar.h"
 #include "../Header/TextureManager.h"
 #include <cstdlib>
@@ -41,7 +42,10 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
         m_pMap = new Map();
 
-        TestPath = new Path();
+//        TestPath = new Path();
+
+
+        PathManager::getInstance()->loadPath("../Assets/player.path", "player");
 
         m_pPlayer = new Player(0,0,30,30,"player");
         m_pActors.push_back(m_pPlayer);
@@ -109,10 +113,14 @@ void Game::handleInput() {
 }
 
 void Game::update() {
+//
+//    TestPath->rotate(1);
+//    TestPath->moveX(1);
+//    TestPath->moveY(1);
 
-    TestPath->rotate(1);
-    TestPath->moveX(1);
-    TestPath->moveY(1);
+    PathManager::getInstance()->movePathXAbs("player",m_pPlayer->getX());
+    PathManager::getInstance()->movePathYAbs("player",m_pPlayer->getY());
+
 
     switch (m_GameState) {
         case STATE_MENU:
@@ -179,7 +187,9 @@ void Game::render() {
             break;
     }
 
-    TestPath->draw(m_pRenderer);
+//    TestPath->draw(m_pRenderer);
+
+    PathManager::getInstance()->drawPath(m_pRenderer, "player");
 
     SDL_RenderPresent(m_pRenderer);
 }

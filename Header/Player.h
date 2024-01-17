@@ -13,5 +13,9 @@ public:
     void handleInput();
     void shoot();
 
+    // TODO: delete
+    double getX(){return m_Position->x;};
+    double getY(){return m_Position->y;};
+
 private:
 };

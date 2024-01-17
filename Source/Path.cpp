@@ -4,14 +4,18 @@
 #include <iostream>
 
 Path::Path() {
-    m_pLines = PathManager::getInstance()->loadPath("../Assets/player.path");
-    m_pLines.pop_back();
+//    m_pLines = PathManager::getInstance()->loadPath("../Assets/player.path");
     m_pCenter = getPathCenter(m_pLines);
     std::cout<<m_pCenter->x<<" - "<<m_pCenter->y<<"\n";
 
 
 }
 
+
+Path::Path(std::vector<Line *> lines) {
+    m_pLines = lines;
+    m_pCenter = getPathCenter(m_pLines);
+}
 
 
 void Path::draw(SDL_Renderer* renderer) {
@@ -48,6 +52,17 @@ void Path::moveY(double y) {
     }
     m_pCenter = getPathCenter(m_pLines);
 
+}
+
+void Path::moveXAbs(double x) {
+    double difference = x - m_pCenter->x;
+
+    moveX(difference);
+}
+
+void Path::moveYAbs(double y) {
+    double difference = y - m_pCenter->y;
+    moveY(difference);
 }
 
 Point* getPathCenter(std::vector<Line*> path){
