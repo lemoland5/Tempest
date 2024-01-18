@@ -1,10 +1,12 @@
 #include "../Header/Actor.h"
 #include "../Header/Game.h"
+#include "../Header/PathManager.h"
 #include "../Header/TextureManager.h"
 #include <iostream>
 
 void Actor::draw(SDL_Renderer* renderer) {
-    TextureManager::getInstance()->draw(renderer,m_TextureId, (m_Position->x - (m_Width*m_Anchor)), (m_Position->y - (m_Height*m_Anchor)), m_Width, m_Height);
+//    TextureManager::getInstance()->draw(renderer,m_TextureId, (m_Position->x - (m_Width*m_Anchor)), (m_Position->y - (m_Height*m_Anchor)), m_Width, m_Height);
+    PathManager::getInstance()->drawPath(renderer, m_TextureId, m_Position->x, m_Position->y);
 }
 
 void Actor::moveX(int x) {

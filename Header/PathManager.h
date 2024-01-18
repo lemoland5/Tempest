@@ -11,6 +11,8 @@ public:
     void loadPath(std::string path, std::string id);
 
     void drawPath(SDL_Renderer* renderer, std::string id);
+    void drawPath(SDL_Renderer* renderer, std::string id, double x, double y);
+
     void movePathX(std::string id, double x);
     void movePathXAbs(std::string id, double x);
     void movePathY(std::string id, double y);

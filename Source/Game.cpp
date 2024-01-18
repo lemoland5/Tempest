@@ -46,6 +46,12 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
 
         PathManager::getInstance()->loadPath("../Assets/player.path", "player");
+        PathManager::getInstance()->loadPath("../Assets/player.path", "pulsar");
+        PathManager::getInstance()->loadPath("../Assets/player.path", "flipper");
+        PathManager::getInstance()->loadPath("../Assets/player.path", "flipperTanker");
+        PathManager::getInstance()->loadPath("../Assets/player.path", "fuseball");
+        PathManager::getInstance()->loadPath("../Assets/player.path", "bullet");
+//        PathManager::getInstance()->loadPath("../Assets/player.path", "player");
 
         m_pPlayer = new Player(0,0,30,30,"player");
         m_pActors.push_back(m_pPlayer);
@@ -121,7 +127,6 @@ void Game::update() {
     PathManager::getInstance()->movePathXAbs("player",m_pPlayer->getX());
     PathManager::getInstance()->movePathYAbs("player",m_pPlayer->getY());
 
-
     switch (m_GameState) {
         case STATE_MENU:
             updateMenu();
@@ -189,7 +194,7 @@ void Game::render() {
 
 //    TestPath->draw(m_pRenderer);
 
-    PathManager::getInstance()->drawPath(m_pRenderer, "player");
+    PathManager::getInstance()->drawPath(m_pRenderer, "player", 500, 100);
 
     SDL_RenderPresent(m_pRenderer);
 }

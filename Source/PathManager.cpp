@@ -61,3 +61,9 @@ void PathManager::movePathY(std::string id, double y) {
 void PathManager::movePathYAbs(std::string id, double y) {
     m_pPaths[id]->moveYAbs(y);
 }
+
+void PathManager::drawPath(SDL_Renderer *renderer, std::string id, double x, double y) {
+    m_pPaths[id]->moveXAbs(x);
+    m_pPaths[id]->moveYAbs(y);
+    drawPath(renderer, id);
+}
