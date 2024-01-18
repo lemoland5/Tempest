@@ -50,7 +50,7 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         PathManager::getInstance()->loadPath("../Assets/player.path", "flipper");
         PathManager::getInstance()->loadPath("../Assets/player.path", "flipperTanker");
         PathManager::getInstance()->loadPath("../Assets/player.path", "fuseball");
-        PathManager::getInstance()->loadPath("../Assets/player.path", "bullet");
+        PathManager::getInstance()->loadPath("../Assets/bullet.path", "bullet");
 //        PathManager::getInstance()->loadPath("../Assets/player.path", "player");
 
         m_pPlayer = new Player(0,0,30,30,"player");
@@ -123,9 +123,9 @@ void Game::update() {
 //    TestPath->rotate(1);
 //    TestPath->moveX(1);
 //    TestPath->moveY(1);
-
-    PathManager::getInstance()->movePathXAbs("player",m_pPlayer->getX());
-    PathManager::getInstance()->movePathYAbs("player",m_pPlayer->getY());
+//
+//    PathManager::getInstance()->movePathXAbs("player",m_pPlayer->getX());
+//    PathManager::getInstance()->movePathYAbs("player",m_pPlayer->getY());
 
     switch (m_GameState) {
         case STATE_MENU:
@@ -194,14 +194,14 @@ void Game::render() {
 
 //    TestPath->draw(m_pRenderer);
 
-    PathManager::getInstance()->drawPath(m_pRenderer, "player", 500, 100);
+//    PathManager::getInstance()->drawPath(m_pRenderer, "player", 500, 100);
 
     SDL_RenderPresent(m_pRenderer);
 }
 
 
 void Game::renderMenu() {
-//    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, 80, WINDOW_WIDTH, 100, "atari", "TEMPEST MMXXIV", COLOR_TEXT_SELECTED);
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, 80, WINDOW_WIDTH, 100, "atari", "TEMPEST MMXXIV", COLOR_TEXT_SELECTED);
 
     for(int i = 0; i < m_pMenuOptions.size(); i++){
         m_pMenuOptions[i]->draw(m_pRenderer, WINDOW_CENTER_HORIZONTAL, (int)WINDOW_CENTER_VERTICAL + (100 * i), 300, 100, "atari");
@@ -227,14 +227,14 @@ void Game::checkSpawn() {
 //    if(m_FrameCount % 120 == 0){
 //        spawn<Flipper>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
 //    }
+//
+//    if(m_FrameCount % 120 == 0){
+//        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
+//    }
 
-    if(m_FrameCount % 120 == 0){
-        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
-    }
-
-    if(m_FrameCount % 120 == 0){
-        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
-    }
+//    if(m_FrameCount % 120 == 0){
+//        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
+//    }
 
 //    if(m_FrameCount % 120 == 0){
 //        spawn<FlipperTanker>(0,LINE_T_SCALE,80,30,"flipperTanker");
@@ -242,9 +242,9 @@ void Game::checkSpawn() {
 //    if(m_FrameCount % 100 == 0) {
 //        spawn<Fuseball>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,30,30,"fuseball");
 //    }
-    if(m_FrameCount % 60 == 0){
-        spawn<Pulsar>(2,LINE_T_SCALE,9,30,"pulsar");
-    }
+//    if(m_FrameCount % 60 == 0){
+//        spawn<Pulsar>(2,LINE_T_SCALE,9,30,"pulsar");
+//    }
 }
 
 void Game::NodeRepUpdate() {

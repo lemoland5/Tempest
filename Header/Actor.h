@@ -37,6 +37,7 @@ protected:
     float m_Anchor = 0.5f;
     int m_Width;
     int m_Height;
+    float m_Rotation;
     std::string m_TextureId;
     bool m_MarkedForDeletion = false;
     std::stack<Type> m_CollisionStack;

@@ -43,7 +43,7 @@ void Player::handleCollisions() {
         switch (m_CollisionStack.top()) {
             case TYPE_ENEMY:
 //                Actor::kill();
-                std::cout<<"Chinese person! \n";
+                // std::cout<<"Chinese person! \n";
                 m_CollisionStack.pop();
                 break;
             default:

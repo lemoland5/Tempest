@@ -14,8 +14,8 @@ public:
     void shoot();
 
     // TODO: delete
-    double getX(){return m_Position->x;};
-    double getY(){return m_Position->y;};
+    float getX(){return m_Position->x;};
+    float getY(){return m_Position->y;};
 
 private:
 };

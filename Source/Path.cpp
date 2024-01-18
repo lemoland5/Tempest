@@ -6,38 +6,44 @@
 Path::Path() {
 //    m_pLines = PathManager::getInstance()->loadPath("../Assets/player.path");
     m_pCenter = getPathCenter(m_pLines);
-    std::cout<<m_pCenter->x<<" - "<<m_pCenter->y<<"\n";
+    // std::cout<<m_pCenter->x<<" - "<<m_pCenter->y<<"\n";
 
 
 }
 
 
-Path::Path(std::vector<Line *> lines) {
+Path::Path(std::vector<Line *> lines, SDL_Color color) {
     m_pLines = lines;
+    m_Color = color;
     m_pCenter = getPathCenter(m_pLines);
+
+    std::cout<<m_Color.g<<"\n";
 }
 
 
 void Path::draw(SDL_Renderer* renderer) {
 //    std::cout<<"drawing \n";
     for(auto & line : m_pLines){
-        std::cout<<line->getLength()<<"\n";
+        // std::cout<<line->getLength()<<"\n";
         SDL_RenderDrawLine(renderer, line);
-        SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pBegin));
-        SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pEnd));
+        SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pBegin), m_Color);
+        SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pEnd), m_Color);
     }
 }
 
-void Path::rotate(double angle) {
-    std::cout<<"CENTER: "<<m_pCenter->x<<", "<<m_pCenter->y<<"\n";
+void Path::rotate(float angle) {
+    // std::cout<<"CENTER: "<<m_pCenter->x<<", "<<m_pCenter->y<<"\n";
+
 
     for(auto & line : m_pLines){
         line->m_pBegin = rotatePoint(m_pCenter, line->m_pBegin, angle);
         line->m_pEnd = rotatePoint(m_pCenter, line->m_pEnd, angle);
     }
+
+    m_Rotation += angle;
 }
 
-void Path::moveX(double x) {
+void Path::moveX(float x) {
     for(auto & line : m_pLines){
         line->m_pBegin->x += x;
         line->m_pEnd->x += x;
@@ -45,7 +51,7 @@ void Path::moveX(double x) {
     m_pCenter = getPathCenter(m_pLines);
 }
 
-void Path::moveY(double y) {
+void Path::moveY(float y) {
     for(auto & line : m_pLines){
         line->m_pBegin->y += y;
         line->m_pEnd->y += y;
@@ -54,16 +60,23 @@ void Path::moveY(double y) {
 
 }
 
-void Path::moveXAbs(double x) {
-    double difference = x - m_pCenter->x;
+void Path::moveXAbs(float x) {
+    float difference = x - m_pCenter->x;
 
     moveX(difference);
 }
 
-void Path::moveYAbs(double y) {
-    double difference = y - m_pCenter->y;
+void Path::moveYAbs(float y) {
+    float difference = y - m_pCenter->y;
     moveY(difference);
 }
+
+void Path::rotateAbs(float angle) {
+    float difference = angle - m_Rotation;
+    rotate(difference);
+}
+
+Path::Path(std::vector<Line *> lines): Path(lines, {255,255,255,255}) {};
 
 Point* getPathCenter(std::vector<Line*> path){
 //    std::cout<<path.size()<<"\n";
@@ -111,9 +124,9 @@ Point* getPathCenter(std::vector<Line*> path){
     centerX = ((float)minX + (float)maxX) / 2;
     centerY = ((float)minY + (float)maxY) / 2;
 //
-    std::cout<<minX<<" - "<<maxX<<"\n";
-    std::cout<<minY<<" - "<<maxY<<"\n";
-    std::cout<<centerX<<" - "<<centerY<<"\n";
+    // std::cout<<minX<<" - "<<maxX<<"\n";
+    // std::cout<<minY<<" - "<<maxY<<"\n";
+    // std::cout<<centerX<<" - "<<centerY<<"\n";
 
     return new Point((int)centerX, (int)centerY);
 

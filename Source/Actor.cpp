@@ -6,7 +6,7 @@
 
 void Actor::draw(SDL_Renderer* renderer) {
 //    TextureManager::getInstance()->draw(renderer,m_TextureId, (m_Position->x - (m_Width*m_Anchor)), (m_Position->y - (m_Height*m_Anchor)), m_Width, m_Height);
-    PathManager::getInstance()->drawPath(renderer, m_TextureId, m_Position->x, m_Position->y);
+    PathManager::getInstance()->drawPath(renderer, m_TextureId, m_Position->x, m_Position->y, m_Rotation);
 }
 
 void Actor::moveX(int x) {
@@ -32,6 +32,9 @@ void Actor::update() {
 
 Actor::Actor(int x, int y, int width, int height, std::string id): m_MapPosition(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(id){
     m_Position = Game::getInstance()->getMap()->getNode((int)m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / LINE_T_SCALE);
+    m_Rotation = Game::getInstance()->getMap()->getNode((int)m_MapPosition->x%4)->getAxis()->getAngle();
+    // std::cout<<m_Rotation<<"\n";
+
 }
 
 void Actor::addCollision(Type type) {
