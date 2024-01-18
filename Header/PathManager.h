@@ -8,7 +8,7 @@
 
 class PathManager {
 public:
-    void loadPath(std::string path, std::string id);
+    void loadPath(const std::string& path, const std::string& id);
 
     void drawPath(SDL_Renderer* renderer, std::string id);
     void drawPath(SDL_Renderer* renderer, std::string id, float x, float y);

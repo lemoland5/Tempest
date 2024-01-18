@@ -41,13 +41,13 @@ SDL_Color stringToColor(std::string line){
     return {static_cast<Uint8>(values[0]), static_cast<Uint8>(values[1]), static_cast<Uint8>(values[2]), static_cast<Uint8>(values[3])};
 }
 
-void PathManager::loadPath(std::string path, std::string id) {
+void PathManager::loadPath(const std::string& path, const std::string& id) {
     std::ifstream file;
     std::string line;
     int lineNumber = 0;
     file.open(path);
 
-    std::vector<Line *> res;
+    auto* res = new std::vector<Line*>;
     SDL_Color color;
 
     if ( file.is_open() ) {
@@ -59,13 +59,13 @@ void PathManager::loadPath(std::string path, std::string id) {
 //                std::cout<<color.g<<"\n";
             }
             else{
-                res.push_back(stringToLine(line));
+                res->push_back(stringToLine(line));
             }
             lineNumber++;
         }
     }
 
-    res.pop_back();
+    res->pop_back();
     m_pPaths[id] = new Path(res, color);
 }
 

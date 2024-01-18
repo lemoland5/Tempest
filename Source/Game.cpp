@@ -47,10 +47,11 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
         PathManager::getInstance()->loadPath("../Assets/player.path", "player");
         PathManager::getInstance()->loadPath("../Assets/player.path", "pulsar");
-        PathManager::getInstance()->loadPath("../Assets/player.path", "flipper");
+        PathManager::getInstance()->loadPath("../Assets/flipper.path", "flipper");
         PathManager::getInstance()->loadPath("../Assets/player.path", "flipperTanker");
         PathManager::getInstance()->loadPath("../Assets/player.path", "fuseball");
-        PathManager::getInstance()->loadPath("../Assets/bullet.path", "bullet");
+        PathManager::getInstance()->loadPath("../Assets/flipper"
+                                             ".path", "bullet");
 //        PathManager::getInstance()->loadPath("../Assets/player.path", "player");
 
         m_pPlayer = new Player(0,0,30,30,"player");

@@ -7,8 +7,8 @@
 class Path {
 public:
     Path();
-    Path(std::vector<Line*> lines);
-    Path(std::vector<Line*> lines, SDL_Color color);
+    explicit Path(std::vector<Line*>* lines);
+    Path(std::vector<Line*>* lines, SDL_Color color);
 
     void draw(SDL_Renderer* renderer);
     void moveX(float x);
@@ -19,10 +19,10 @@ public:
     void rotateAbs(float angle);
 
 private:
-    std::vector<Line*> m_pLines;
+    std::vector<Line*>* m_pLines;
     Point* m_pCenter;
     float m_Rotation = 0;
     SDL_Color m_Color;
 };
 
-Point* getPathCenter(std::vector<Line*> path);
+Point* getPathCenter(std::vector<Line*>* path);

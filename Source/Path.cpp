@@ -11,8 +11,10 @@ Path::Path() {
 
 }
 
+Path::Path(std::vector<Line *>* lines): Path(lines, {255,255,255,255}) {};
 
-Path::Path(std::vector<Line *> lines, SDL_Color color) {
+
+Path::Path(std::vector<Line *>* lines, SDL_Color color) {
     m_pLines = lines;
     m_Color = color;
     m_pCenter = getPathCenter(m_pLines);
@@ -23,7 +25,7 @@ Path::Path(std::vector<Line *> lines, SDL_Color color) {
 
 void Path::draw(SDL_Renderer* renderer) {
 //    std::cout<<"drawing \n";
-    for(auto & line : m_pLines){
+    for(auto & line : *m_pLines){
         // std::cout<<line->getLength()<<"\n";
         SDL_RenderDrawLine(renderer, line);
         SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pBegin), m_Color);
@@ -35,7 +37,7 @@ void Path::rotate(float angle) {
     // std::cout<<"CENTER: "<<m_pCenter->x<<", "<<m_pCenter->y<<"\n";
 
 
-    for(auto & line : m_pLines){
+    for(auto & line : *m_pLines){
         line->m_pBegin = rotatePoint(m_pCenter, line->m_pBegin, angle);
         line->m_pEnd = rotatePoint(m_pCenter, line->m_pEnd, angle);
     }
@@ -44,7 +46,7 @@ void Path::rotate(float angle) {
 }
 
 void Path::moveX(float x) {
-    for(auto & line : m_pLines){
+    for(auto & line : *m_pLines){
         line->m_pBegin->x += x;
         line->m_pEnd->x += x;
     }
@@ -52,7 +54,7 @@ void Path::moveX(float x) {
 }
 
 void Path::moveY(float y) {
-    for(auto & line : m_pLines){
+    for(auto & line : *m_pLines){
         line->m_pBegin->y += y;
         line->m_pEnd->y += y;
     }
@@ -76,9 +78,8 @@ void Path::rotateAbs(float angle) {
     rotate(difference);
 }
 
-Path::Path(std::vector<Line *> lines): Path(lines, {255,255,255,255}) {};
 
-Point* getPathCenter(std::vector<Line*> path){
+Point* getPathCenter(std::vector<Line*>* path){
 //    std::cout<<path.size()<<"\n";
 
 //    for(auto & line : path){
@@ -88,12 +89,12 @@ Point* getPathCenter(std::vector<Line*> path){
     float centerX;
     float centerY;
 
-    int minX = path[0]->m_pBegin->x;
+    int minX = (*path)[0]->m_pBegin->x;
     int maxX = minX;
-    int minY = path[0]->m_pBegin->y;
-    int maxY = path[0]->m_pBegin->y;
+    int minY = (*path)[0]->m_pBegin->y;
+    int maxY = (*path)[0]->m_pBegin->y;
 
-    for(auto & line : path){
+    for(auto & line : (*path)){
         if(line->m_pBegin->x < minX){
             minX = line->m_pBegin->x;
         }
