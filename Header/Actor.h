@@ -14,26 +14,28 @@ enum Type {
 class Actor {
 public:
     Actor() = default;
-    Actor(int x, int y, int width, int height, std::string id);
-    virtual ~Actor() = default;
-//    Actor(Point* point, int width, int height): m_MapPosition(point), m_Width(width), m_Height(height), m_MarkedForDeletion(false){};
+    Actor(float x, float y, int width, int height, std::string id);
+    virtual ~Actor();
+//    Actor(Point* point, int width, int height): m_pMapPosition(point), m_Width(width), m_Height(height), m_MarkedForDeletion(false){};
 
     virtual void update();
     virtual void draw(SDL_Renderer* renderer);
     virtual void handleCollisions() = 0;
     virtual void kill();
 
+    void markForDeletion() {m_MarkedForDeletion = true;};
     virtual Type getType() = 0;
     [[nodiscard]] bool isMarkedForDeletion() const {return m_MarkedForDeletion;};
-    [[nodiscard]] Point* getMapPosition() const {return m_MapPosition;};
+    [[nodiscard]] Point* getMapPosition() const {return m_pMapPosition;};
 
     void moveX(int x);
+    void moveXAbs(int x);
     void moveY(int y);
     void addCollision(Type type);
 
 protected:
-    Point* m_Position;
-    Point* m_MapPosition;
+    Point* m_pPosition;
+    Point* m_pMapPosition;
     float m_Anchor = 0.5f;
     int m_Width;
     int m_Height;

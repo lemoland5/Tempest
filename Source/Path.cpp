@@ -25,11 +25,11 @@ Path::Path(std::vector<Line *>* lines, SDL_Color color) {
 
 void Path::draw(SDL_Renderer* renderer) {
 //    std::cout<<"drawing \n";
-    for(auto & line : *m_pLines){
+    for(int i = 0; i < m_pLines->size(); i++){
         // std::cout<<line->getLength()<<"\n";
-        SDL_RenderDrawLine(renderer, line);
-        SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pBegin), m_Color);
-        SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pEnd), m_Color);
+        SDL_RenderDrawLine(renderer, (*m_pLines)[i], m_Color);
+//        SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pBegin), m_Color);
+//        SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pEnd), m_Color);
     }
 }
 
@@ -37,27 +37,30 @@ void Path::rotate(float angle) {
     // std::cout<<"CENTER: "<<m_pCenter->x<<", "<<m_pCenter->y<<"\n";
 
 
-    for(auto & line : *m_pLines){
-        line->m_pBegin = rotatePoint(m_pCenter, line->m_pBegin, angle);
-        line->m_pEnd = rotatePoint(m_pCenter, line->m_pEnd, angle);
+    for(int i = 0; i < m_pLines->size(); i++){
+        (*m_pLines)[i]->m_pBegin = rotatePoint(m_pCenter, (*m_pLines)[i]->m_pBegin, angle);
+        (*m_pLines)[i]->m_pEnd = rotatePoint(m_pCenter, (*m_pLines)[i]->m_pEnd, angle);
     }
 
     m_Rotation += angle;
 }
 
 void Path::moveX(float x) {
-    for(auto & line : *m_pLines){
-        line->m_pBegin->x += x;
-        line->m_pEnd->x += x;
+    for(int i = 0; i < m_pLines->size(); i++){
+        (*m_pLines)[i]->m_pBegin->x += x;
+        (*m_pLines)[i]->m_pEnd->x += x;
     }
+    delete m_pCenter;
     m_pCenter = getPathCenter(m_pLines);
 }
 
 void Path::moveY(float y) {
-    for(auto & line : *m_pLines){
-        line->m_pBegin->y += y;
-        line->m_pEnd->y += y;
+    for(int i = 0; i < m_pLines->size(); i++){
+        (*m_pLines)[i]->m_pBegin->y += y;
+        (*m_pLines)[i]->m_pEnd->y += y;
     }
+    delete m_pCenter;
+
     m_pCenter = getPathCenter(m_pLines);
 
 }
@@ -94,31 +97,31 @@ Point* getPathCenter(std::vector<Line*>* path){
     int minY = (*path)[0]->m_pBegin->y;
     int maxY = (*path)[0]->m_pBegin->y;
 
-    for(auto & line : (*path)){
-        if(line->m_pBegin->x < minX){
-            minX = line->m_pBegin->x;
+    for(int i = 0; i < path->size(); i++){
+        if((*path)[i]->m_pBegin->x < minX){
+            minX = (*path)[i]->m_pBegin->x;
         }
-        if(line->m_pEnd->x < minX){
-            minX = line->m_pEnd->x;
+        if((*path)[i]->m_pEnd->x < minX){
+            minX = (*path)[i]->m_pEnd->x;
         }
-        if(line->m_pBegin->x > maxX){
-            maxX = line->m_pBegin->x;
+        if((*path)[i]->m_pBegin->x > maxX){
+            maxX = (*path)[i]->m_pBegin->x;
         }
-        if(line->m_pEnd->x > maxX){
-            maxX = line->m_pEnd->x;
+        if((*path)[i]->m_pEnd->x > maxX){
+            maxX = (*path)[i]->m_pEnd->x;
         }
 
-        if(line->m_pBegin->y < minY){
-            minY = line->m_pBegin->y;
+        if((*path)[i]->m_pBegin->y < minY){
+            minY = (*path)[i]->m_pBegin->y;
         }
-        if(line->m_pEnd->y < minY){
-            minY = line->m_pEnd->y;
+        if((*path)[i]->m_pEnd->y < minY){
+            minY = (*path)[i]->m_pEnd->y;
         }
-        if(line->m_pBegin->y > maxY){
-            maxY = line->m_pBegin->y;
+        if((*path)[i]->m_pBegin->y > maxY){
+            maxY = (*path)[i]->m_pBegin->y;
         }
-        if(line->m_pEnd->y > maxY){
-            maxY = line->m_pEnd->y;
+        if((*path)[i]->m_pEnd->y > maxY){
+            maxY = (*path)[i]->m_pEnd->y;
         }
     }
 

@@ -5,7 +5,7 @@ void Flipper::update() {
 
 //    m_Anchor += 0.1f;
 
-    if(m_MapPosition->y > 0){
+    if(m_pMapPosition->y > 0){
         moveY(-1);
     }
     else{

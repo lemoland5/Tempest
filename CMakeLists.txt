@@ -1,7 +1,12 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.22.1)
+
 project(Tempest)
 
+
 set(CMAKE_CXX_STANDARD 17)
+
+#include(C:/Users/Niep/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake)
+
 
 add_executable(Tempest
         Source/main.cpp
@@ -16,8 +21,6 @@ add_executable(Tempest
         Header/Game.h
         Source/Actor.cpp
         Header/Actor.h
-        Source/TextureManager.cpp
-        Header/TextureManager.h
         Source/EventHandler.cpp
         Header/EventHandler.h
         Header/Player.h

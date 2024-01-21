@@ -8,6 +8,7 @@ public:
     Node(Point* start1, Point* end1, Point* start2, Point* end2);
     Node(Line* inner, Line* outer);
     Node();
+    ~Node();
 
     [[nodiscard]] Line* getAxis() const {return m_Axis;};
 

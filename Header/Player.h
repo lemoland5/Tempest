@@ -1,10 +1,12 @@
 #pragma once
 
+#include <utility>
+
 #include "Actor.h"
 
 class Player : public Actor {
 public:
-    Player(int x, int y, int width, int height, std::string id): Actor(x, y, width, height, id){};
+    Player(int x, int y, int width, int height, std::string id): Actor(x, y, width, height, std::move(id)){};
 
     Type getType() override {return TYPE_PLAYER;};
 
@@ -12,10 +14,10 @@ public:
     void handleCollisions() override;
     void handleInput();
     void shoot();
+    void kill() override;
 
-    // TODO: delete
-    float getX(){return m_Position->x;};
-    float getY(){return m_Position->y;};
+    [[nodiscard]] int getLives() const {return m_Lives;};
 
 private:
+    int m_Lives = 5;
 };

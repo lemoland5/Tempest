@@ -24,6 +24,8 @@ public:
     Line( int x1,  int y1,  int x2,  int y2): m_pBegin(new Point(x1, y1)), m_pEnd(new Point(x2, y2)){};
     Line(Point* m_pBegin, Point* m_pEnd): m_pBegin(m_pBegin), m_pEnd(m_pEnd){};
     Line(): m_pBegin(new Point(1,1)), m_pEnd(new Point(2,1)){};
+    ~Line();
+
 
     [[nodiscard]] float getLength() const;
     [[nodiscard]] float getAngle() const;

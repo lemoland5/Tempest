@@ -2,7 +2,7 @@
 
 void Fuseball::update() {
     if(m_Cycle % 2 == 1){
-        if(m_MapPosition->y > 0){
+        if(m_pMapPosition->y > 0){
             moveY(-1);
         }
         else{
@@ -10,7 +10,7 @@ void Fuseball::update() {
         }
     }
     else{
-        if(m_MapPosition->y < LINE_T_SCALE){
+        if(m_pMapPosition->y < LINE_T_SCALE){
             moveY(1);
         }
         else{

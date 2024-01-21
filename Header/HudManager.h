@@ -35,6 +35,9 @@ public:
     void drawText(SDL_Renderer* renderer, int x, int y, int w, int h, std::string fontId, std::string text, SDL_Color color);
     void drawText(SDL_Renderer* renderer, int x, int y, int w, int h, std::string fontId, std::string text);
 
+    void destroy();
+
+
     static HudManager* getInstance();
 private:
     static HudManager* s_pInstance;

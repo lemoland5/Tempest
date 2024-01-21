@@ -3,7 +3,7 @@
 
 void Pulsar::update() {
 
-    if(m_MapPosition->y > LINE_T_SCALE / 2){
+    if(m_pMapPosition->y > LINE_T_SCALE / 2){
         moveY(-1);
     }
 //    else{

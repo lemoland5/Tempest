@@ -16,3 +16,8 @@ float Line::getLength() const {
 float Line::getAngle() const {
     return radianToDegree(atan2(m_pEnd->x - m_pBegin->x, m_pBegin->y - m_pEnd->y));
 }
+
+Line::~Line() {
+    delete m_pBegin;
+    delete m_pEnd;
+}

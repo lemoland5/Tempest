@@ -5,7 +5,7 @@ void Bullet::update() {
 
 
 
-    if(m_MapPosition->y < LINE_T_SCALE){
+    if(m_pMapPosition->y < LINE_T_SCALE){
         moveY(3);
     }
     else{

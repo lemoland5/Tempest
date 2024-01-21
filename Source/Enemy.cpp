@@ -12,6 +12,11 @@ void Enemy::handleCollisions() {
                 kill();
                 m_CollisionStack.pop();
                 break;
+            case TYPE_PLAYER:
+//                kill();
+                m_MarkedForDeletion = true;
+                m_CollisionStack.pop();
+                break;
             default:
                 m_CollisionStack.pop();
                 break;

@@ -1,38 +1,38 @@
 #include "../Header/Actor.h"
 #include "../Header/Game.h"
 #include "../Header/PathManager.h"
-#include "../Header/TextureManager.h"
 #include <iostream>
+#include <utility>
 
 void Actor::draw(SDL_Renderer* renderer) {
-//    TextureManager::getInstance()->draw(renderer,m_TextureId, (m_Position->x - (m_Width*m_Anchor)), (m_Position->y - (m_Height*m_Anchor)), m_Width, m_Height);
-    PathManager::getInstance()->drawPath(renderer, m_TextureId, m_Position->x, m_Position->y, m_Rotation);
+//    TextureManager::getInstance()->draw(renderer,m_TextureId, (m_pPosition->x - (m_Width*m_Anchor)), (m_pPosition->y - (m_Height*m_Anchor)), m_Width, m_Height);
+    PathManager::getInstance()->drawPath(renderer, m_TextureId, m_pPosition->x, m_pPosition->y, m_Rotation);
 }
 
 void Actor::moveX(int x) {
-    m_MapPosition->x += x;
+    m_pMapPosition->x += x;
 }
 void Actor::moveY(int y) {
-    m_MapPosition->y += y;
+    m_pMapPosition->y += y;
 }
 
 void Actor::update() {
     handleCollisions();
-        // m_MapPosition rollback
-    if(m_MapPosition->x < 0){
-        m_MapPosition->x = (int)Game::getInstance()->getMap()->getNodeCount() - 1 + m_MapPosition->x;
+        // m_pMapPosition rollback
+    if(m_pMapPosition->x < 0){
+        m_pMapPosition->x = (float)Game::getInstance()->getMap()->getNodeCount() - 1 + m_pMapPosition->x;
     }
-    if(m_MapPosition->x == (int)Game::getInstance()->getMap()->getNodeCount() - 1){
-        m_MapPosition->x = 0;
+    if(m_pMapPosition->x == (float)Game::getInstance()->getMap()->getNodeCount() - 1){
+        m_pMapPosition->x = 0;
     }
 
-        // m_Position calculation.
-    m_Position = Game::getInstance()->getMap()->getNode((int)m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / LINE_T_SCALE);
+        // m_pPosition calculation.
+    m_pPosition = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_pMapPosition->y / LINE_T_SCALE);
 }
 
-Actor::Actor(int x, int y, int width, int height, std::string id): m_MapPosition(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(id){
-    m_Position = Game::getInstance()->getMap()->getNode((int)m_MapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_MapPosition->y / LINE_T_SCALE);
-    m_Rotation = Game::getInstance()->getMap()->getNode((int)m_MapPosition->x%4)->getAxis()->getAngle();
+Actor::Actor(float x, float y, int width, int height, std::string id): m_pMapPosition(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(std::move(id)){
+    m_pPosition = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_pMapPosition->y / LINE_T_SCALE);
+    m_Rotation = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%4)->getAxis()->getAngle();
     // std::cout<<m_Rotation<<"\n";
 
 }
@@ -43,4 +43,14 @@ void Actor::addCollision(Type type) {
 
 void Actor::kill() {
     m_MarkedForDeletion = true;
+}
+
+void Actor::moveXAbs(int x) {
+    float difference = x - m_pMapPosition->x;
+    moveX(difference);
+}
+
+Actor::~Actor() {
+    delete m_pMapPosition;
+    delete m_pPosition;
 }

@@ -88,13 +88,13 @@ void PathManager::movePathYAbs(std::string id, float y) {
     m_pPaths[id]->moveYAbs(y);
 }
 
-void PathManager::drawPath(SDL_Renderer *renderer, std::string id, float x, float y) {
+void PathManager::drawPath(SDL_Renderer *renderer, std::string id, int x, int y) {
     m_pPaths[id]->moveXAbs(x);
     m_pPaths[id]->moveYAbs(y);
     drawPath(renderer, id);
 }
 
-void PathManager::drawPath(SDL_Renderer *renderer, std::string id, float x, float y, float angle) {
+void PathManager::drawPath(SDL_Renderer *renderer, std::string id, int x, int y, float angle) {
     m_pPaths[id]->rotateAbs(angle);
     drawPath(renderer, id, x, y);
 }

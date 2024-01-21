@@ -28,3 +28,9 @@ void Node::draw(SDL_Renderer* renderer) {
     SDL_RenderDrawLine(renderer, m_Inner->m_pEnd->x, m_Inner->m_pEnd->y, m_Outer->m_pEnd->x, m_Outer->m_pEnd->y);
     SDL_RenderDrawLine(renderer, m_Axis);
 }
+
+Node::~Node() {
+    delete m_Inner;
+    delete m_Outer;
+    delete m_Axis;
+}

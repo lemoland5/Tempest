@@ -15,10 +15,10 @@ void Player::handleInput() {
 //    EventHandler::getInstance()->update();
 
 //    if(EventHandler::getInstance()->isKeyDown(SDL_SCANCODE_RIGHT)){
-//        m_MapPosition->x += 1;
+//        m_pMapPosition->x += 1;
 //    }
 //    if(EventHandler::getInstance()->isKeyDown(SDL_SCANCODE_LEFT)){
-//        m_MapPosition->x -= 1;
+//        m_pMapPosition->x -= 1;
 //    }
 //
 //    SDL_Event event;
@@ -34,16 +34,18 @@ void Player::handleInput() {
 }
 
 void Player::shoot(){
-    Game::getInstance()->spawn<Bullet>(m_MapPosition->x, m_MapPosition->y, 10, 10, "bullet");
+    Game::getInstance()->spawn<Bullet>(m_pMapPosition->x, m_pMapPosition->y, 10, 10, "bullet");
 //    std::cout<<m_CollisionStack.top()<<"\n";
 }
 
 void Player::handleCollisions() {
     while(!m_CollisionStack.empty()){
+        std::cout<<"I got touched \n";
+
         switch (m_CollisionStack.top()) {
             case TYPE_ENEMY:
-//                Actor::kill();
-                // std::cout<<"Chinese person! \n";
+                kill();
+                 std::cout<<"Chinese person! \n";
                 m_CollisionStack.pop();
                 break;
             default:
@@ -51,4 +53,15 @@ void Player::handleCollisions() {
                 break;
         }
     }
+}
+
+void Player::kill() {
+    std::cout<<"I got killed \n";
+    m_Lives--;
+    Game::getInstance()->setState(STATE_PAUSED);
+
+//    if(m_Lives <= 0){
+//         Game::getInstance()->setState(STATE_PAUSED);
+//    }
+//    Actor::kill();
 }

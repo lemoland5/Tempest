@@ -1,0 +1,3 @@
+C:/Users/Niep/Desktop/Tempest/CMakeFiles/Tempest.dir
+C:/Users/Niep/Desktop/Tempest/CMakeFiles/edit_cache.dir
+C:/Users/Niep/Desktop/Tempest/CMakeFiles/rebuild_cache.dir

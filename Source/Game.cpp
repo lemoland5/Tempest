@@ -6,7 +6,6 @@
 #include "../Header/MapLoader.h"
 #include "../Header/PathManager.h"
 #include "../Header/Pulsar.h"
-#include "../Header/TextureManager.h"
 #include <cstdlib>
 
 Game* Game::s_pInstance = nullptr;
@@ -20,18 +19,8 @@ Game* Game::getInstance() {
 
 bool Game::initialise(const std::string& windowName, unsigned int width, unsigned int height) {
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0 && TTF_Init() == 0){
-
         m_pWindow = SDL_CreateWindow(windowName.c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (int)width, (int)height, SDL_WINDOW_SHOWN);
         m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
-
-        m_FrameCount = 0;
-        m_isRunning = true;
-        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/bullet.svg","bullet");
-        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/flipper.svg","flipper");
-        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/flipperTanker.svg","flipperTanker");
-        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/fuseball.svg","fuseball");
-        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/player.svg","player");
-        TextureManager::getInstance()->loadSvg(m_pRenderer, "../Assets/pulsar.svg","pulsar");
 
         m_pMenuOptions.push_back(new MenuOption("PLAY"));
         m_pMenuOptions.push_back(new MenuOption("QUIT"));
@@ -50,8 +39,7 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         PathManager::getInstance()->loadPath("../Assets/flipper.path", "flipper");
         PathManager::getInstance()->loadPath("../Assets/player.path", "flipperTanker");
         PathManager::getInstance()->loadPath("../Assets/player.path", "fuseball");
-        PathManager::getInstance()->loadPath("../Assets/flipper"
-                                             ".path", "bullet");
+        PathManager::getInstance()->loadPath("../Assets/bullet.path", "bullet");
 //        PathManager::getInstance()->loadPath("../Assets/player.path", "player");
 
         m_pPlayer = new Player(0,0,30,30,"player");
@@ -61,6 +49,9 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
         //m_NodeRep.max_size(NodeCount);
         m_NodeRep = {1,0,0,0};
+
+
+        m_isRunning = true;
 
         std::cout<<"inited \n";
         return true;
@@ -93,7 +84,7 @@ void Game::handleInput() {
                         m_pPlayer->shoot();
                     }
                 }
-                else{
+                if(m_GameState == STATE_MENU){
                     if(event.key.keysym.sym == SDLK_UP){
                         m_MenuSelected++;
                     }
@@ -102,12 +93,6 @@ void Game::handleInput() {
                     }
                     if(event.key.keysym.sym == SDLK_SPACE || event.key.keysym.sym == SDLK_RETURN){
                         checkMenu();
-                    }
-                    if(event.key.keysym.sym == SDLK_RIGHT){
-                        TestPath->rotate(1);
-                    }
-                    if(event.key.keysym.sym == SDLK_LEFT){
-                        TestPath->rotate(-1);
                     }
                 }
                 break;
@@ -120,7 +105,8 @@ void Game::handleInput() {
 }
 
 void Game::update() {
-//
+    m_FrameCount++;
+
 //    TestPath->rotate(1);
 //    TestPath->moveX(1);
 //    TestPath->moveY(1);
@@ -135,13 +121,13 @@ void Game::update() {
         case STATE_INGAME:
             updateIngame();
             break;
+        case STATE_PAUSED:
+            updatePaused();
+            break;
     }
 }
 
 void Game::updateIngame() {
-    m_FrameCount++;
-//    addScore(1);
-
     m_pPlayer->update();
 
     CollisionManager::ObjectsColliding<Actor>(m_NodeRep, m_pActors);
@@ -172,8 +158,24 @@ void Game::updateMenu() {
     m_pMenuOptions[m_MenuSelected]->setSelected(true);
 }
 
+void Game::updatePaused() {
+    m_FrameCountPaused++;
+    if(m_FrameCountPaused % 50 > 0 && m_FrameCountPaused % 50 < 25){
+        m_BackgroundColor = {127,127,127,255};
+    }
+    else{
+        m_BackgroundColor = {0,0,0,255};
+    }
+    if(m_FrameCountPaused >= 150){
+        resetIngame();
+        m_GameState = STATE_INGAME;
+    }
+}
+
 void Game::render() {
-    SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 0);
+//    std::cout<<m_pActors.size()<<"\n";
+//    std::cout<<PathManager::getInstance()->m_pPaths.size()<<"\n";
+    SDL_SetRenderDrawColor(m_pRenderer, m_BackgroundColor);
     SDL_RenderClear(m_pRenderer);
     SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
 
@@ -188,7 +190,7 @@ void Game::render() {
         case STATE_MENU:
             renderMenu();
             break;
-        case STATE_INGAME:
+        default:
             renderIngame();
             break;
     }
@@ -208,18 +210,22 @@ void Game::renderMenu() {
         m_pMenuOptions[i]->draw(m_pRenderer, WINDOW_CENTER_HORIZONTAL, (int)WINDOW_CENTER_VERTICAL + (100 * i), 300, 100, "atari");
     }
 
-
 }
 
 void Game::renderIngame() {
     m_pMap->draw(m_pRenderer);
     m_pPlayer->draw(m_pRenderer);
 
-    for(auto & actor : m_pActors){
-        actor->draw(m_pRenderer);
+    for(int i = 0; i < m_pActors.size(); i++){
+        m_pActors[i]->draw(m_pRenderer);
     }
 
     HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 175, (int)m_DisplayScore.length() * 100, 100, "atari", m_DisplayScore, {255,255,255});
+
+    for(int i = 0; i < m_pPlayer->getLives(); i++) {
+        PathManager::getInstance()->drawPath(m_pRenderer, "player", WINDOW_CENTER_HORIZONTAL - 300 + 40 + (i * 102),
+                                             WINDOW_CENTER_VERTICAL + 175 + 100);
+    }
 }
 
 
@@ -233,9 +239,9 @@ void Game::checkSpawn() {
 //        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
 //    }
 
-//    if(m_FrameCount % 120 == 0){
-//        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
-//    }
+    if(m_FrameCount % 120 == 0){
+        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
+    }
 
 //    if(m_FrameCount % 120 == 0){
 //        spawn<FlipperTanker>(0,LINE_T_SCALE,80,30,"flipperTanker");
@@ -246,6 +252,14 @@ void Game::checkSpawn() {
 //    if(m_FrameCount % 60 == 0){
 //        spawn<Pulsar>(2,LINE_T_SCALE,9,30,"pulsar");
 //    }
+}
+
+void Game::resetIngame() {
+    m_pPlayer->moveXAbs(0);
+    for(int i = 0; i < m_pActors.size(); i++){
+        m_pActors[i]->markForDeletion();
+    }
+//    m_pActors.clear();
 }
 
 void Game::NodeRepUpdate() {
@@ -285,8 +299,8 @@ void Game::resetScore() {
 }
 
 void Game::resetMenuSelection() {
-    for(auto & option : m_pMenuOptions){
-        option->setSelected(false);
+    for(int i = 0; i < m_pMenuOptions.size(); i++){
+        m_pMenuOptions[i]->setSelected(false);
     }
 }
 
@@ -301,3 +315,19 @@ void Game::checkMenu() {
     }
 }
 
+void Game::setState(GameState state) {
+    switch (state){
+        case STATE_PAUSED:
+            m_FrameCountPaused = 0;
+        default:
+            m_GameState = state;
+            break;
+    }
+}
+
+void Game::quit() {
+    SDL_DestroyRenderer(m_pRenderer);
+    SDL_DestroyWindow(m_pWindow);
+    HudManager::getInstance()->destroy();
+    PathManager::getInstance()->destroy();
+}

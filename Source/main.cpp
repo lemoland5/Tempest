@@ -17,8 +17,8 @@ int main(int argc, char* argv[]) {
             if(currentFrametime < TARGET_FRAMETIME){
                 SDL_Delay(TARGET_FRAMETIME - currentFrametime);
             }
-
         }
+        Game::getInstance()->quit();
     }
     return 0;
 }

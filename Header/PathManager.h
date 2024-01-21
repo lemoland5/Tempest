@@ -11,13 +11,18 @@ public:
     void loadPath(const std::string& path, const std::string& id);
 
     void drawPath(SDL_Renderer* renderer, std::string id);
-    void drawPath(SDL_Renderer* renderer, std::string id, float x, float y);
-    void drawPath(SDL_Renderer* renderer, std::string id, float x, float y, float angle);
+    void drawPath(SDL_Renderer* renderer, std::string id, int x, int y);
+    void drawPath(SDL_Renderer* renderer, std::string id, int x, int y, float angle);
 
     void movePathX(std::string id, float x);
     void movePathXAbs(std::string id, float x);
     void movePathY(std::string id, float y);
     void movePathYAbs(std::string id, float y);
+
+//     TODO: MOVE TO PRIVATE
+//    std::map<std::string, Path*> m_pPaths;
+
+    void destroy(){m_pPaths.clear();};
 
     static PathManager* getInstance();
 private:

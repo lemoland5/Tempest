@@ -41,6 +41,12 @@ void HudManager::drawText(SDL_Renderer *renderer, int x, int y, int w, int h, st
     drawText(renderer, x, y, w, h, fontId, text, {255,255,255,255});
 }
 
+void HudManager::destroy() {
+    for(auto & font : m_pFonts){
+        TTF_CloseFont(font.second);
+    }
+}
+
 void MenuOption::draw(SDL_Renderer *renderer, int x, int y, int w, int h, std::string fontId) {
     if(m_isSelected){
         HudManager::getInstance()->drawText(renderer, x, y, w, h, fontId, m_Text, COLOR_TEXT_SELECTED);

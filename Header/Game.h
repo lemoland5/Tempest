@@ -17,13 +17,15 @@ const std::string WINDOW_NAME = "Tempest";
 
 enum GameState{
     STATE_MENU,
-    STATE_INGAME
+    STATE_INGAME,
+    STATE_PAUSED
 };
 
 class Game {
 public:
     static Game *getInstance();
 
+    void setState(GameState state);
     void addScore(int score);
     void resetScore();
     [[nodiscard]] bool isRunning() const;
@@ -32,6 +34,7 @@ public:
 
     bool initialise(const std::string &windowName = WINDOW_NAME, unsigned int width = WINDOW_WIDTH,
                     unsigned int height = WINDOW_HEIGHT);
+    void quit();
 
     void handleInput();
     void update();
@@ -39,6 +42,7 @@ public:
 
     void updateIngame();
     void updateMenu();
+    void updatePaused();
 
     void renderIngame();
     void renderMenu();
@@ -46,11 +50,13 @@ public:
     void NodeRepUpdate();
 
     void checkSpawn();
+    void resetIngame();
 
     template <class T>
     void spawn(int x, int y, int width, int height,std::string textureId) {
         Actor* tmp = new T(x, y, width, height, textureId);
         m_pActors.push_back(tmp);
+//        delete tmp;
     }
 
 private:
@@ -59,6 +65,12 @@ private:
     static Game *s_pInstance;
     Game() = default;
 
+    bool m_isRunning = true;
+    bool m_isPaused = false;
+
+    int m_FrameCount = 0;
+    int m_FrameCountPaused = 0;
+
     void resetMenuSelection();
     void checkMenu();
 
@@ -66,14 +78,13 @@ private:
 
     int m_MenuSelected = 0;
     std::vector<MenuOption*> m_pMenuOptions;
+    SDL_Color m_BackgroundColor = {0,0,0,255};
 
     SDL_Window *m_pWindow;
     SDL_Renderer *m_pRenderer;
     Map *m_pMap;
     Player* m_pPlayer;
     std::vector<Actor*> m_pActors;
-    bool m_isRunning;
-    int m_FrameCount;
     int m_Score;
     std::string m_DisplayScore;
     std::vector<int> m_NodeRep;
