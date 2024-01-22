@@ -19,5 +19,5 @@ public:
     [[nodiscard]] int getLives() const {return m_Lives;};
 
 private:
-    int m_Lives = 5;
+    int m_Lives = 1;
 };

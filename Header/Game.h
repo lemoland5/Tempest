@@ -18,7 +18,8 @@ const std::string WINDOW_NAME = "Tempest";
 enum GameState{
     STATE_MENU,
     STATE_INGAME,
-    STATE_PAUSED
+    STATE_PAUSED,
+    STATE_GAMEOVER
 };
 
 class Game {
@@ -43,9 +44,11 @@ public:
     void updateIngame();
     void updateMenu();
     void updatePaused();
+    void updateGameover();
 
     void renderIngame();
     void renderMenu();
+    void renderGameover();
 
     void NodeRepUpdate();
 

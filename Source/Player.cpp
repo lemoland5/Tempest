@@ -39,6 +39,7 @@ void Player::shoot(){
 }
 
 void Player::handleCollisions() {
+    std::cout<<m_CollisionStack.size()<<"\n";
     while(!m_CollisionStack.empty()){
         std::cout<<"I got touched \n";
 
@@ -60,8 +61,8 @@ void Player::kill() {
     m_Lives--;
     Game::getInstance()->setState(STATE_PAUSED);
 
-//    if(m_Lives <= 0){
-//         Game::getInstance()->setState(STATE_PAUSED);
-//    }
+    if(m_Lives <= 0){
+         Game::getInstance()->setState(STATE_GAMEOVER);
+    }
 //    Actor::kill();
 }

@@ -124,6 +124,9 @@ void Game::update() {
         case STATE_PAUSED:
             updatePaused();
             break;
+        case STATE_GAMEOVER:
+            updateGameover();
+            break;
     }
 }
 
@@ -172,6 +175,10 @@ void Game::updatePaused() {
     }
 }
 
+void Game::updateGameover(){
+    m_FrameCountPaused++;
+}
+
 void Game::render() {
 //    std::cout<<m_pActors.size()<<"\n";
 //    std::cout<<PathManager::getInstance()->m_pPaths.size()<<"\n";
@@ -190,6 +197,8 @@ void Game::render() {
         case STATE_MENU:
             renderMenu();
             break;
+        case STATE_GAMEOVER:
+            renderGameover();
         default:
             renderIngame();
             break;
@@ -239,7 +248,7 @@ void Game::checkSpawn() {
 //        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
 //    }
 
-    if(m_FrameCount % 120 == 0){
+    if(m_FrameCount % 240 == 0){
         spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
     }
 
@@ -256,8 +265,11 @@ void Game::checkSpawn() {
 
 void Game::resetIngame() {
     m_pPlayer->moveXAbs(0);
-    for(int i = 0; i < m_pActors.size(); i++){
-        m_pActors[i]->markForDeletion();
+//    for(int i = 0; i < m_pActors.size(); i++){
+//        m_pActors[i]->markForDeletion();
+//    }
+    while(m_pActors.size() > 1){
+        m_pActors.pop_back();
     }
 //    m_pActors.clear();
 }
@@ -317,11 +329,11 @@ void Game::checkMenu() {
 
 void Game::setState(GameState state) {
     switch (state){
+        case STATE_GAMEOVER:
         case STATE_PAUSED:
             m_FrameCountPaused = 0;
         default:
             m_GameState = state;
-            break;
     }
 }
 
@@ -330,4 +342,14 @@ void Game::quit() {
     SDL_DestroyWindow(m_pWindow);
     HudManager::getInstance()->destroy();
     PathManager::getInstance()->destroy();
+}
+
+void Game::renderGameover() {
+    if(m_FrameCountPaused % 50 > 0 && m_FrameCountPaused % 50 < 25){
+//        m_BackgroundColor = {127,127,127,255};
+        HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL, WINDOW_WIDTH, 300, "atari", "GAME OVER!", COLOR_TEXT);
+    }
+    if(m_FrameCountPaused >= 150){
+        m_isRunning = false;
+    }
 }
