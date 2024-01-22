@@ -19,7 +19,7 @@ Path::Path(std::vector<Line *>* lines, SDL_Color color) {
     m_Color = color;
     m_pCenter = getPathCenter(m_pLines);
 
-    std::cout<<m_Color.g<<"\n";
+//    std::cout<<m_Color.g<<"\n";
 }
 
 

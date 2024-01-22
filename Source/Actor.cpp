@@ -18,7 +18,8 @@ void Actor::moveY(int y) {
 
 void Actor::update() {
     handleCollisions();
-        // m_pMapPosition rollback
+
+//     m_pMapPosition rollback
     if(m_pMapPosition->x < 0){
         m_pMapPosition->x = (float)Game::getInstance()->getMap()->getNodeCount() - 1 + m_pMapPosition->x;
     }
@@ -26,7 +27,8 @@ void Actor::update() {
         m_pMapPosition->x = 0;
     }
 
-        // m_pPosition calculation.
+
+    delete m_pPosition;     // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     m_pPosition = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_pMapPosition->y / LINE_T_SCALE);
 }
 
@@ -51,6 +53,7 @@ void Actor::moveXAbs(int x) {
 }
 
 Actor::~Actor() {
+    std::cout<<"ima head out \n";
     delete m_pMapPosition;
     delete m_pPosition;
 }

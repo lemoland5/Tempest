@@ -70,8 +70,10 @@ void Game::handleInput() {
                 m_isRunning = false;
                 break;
             case SDL_KEYDOWN:
-                if (event.key.keysym.sym == SDLK_ESCAPE) {
-                    m_isRunning = false;
+                if(m_GameState != STATE_GAMEOVER){
+                    if (event.key.keysym.sym == SDLK_ESCAPE) {
+                        m_isRunning = false;
+                    }
                 }
                 if(m_GameState == STATE_INGAME){
                     if(event.key.keysym.sym == SDLK_RIGHT){
@@ -95,6 +97,15 @@ void Game::handleInput() {
                         checkMenu();
                     }
                 }
+                if(m_GameState == STATE_GAMEOVER){
+                    if(event.key.keysym.sym == SDLK_SPACE || event.key.keysym.sym == SDLK_RETURN){
+                        setState(STATE_INGAME);
+                    }
+                    if(event.key.keysym.sym == SDLK_ESCAPE){
+                        setState(STATE_MENU);
+                    }
+                }
+
                 break;
         }
     }
@@ -133,7 +144,7 @@ void Game::update() {
 void Game::updateIngame() {
     m_pPlayer->update();
 
-    CollisionManager::ObjectsColliding<Actor>(m_NodeRep, m_pActors);
+//    CollisionManager::ObjectsColliding<Actor>(m_NodeRep, m_pActors);
 
     NodeRepUpdate();
 
@@ -143,6 +154,7 @@ void Game::updateIngame() {
         if(m_pActors[i]->isMarkedForDeletion()) {
             m_NodeRep[m_pActors[i]->getMapPosition()->x]--;
             delete m_pActors[i];
+//            m_pActors.pop_back(i);
             m_pActors.erase(m_pActors.begin() + i);
         }
     }
@@ -199,6 +211,7 @@ void Game::render() {
             break;
         case STATE_GAMEOVER:
             renderGameover();
+            break;
         default:
             renderIngame();
             break;
@@ -248,9 +261,9 @@ void Game::checkSpawn() {
 //        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
 //    }
 
-    if(m_FrameCount % 240 == 0){
-        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
-    }
+//    if(m_FrameCount % 240 == 0){
+//        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
+//    }
 
 //    if(m_FrameCount % 120 == 0){
 //        spawn<FlipperTanker>(0,LINE_T_SCALE,80,30,"flipperTanker");
@@ -319,7 +332,7 @@ void Game::resetMenuSelection() {
 void Game::checkMenu() {
     switch(m_MenuSelected){
         case 0:
-            m_GameState = STATE_INGAME;
+            setState(STATE_INGAME);
             break;
         case 1:
             m_isRunning = false;
@@ -329,6 +342,10 @@ void Game::checkMenu() {
 
 void Game::setState(GameState state) {
     switch (state){
+        case STATE_INGAME:
+            m_pPlayer->setLives(DEFAULT_LIVES);
+            resetScore();
+            m_GameState = state;
         case STATE_GAMEOVER:
         case STATE_PAUSED:
             m_FrameCountPaused = 0;
@@ -345,11 +362,16 @@ void Game::quit() {
 }
 
 void Game::renderGameover() {
-    if(m_FrameCountPaused % 50 > 0 && m_FrameCountPaused % 50 < 25){
+    if(m_FrameCountPaused % 50 > 0 && m_FrameCountPaused % 50 < 25 && m_FrameCountPaused < 150){
 //        m_BackgroundColor = {127,127,127,255};
-        HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL, WINDOW_WIDTH, 300, "atari", "GAME OVER!", COLOR_TEXT);
+        HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL, WINDOW_WIDTH, 200, "atari", "GAME OVER!", COLOR_TEXT);
     }
     if(m_FrameCountPaused >= 150){
-        m_isRunning = false;
+//        m_isRunning = false;
+//        HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 200, WINDOW_WIDTH, 300, "atari", "GAME OVER!", COLOR_TEXT);
+        HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 200, WINDOW_WIDTH, 140, "atari", "SCORE: " + m_DisplayScore, COLOR_TEXT);
+        HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL, WINDOW_WIDTH - 300, 70, "atari", "[ESC] - MAIN MENU", COLOR_TEXT);
+        HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 170, WINDOW_WIDTH - 150, 70, "atari", "[SPACE/ENTER] - PLAY AGAIN", COLOR_TEXT);
+
     }
 }
