@@ -20,7 +20,7 @@ void FlipperTanker::update() {
 //        }
 //    }
 
-    Enemy::update();
+    Actor::update();
 }
 
 void FlipperTanker::kill() {

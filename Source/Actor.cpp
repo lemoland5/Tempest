@@ -14,9 +14,9 @@ void Actor::moveX(int x) {
 
     //     m_pMapPosition rollback
     if(m_pMapPosition->x < 0){
-        m_pMapPosition->x = (float)Game::getInstance()->getMap()->getNodeCount() - 1 + m_pMapPosition->x;
+        m_pMapPosition->x = (float)Game::getInstance()->getMap()->getNodeCount() + m_pMapPosition->x;
     }
-    if(m_pMapPosition->x == (float)Game::getInstance()->getMap()->getNodeCount() - 1){
+    if(m_pMapPosition->x == (float)Game::getInstance()->getMap()->getNodeCount()){
         m_pMapPosition->x = 0;
     }
 }

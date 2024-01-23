@@ -39,7 +39,7 @@ void Player::shoot(){
 }
 
 void Player::handleCollisions() {
-    std::cout<<m_CollisionStack.size()<<"\n";
+//    std::cout<<m_CollisionStack.size()<<"\n";
     while(!m_CollisionStack.empty()){
         std::cout<<"I got touched \n";
 

@@ -253,13 +253,13 @@ void Game::renderIngame() {
 
 
 void Game::checkSpawn() {
-//    if(m_FrameCount % 120 == 0){
-//        spawn<Flipper>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
+//    if(m_FrameCount % 40 == 0){
+//        spawn<Flipper>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
 //    }
-//
-    if(m_FrameCount % 120 == 0){
-        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
-    }
+
+//    if(m_FrameCount % 120 == 0){
+//        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
+//    }
 
 //    if(m_FrameCount % 240 == 0){
 //        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
@@ -268,12 +268,16 @@ void Game::checkSpawn() {
 //    if(m_FrameCount % 120 == 0){
 //        spawn<FlipperTanker>(0,LINE_T_SCALE,80,30,"flipperTanker");
 //    }
-//    if(m_FrameCount % 100 == 0) {
-//        spawn<Fuseball>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,30,30,"fuseball");
+//    if(m_FrameCount % 40 == 0) {
+//        std::cout<<m_pMap->getNodeCount()<<"\n";
+//        spawn<Fuseball>(rand() % (m_pMap->getNodeCount()),LINE_T_SCALE,30,30,"fuseball");
 //    }
-//    if(m_FrameCount % 60 == 0){
-//        spawn<Pulsar>(2,LINE_T_SCALE,9,30,"pulsar");
+//    if(m_FrameCount % 30 == 0) {
+//        spawn<Fuseball>(4,LINE_T_SCALE,30,30,"fuseball");
 //    }
+    if(m_FrameCount % 60 == 0){
+        spawn<Pulsar>(2,LINE_T_SCALE,9,30,"pulsar");
+    }
 }
 
 void Game::resetIngame() {

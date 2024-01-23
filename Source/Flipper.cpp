@@ -3,8 +3,6 @@
 
 void Flipper::update() {
 
-//    m_Anchor += 0.1f;
-
     if(m_pMapPosition->y > 0){
         moveY(-1);
     }
@@ -25,11 +23,10 @@ void Flipper::update() {
         flip();
     }
 
-    Enemy::update();
+    Actor::update();
 }
 
 void Flipper::flip() {
-    m_isFlipping = true;
     m_FramesFlipping++;
 
     if(m_FlipDestination > 0){

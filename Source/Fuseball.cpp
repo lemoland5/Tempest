@@ -23,13 +23,5 @@ void Fuseball::update() {
     }
 
 
-    Enemy::update();
-}
-
-void Fuseball::handleCollisions() {
-    if(!m_CollisionStack.empty()){
-        Enemy::kill();
-        m_CollisionStack.pop();
-
-    }
+    Actor::update();
 }
