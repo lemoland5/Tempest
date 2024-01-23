@@ -46,7 +46,6 @@ add_executable(Tempest
         Source/PathManager.cpp
         Header/PathManager.h
         Source/PathManager.cpp
-        Header/PathManager.h
 )
 
 find_package(SDL2 CONFIG REQUIRED)

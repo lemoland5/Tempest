@@ -8,7 +8,7 @@
 //#define M_PI 3.1415
 //#endif
 
-const int LINE_T_SCALE = 200;
+const int LINE_T_SCALE = 250;
 
 struct Point{
 public:

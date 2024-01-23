@@ -144,7 +144,7 @@ void Game::update() {
 void Game::updateIngame() {
     m_pPlayer->update();
 
-//    CollisionManager::ObjectsColliding<Actor>(m_NodeRep, m_pActors);
+    CollisionManager::ObjectsColliding<Actor>(m_NodeRep, m_pActors);
 
     NodeRepUpdate();
 
@@ -257,9 +257,9 @@ void Game::checkSpawn() {
 //        spawn<Flipper>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
 //    }
 //
-//    if(m_FrameCount % 120 == 0){
-//        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
-//    }
+    if(m_FrameCount % 120 == 0){
+        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
+    }
 
 //    if(m_FrameCount % 240 == 0){
 //        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");

@@ -32,6 +32,7 @@ public:
     void moveXAbs(int x);
     void moveY(int y);
     void addCollision(Type type);
+    void correctRotation();
 
 protected:
     Point* m_pPosition;
