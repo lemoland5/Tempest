@@ -19,5 +19,5 @@ void Map::draw(SDL_Renderer *renderer) {
 }
 
 Map::Map() {
-    m_NodeList = MapLoader::getInstance()->load("../Assets/firstMap.map");
+    m_NodeList = MapLoader::getInstance()->load("../Assets/final.map");
 }

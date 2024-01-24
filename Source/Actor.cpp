@@ -19,6 +19,9 @@ void Actor::moveX(int x) {
     if(m_pMapPosition->x == (float)Game::getInstance()->getMap()->getNodeCount()){
         m_pMapPosition->x = 0;
     }
+    correctRotation();
+    std::cout<<"New rotation: "<<m_Rotation<<"\n";
+
 }
 void Actor::moveY(int y) {
     m_pMapPosition->y += y;
@@ -31,11 +34,11 @@ void Actor::update() {
 
 
     delete m_pPosition;     // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    m_pPosition = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_pMapPosition->y / LINE_T_SCALE);
+    m_pPosition = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%10)->getAxis()->calculateTValuePoint((float)m_pMapPosition->y / LINE_T_SCALE);
 }
 
 Actor::Actor(float x, float y, int width, int height, std::string id): m_pMapPosition(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(std::move(id)){
-    m_pPosition = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%4)->getAxis()->calculateTValuePoint((float)m_pMapPosition->y / LINE_T_SCALE);
+    m_pPosition = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%10)->getAxis()->calculateTValuePoint((float)m_pMapPosition->y / LINE_T_SCALE);
     correctRotation();
     // std::cout<<m_Rotation<<"\n";
 
@@ -61,5 +64,5 @@ Actor::~Actor() {
 }
 
 void Actor::correctRotation() {
-    m_Rotation = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%4)->getAxis()->getAngle();
+    m_Rotation = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%10)->getAxis()->getAngle();
 }

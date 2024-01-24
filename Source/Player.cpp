@@ -4,35 +4,6 @@
 #include "../Header/Player.h"
 #include <iostream>
 
- void Player::update() {
-    handleInput();
-
-
-    Actor::update();
-}
-
-void Player::handleInput() {
-//    EventHandler::getInstance()->update();
-
-//    if(EventHandler::getInstance()->isKeyDown(SDL_SCANCODE_RIGHT)){
-//        m_pMapPosition->x += 1;
-//    }
-//    if(EventHandler::getInstance()->isKeyDown(SDL_SCANCODE_LEFT)){
-//        m_pMapPosition->x -= 1;
-//    }
-//
-//    SDL_Event event;
-//    if(SDL_PollEvent(&event)) {
-//        switch (event.type) {
-//            case SDL_KEYDOWN:
-//                if (event.key.keysym.sym == SDLK_RIGHT)
-//
-//                break;
-//        }
-//    }
-
-}
-
 void Player::shoot(){
     Game::getInstance()->spawn<Bullet>(m_pMapPosition->x, m_pMapPosition->y, 10, 10, "bullet");
 //    std::cout<<m_CollisionStack.top()<<"\n";
@@ -56,9 +27,6 @@ void Player::handleCollisions() {
     }
 }
 
-void Player::zap() {
-    Game::getInstance()->cleanActors();
-}
 
 void Player::kill() {
     std::cout<<"I got killed \n";

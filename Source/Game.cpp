@@ -51,7 +51,7 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         loadHighScore();
 
         //m_NodeRep.max_size(NodeCount);
-        m_NodeRep = {1,0,0,0};
+        m_NodeRep = {1,0,0,0,0,0,0,0,0,0};
 
 
 
@@ -90,10 +90,8 @@ void Game::handleInput() {
                     if(event.key.keysym.sym == SDLK_SPACE){
                         m_pPlayer->shoot();
                     }
-                    if(event.key.keysym.sym == SDLK_RETURN){
-                        m_pPlayer->zap();
-                    }
                 }
+
                 if(m_GameState == STATE_MENU){
                     if(event.key.keysym.sym == SDLK_UP){
                         m_MenuSelected++;
@@ -276,9 +274,9 @@ void Game::checkSpawn() {
 //        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
 //    }
 
-//    if(m_FrameCount % 120 == 0){
-//        spawn<FlipperTanker>(0,LINE_T_SCALE,80,30,"flipperTanker");
-//    }
+    if(m_FrameCount % 120 == 0){
+        spawn<FlipperTanker>(5,LINE_T_SCALE,80,30,"flipperTanker");
+    }
 //    if(m_FrameCount % 40 == 0) {
 //        std::cout<<m_pMap->getNodeCount()<<"\n";
 //        spawn<Fuseball>(rand() % (m_pMap->getNodeCount()),LINE_T_SCALE,30,30,"fuseball");
@@ -286,9 +284,9 @@ void Game::checkSpawn() {
 //    if(m_FrameCount % 30 == 0) {
 //        spawn<Fuseball>(4,LINE_T_SCALE,30,30,"fuseball");
 //    }
-    if(m_FrameCount % 180 == 0){
-        spawn<Pulsar>(2,LINE_T_SCALE,9,30,"pulsar");
-    }
+//    if(m_FrameCount % 180 == 0){
+//        spawn<Pulsar>(2,LINE_T_SCALE,9,30,"pulsar");
+//    }
 }
 
 void Game::resetIngame() {

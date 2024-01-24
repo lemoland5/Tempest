@@ -5,9 +5,6 @@ project(Tempest)
 
 set(CMAKE_CXX_STANDARD 17)
 
-#include(C:/Users/Niep/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake)
-
-
 add_executable(Tempest
         Source/main.cpp
         Header/Shapes.h
