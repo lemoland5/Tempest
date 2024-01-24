@@ -54,6 +54,7 @@ public:
 
     void checkSpawn();
     void resetIngame();
+    void cleanActors();
 
     template <class T>
     void spawn(int x, int y, int width, int height,std::string textureId) {

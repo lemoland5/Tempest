@@ -85,6 +85,9 @@ void Game::handleInput() {
                     if(event.key.keysym.sym == SDLK_SPACE){
                         m_pPlayer->shoot();
                     }
+                    if(event.key.keysym.sym == SDLK_RETURN){
+                        m_pPlayer->zap();
+                    }
                 }
                 if(m_GameState == STATE_MENU){
                     if(event.key.keysym.sym == SDLK_UP){
@@ -285,9 +288,7 @@ void Game::resetIngame() {
 //    for(int i = 0; i < m_pActors.size(); i++){
 //        m_pActors[i]->markForDeletion();
 //    }
-    while(m_pActors.size() > 1){
-        m_pActors.pop_back();
-    }
+    cleanActors();
 //    m_pActors.clear();
 }
 
@@ -376,6 +377,11 @@ void Game::renderGameover() {
         HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 200, WINDOW_WIDTH, 140, "atari", "SCORE: " + m_DisplayScore, COLOR_TEXT);
         HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL, WINDOW_WIDTH - 300, 70, "atari", "[ESC] - MAIN MENU", COLOR_TEXT);
         HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 170, WINDOW_WIDTH - 150, 70, "atari", "[SPACE/ENTER] - PLAY AGAIN", COLOR_TEXT);
+    }
+}
 
+void Game::cleanActors() {
+    while(m_pActors.size() > 1){
+        m_pActors.pop_back();
     }
 }

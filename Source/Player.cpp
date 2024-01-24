@@ -56,6 +56,10 @@ void Player::handleCollisions() {
     }
 }
 
+void Player::zap() {
+    Game::getInstance()->cleanActors();
+}
+
 void Player::kill() {
     std::cout<<"I got killed \n";
     m_Lives--;
