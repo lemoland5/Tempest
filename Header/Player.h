@@ -4,7 +4,7 @@
 
 #include "Actor.h"
 
-const int DEFAULT_LIVES = 5;
+const int DEFAULT_LIVES = 1;
 //const int ZAPPER_RECHARGE_FRAMES =
 
 class Player : public Actor {

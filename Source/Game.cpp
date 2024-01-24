@@ -7,6 +7,7 @@
 #include "../Header/PathManager.h"
 #include "../Header/Pulsar.h"
 #include <cstdlib>
+#include <fstream>
 
 Game* Game::s_pInstance = nullptr;
 
@@ -31,13 +32,14 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
         m_pMap = new Map();
 
-//        TestPath = new Path();
+//         = new Path();
 
 
         PathManager::getInstance()->loadPath("../Assets/player.path", "player");
-        PathManager::getInstance()->loadPath("../Assets/player.path", "pulsar");
+        PathManager::getInstance()->loadPath("../Assets/pulsar.path", "pulsar");
+        PathManager::getInstance()->loadPath("../Assets/pulsarAlt.path", "pulsarAlt");
         PathManager::getInstance()->loadPath("../Assets/flipper.path", "flipper");
-        PathManager::getInstance()->loadPath("../Assets/player.path", "flipperTanker");
+        PathManager::getInstance()->loadPath("../Assets/flipperTanker.path", "flipperTanker");
         PathManager::getInstance()->loadPath("../Assets/player.path", "fuseball");
         PathManager::getInstance()->loadPath("../Assets/bullet.path", "bullet");
 //        PathManager::getInstance()->loadPath("../Assets/player.path", "player");
@@ -46,9 +48,12 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         m_pActors.push_back(m_pPlayer);
 
         resetScore();
+        loadHighScore();
 
         //m_NodeRep.max_size(NodeCount);
         m_NodeRep = {1,0,0,0};
+
+
 
 
         m_isRunning = true;
@@ -121,9 +126,9 @@ void Game::handleInput() {
 void Game::update() {
     m_FrameCount++;
 
-//    TestPath->rotate(1);
-//    TestPath->moveX(1);
-//    TestPath->moveY(1);
+//    ->rotate(1);
+//    ->moveX(1);
+//    ->moveY(1);
 //
 //    PathManager::getInstance()->movePathXAbs("player",m_pPlayer->getX());
 //    PathManager::getInstance()->movePathYAbs("player",m_pPlayer->getY());
@@ -197,6 +202,7 @@ void Game::updateGameover(){
 void Game::render() {
 //    std::cout<<m_pActors.size()<<"\n";
 //    std::cout<<PathManager::getInstance()->m_pPaths.size()<<"\n";
+//    std::cout<<m_HighScore<<"\n";
     SDL_SetRenderDrawColor(m_pRenderer, m_BackgroundColor);
     SDL_RenderClear(m_pRenderer);
     SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
@@ -220,7 +226,7 @@ void Game::render() {
             break;
     }
 
-//    TestPath->draw(m_pRenderer);
+//    ->draw(m_pRenderer);
 
 //    PathManager::getInstance()->drawPath(m_pRenderer, "player", 500, 100);
 
@@ -229,11 +235,13 @@ void Game::render() {
 
 
 void Game::renderMenu() {
-    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, 80, WINDOW_WIDTH, 100, "atari", "TEMPEST MMXXIV", COLOR_TEXT_SELECTED);
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, 45, WINDOW_WIDTH, 100, "atari", "TEMPEST MMXXIV", COLOR_TEXT_SELECTED);
 
     for(int i = 0; i < m_pMenuOptions.size(); i++){
-        m_pMenuOptions[i]->draw(m_pRenderer, WINDOW_CENTER_HORIZONTAL, (int)WINDOW_CENTER_VERTICAL + (100 * i), 300, 100, "atari");
+        m_pMenuOptions[i]->draw(m_pRenderer, WINDOW_CENTER_HORIZONTAL, (int)WINDOW_CENTER_VERTICAL + (100 * i) - 35, 300, 100, "atari");
     }
+
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_HEIGHT - 50, WINDOW_WIDTH, 100, "atari", "HIGH SCORE: " + std::to_string(m_HighScore), COLOR_TEXT_SELECTED);
 
 }
 
@@ -278,7 +286,7 @@ void Game::checkSpawn() {
 //    if(m_FrameCount % 30 == 0) {
 //        spawn<Fuseball>(4,LINE_T_SCALE,30,30,"fuseball");
 //    }
-    if(m_FrameCount % 60 == 0){
+    if(m_FrameCount % 180 == 0){
         spawn<Pulsar>(2,LINE_T_SCALE,9,30,"pulsar");
     }
 }
@@ -351,7 +359,11 @@ void Game::setState(GameState state) {
             m_pPlayer->setLives(DEFAULT_LIVES);
             resetScore();
             m_GameState = state;
+            break;
         case STATE_GAMEOVER:
+            if(m_Score > m_HighScore){
+                setHighScore(m_Score);
+            }
         case STATE_PAUSED:
             m_FrameCountPaused = 0;
         default:
@@ -384,4 +396,25 @@ void Game::cleanActors() {
     while(m_pActors.size() > 1){
         m_pActors.pop_back();
     }
+}
+
+void Game::loadHighScore() {
+    std::ifstream file;
+    std::string line;
+    file.open(PATH_HIGHSCORE);
+
+    if ( file.is_open() ) {
+        std::getline(file,line);
+        m_HighScore = std::stoi(line);
+    }
+    file.close();
+}
+
+void Game::setHighScore(int highscore) {
+    m_HighScore = highscore;
+
+    std::ofstream file;
+    file.open(PATH_HIGHSCORE);
+    file << std::to_string(highscore);
+    file.close();
 }

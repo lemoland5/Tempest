@@ -14,6 +14,7 @@ const unsigned int WINDOW_HEIGHT = 710;
 const unsigned int WINDOW_CENTER_HORIZONTAL = WINDOW_WIDTH / 2;
 const unsigned int WINDOW_CENTER_VERTICAL = WINDOW_HEIGHT / 2;
 const std::string WINDOW_NAME = "Tempest";
+const std::string PATH_HIGHSCORE = "../Data/highscore.txt";
 
 enum GameState{
     STATE_MENU,
@@ -27,11 +28,14 @@ public:
     static Game *getInstance();
 
     void setState(GameState state);
+    void setHighScore(int highscore);
     void addScore(int score);
     void resetScore();
     [[nodiscard]] bool isRunning() const;
     [[nodiscard]] Map* getMap() const;
     [[nodiscard]] int getFrameCount() const;
+
+    void loadHighScore();
 
     bool initialise(const std::string &windowName = WINDOW_NAME, unsigned int width = WINDOW_WIDTH,
                     unsigned int height = WINDOW_HEIGHT);
@@ -64,8 +68,6 @@ public:
     }
 
 private:
-    Path* TestPath;
-
     static Game *s_pInstance;
     Game() = default;
 
@@ -74,6 +76,8 @@ private:
 
     int m_FrameCount = 0;
     int m_FrameCountPaused = 0;
+
+    int m_HighScore = 0;
 
     void resetMenuSelection();
     void checkMenu();

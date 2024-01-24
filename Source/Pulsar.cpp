@@ -21,6 +21,14 @@ void Pulsar::update() {
 
 void Pulsar::zap() {
     m_FramesCharging++;
+
+    if(m_FramesCharging % ZAP_PULSE_TIME_FRAMES * 2 > 0 && m_FramesCharging % ZAP_PULSE_TIME_FRAMES * 2 < ZAP_PULSE_TIME_FRAMES){
+        m_TextureId = "pulsarAlt";
+    }
+    else{
+        m_TextureId = "pulsar";
+    }
+
     if(m_FramesCharging >= ZAP_TIME_FRAMES){
         Game::getInstance()->spawn<FlipperTanker>((int)m_pMapPosition->x,COLLISION_DISTANCE,1,1,"bullet");
         Enemy::kill();

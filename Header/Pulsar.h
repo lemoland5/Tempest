@@ -3,6 +3,8 @@
 #include "Enemy.h"
 
 const int ZAP_TIME_FRAMES = 120;
+const int ZAP_PULSE_COUNT = 9;
+const int ZAP_PULSE_TIME_FRAMES = ZAP_TIME_FRAMES/ZAP_PULSE_COUNT;
 
 class Pulsar: public Enemy {
 public:

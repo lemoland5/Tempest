@@ -1,4 +1,5 @@
 #include "../Header/MapLoader.h"
+#include <fstream>
 
 const std::string delimiter = ",";
 
@@ -26,17 +27,19 @@ Node* stringToNode(std::string line) {
 }
 
 std::vector<Node *> MapLoader::load(std::string filename) {
-    std::ifstream myfile;
-    std::string myline;
-    myfile.open(filename);
+    std::ifstream file;
+    std::string line;
+    file.open(filename);
 
     std::vector<Node *> res;
 
-    if ( myfile.is_open() ) {
-        while ( myfile ) {
-            std::getline (myfile, myline);
-            res.push_back(stringToNode(myline));
+    if ( file.is_open() ) {
+        while ( file ) {
+            std::getline (file, line);
+            res.push_back(stringToNode(line));
         }
     }
+
+    file.close();
     return res;
 }
