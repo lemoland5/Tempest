@@ -13,6 +13,7 @@ public:
     [[nodiscard]] Line* getAxis() const {return m_Axis;};
 
     void draw(SDL_Renderer* renderer);
+    void draw(SDL_Renderer* renderer, SDL_Color color);
 
 private:
     Line* m_Inner;

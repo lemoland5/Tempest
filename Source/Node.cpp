@@ -22,12 +22,17 @@ Node::Node(Line* inner, Line* outer) {
 }
 
 void Node::draw(SDL_Renderer* renderer) {
-    SDL_RenderDrawLine(renderer, m_Inner);
-    SDL_RenderDrawLine(renderer, m_Outer);
-    SDL_RenderDrawLine(renderer, m_Inner->m_pBegin->x, m_Inner->m_pBegin->y, m_Outer->m_pBegin->x, m_Outer->m_pBegin->y);
-    SDL_RenderDrawLine(renderer, m_Inner->m_pEnd->x, m_Inner->m_pEnd->y, m_Outer->m_pEnd->x, m_Outer->m_pEnd->y);
-    SDL_RenderDrawLine(renderer, m_Axis);
+    draw(renderer, {255,255,255,255});
 }
+
+void Node::draw(SDL_Renderer* renderer, SDL_Color color){
+    SDL_RenderDrawLine(renderer, m_Inner, color);
+    SDL_RenderDrawLine(renderer, m_Outer, color);
+    SDL_RenderDrawLine(renderer, m_Inner->m_pBegin->x, m_Inner->m_pBegin->y, m_Outer->m_pBegin->x, m_Outer->m_pBegin->y, color);
+    SDL_RenderDrawLine(renderer, m_Inner->m_pEnd->x, m_Inner->m_pEnd->y, m_Outer->m_pEnd->x, m_Outer->m_pEnd->y, color);
+    SDL_RenderDrawLine(renderer, m_Axis, color);
+}
+
 
 Node::~Node() {
     delete m_Inner;

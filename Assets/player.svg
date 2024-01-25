@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.3078125"
-     inkscape:cx="238.56631"
-     inkscape:cy="321.14695"
+     inkscape:zoom="0.65390625"
+     inkscape:cx="77.992832"
+     inkscape:cy="281.3859"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
@@ -39,35 +39,11 @@
     <g
        id="g9025"
        transform="matrix(6.1529759,0,0,6.1529759,-0.41511724,-0.51651672)">
-      <rect
-         style="fill:#880031;stroke:none;stroke-width:1.58565;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers;fill-opacity:1"
-         id="rect234"
-         width="27.682268"
-         height="27.682268"
-         x="0.08055874"
-         y="0.10023659"
-         ry="0" />
-      <ellipse
-         style="fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
-         id="path952"
-         cx="15.628155"
-         cy="21.767651"
-         rx="3.9721811"
-         ry="4.0145416" />
-      <ellipse
-         style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
-         id="path952-1"
-         cx="5.931263"
-         cy="13.719919"
-         rx="3.9721811"
-         ry="4.0145416" />
-      <ellipse
-         style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:2.65252;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers"
-         id="path952-0"
-         cx="20.909737"
-         cy="8.3900042"
-         rx="3.9721811"
-         ry="4.0145416" />
+      <path
+         style="fill:#fffe00;fill-opacity:1;stroke:#000000;stroke-width:0.0215006;stroke-linecap:round;paint-order:stroke fill markers"
+         d="M 20.650473,23.626086 21.70264,15.800597 13.811391,11.32889 5.7228611,16.129399 7.1695895,23.363044 2.8951635,16.1294 13.877151,8.764234 24.333056,15.603317 Z"
+         id="path398"
+         sodipodi:nodetypes="ccccccccc" />
     </g>
   </g>
 </svg>

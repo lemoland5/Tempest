@@ -98,3 +98,11 @@ void PathManager::drawPath(SDL_Renderer *renderer, std::string id, int x, int y,
     m_pPaths[id]->rotateAbs(angle);
     drawPath(renderer, id, x, y);
 }
+
+void PathManager::drawPath(SDL_Renderer *renderer, std::string id, int x, int y, float angle, SDL_Color color) {
+    m_pPaths[id]->moveXAbs(x);
+    m_pPaths[id]->moveYAbs(y);
+    m_pPaths[id]->rotateAbs(angle);
+
+    m_pPaths[id]->draw(renderer, color);
+}

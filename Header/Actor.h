@@ -8,7 +8,8 @@
 enum Type {
     TYPE_PLAYER = 0,
     TYPE_ENEMY = 1,
-    TYPE_BULLET = 2
+    TYPE_BULLET = 2,
+    TYPE_PARTICLE = 3
 };
 
 class Actor {

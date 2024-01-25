@@ -1,6 +1,10 @@
 #include "../Header/Fuseball.h"
+#include "../Header/Game.h"
 
 void Fuseball::update() {
+    if(Game::getInstance()->getFrameCount() % 5 == 0){
+        m_Rotation++;
+    }
     if(m_Cycle % 2 == 1){
         if(m_pMapPosition->y > 0){
             moveY(-1);

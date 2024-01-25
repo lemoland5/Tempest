@@ -13,6 +13,7 @@ public:
     void drawPath(SDL_Renderer* renderer, std::string id);
     void drawPath(SDL_Renderer* renderer, std::string id, int x, int y);
     void drawPath(SDL_Renderer* renderer, std::string id, int x, int y, float angle);
+    void drawPath(SDL_Renderer* renderer, std::string id, int x, int y, float angle, SDL_Color color);
 
     void movePathX(std::string id, float x);
     void movePathXAbs(std::string id, float x);

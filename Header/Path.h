@@ -11,6 +11,7 @@ public:
     Path(std::vector<Line*>* lines, SDL_Color color);
 
     void draw(SDL_Renderer* renderer);
+    void draw(SDL_Renderer* renderer, SDL_Color color);
     void moveX(float x);
     void moveY(float y);
     void moveXAbs(float x);

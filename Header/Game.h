@@ -64,7 +64,11 @@ public:
     void spawn(int x, int y, int width, int height,std::string textureId) {
         Actor* tmp = new T(x, y, width, height, textureId);
         m_pActors.push_back(tmp);
-//        delete tmp;
+    }
+
+    template <class T>
+    void spawn(T* actor) {
+        m_pActors.push_back(actor);
     }
 
 private:

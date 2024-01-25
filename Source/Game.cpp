@@ -40,8 +40,9 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         PathManager::getInstance()->loadPath("../Assets/pulsarAlt.path", "pulsarAlt");
         PathManager::getInstance()->loadPath("../Assets/flipper.path", "flipper");
         PathManager::getInstance()->loadPath("../Assets/flipperTanker.path", "flipperTanker");
-        PathManager::getInstance()->loadPath("../Assets/player.path", "fuseball");
+        PathManager::getInstance()->loadPath("../Assets/fuseball.path", "fuseball");
         PathManager::getInstance()->loadPath("../Assets/bullet.path", "bullet");
+        PathManager::getInstance()->loadPath("../Assets/particle.path", "particle");
 //        PathManager::getInstance()->loadPath("../Assets/player.path", "player");
 
         m_pPlayer = new Player(0,0,30,30,"player");
@@ -274,13 +275,16 @@ void Game::checkSpawn() {
 //        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
 //    }
 
-    if(m_FrameCount % 120 == 0){
-        spawn<FlipperTanker>(5,LINE_T_SCALE,80,30,"flipperTanker");
-    }
+//    if(m_FrameCount % 120 == 0){
+//        spawn<FlipperTanker>(5,LINE_T_SCALE,80,30,"flipperTanker");
+//    }
 //    if(m_FrameCount % 40 == 0) {
-//        std::cout<<m_pMap->getNodeCount()<<"\n";
 //        spawn<Fuseball>(rand() % (m_pMap->getNodeCount()),LINE_T_SCALE,30,30,"fuseball");
 //    }
+    if(m_FrameCount % 40 == 0) {
+        spawn<Fuseball>(4,LINE_T_SCALE,30,30,"fuseball");
+    }
+
 //    if(m_FrameCount % 30 == 0) {
 //        spawn<Fuseball>(4,LINE_T_SCALE,30,30,"fuseball");
 //    }

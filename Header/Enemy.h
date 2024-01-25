@@ -9,6 +9,8 @@ public:
 
     void handleCollisions() override;
 
+    void kill() override;
+
     Type getType() override {return TYPE_ENEMY;};
 
 private:

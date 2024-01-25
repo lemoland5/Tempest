@@ -1,5 +1,6 @@
 #include "../Header/Actor.h"
 #include "../Header/Game.h"
+#include "../Header/Particle.h"
 #include "../Header/PathManager.h"
 #include <iostream>
 #include <utility>
@@ -37,7 +38,13 @@ void Actor::update() {
     m_pPosition = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%10)->getAxis()->calculateTValuePoint((float)m_pMapPosition->y / LINE_T_SCALE);
 }
 
-Actor::Actor(float x, float y, int width, int height, std::string id): m_pMapPosition(new Point(x,y)), m_Width(width), m_Height(height), m_TextureId(std::move(id)){
+Actor::Actor(float x, float y, int width, int height, std::string id): m_Width(width), m_Height(height), m_TextureId(std::move(id)){
+
+    if(x > Game::getInstance()->getMap()->getNodeCount()){
+        m_pMapPosition = new Point(0,0);
+    }
+    else m_pMapPosition = new Point (x,y);
+
     m_pPosition = Game::getInstance()->getMap()->getNode((int)m_pMapPosition->x%10)->getAxis()->calculateTValuePoint((float)m_pMapPosition->y / LINE_T_SCALE);
     correctRotation();
     // std::cout<<m_Rotation<<"\n";
@@ -50,6 +57,9 @@ void Actor::addCollision(Type type) {
 
 void Actor::kill() {
     m_MarkedForDeletion = true;
+//    Game::getInstance()->spawn<Particle>(new Particle(200, 200, 10, 10, "particle", new Point((rand() % 11) - 5,(rand() % 11) - 5), {255,255,0,255}));
+
+
 }
 
 void Actor::moveXAbs(int x) {

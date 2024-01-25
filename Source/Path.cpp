@@ -24,10 +24,13 @@ Path::Path(std::vector<Line *>* lines, SDL_Color color) {
 
 
 void Path::draw(SDL_Renderer* renderer) {
-//    std::cout<<"drawing \n";
+    draw(renderer, m_Color);
+}
+
+void Path::draw(SDL_Renderer *renderer, SDL_Color color) {
     for(int i = 0; i < m_pLines->size(); i++){
         // std::cout<<line->getLength()<<"\n";
-        SDL_RenderDrawLine(renderer, (*m_pLines)[i], m_Color);
+        SDL_RenderDrawLine(renderer, (*m_pLines)[i], color);
 //        SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pBegin), m_Color);
 //        SDL_RenderDrawLine(renderer, new Line(m_pCenter, line->m_pEnd), m_Color);
     }
@@ -80,6 +83,8 @@ void Path::rotateAbs(float angle) {
     float difference = angle - m_Rotation;
     rotate(difference);
 }
+
+
 
 
 Point* getPathCenter(std::vector<Line*>* path){

@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <vector>
 
+const SDL_Color COLOR_MAP_PURPLE = {0, 9, 155, 255};
 
 class Map {
 public:
@@ -19,6 +20,6 @@ public:
 
 private:
     std::vector<Node*> m_NodeList;
+    SDL_Color m_Color;
 };
 
-const SDL_Color COLOR_MAP_PURPLE = {0, 10, 130, 255};
