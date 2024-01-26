@@ -3,7 +3,7 @@
 
 void Fuseball::update() {
     if(Game::getInstance()->getFrameCount() % 5 == 0){
-        m_Rotation++;
+        m_Rotation += ROTATION_SPEED;
     }
     if(m_Cycle % 2 == 1){
         if(m_pMapPosition->y > 0){

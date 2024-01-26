@@ -3,6 +3,7 @@
 #include "Actor.h"
 
 const int DEFAULT_LIVES = 5;
+const int FIRE_DELAY_FRAMES = 60;
 
 class Player : public Actor {
 public:
@@ -13,12 +14,13 @@ public:
 
     void handleCollisions() override;
     void shoot();
+    void update() override;
     void kill() override;
 
     [[nodiscard]] int getLives() const {return m_Lives;};
 
 private:
     int m_Lives = DEFAULT_LIVES;
-    bool m_canZap = true;
+    bool m_canShoot = true;
     int m_FramesRecharging = 0;
 };

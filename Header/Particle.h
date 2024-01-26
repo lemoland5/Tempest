@@ -2,7 +2,7 @@
 
 #include "Actor.h"
 
-const int COLOR_FADE_STEP = 10;
+const int COLOR_FADE_STEP = 6;
 const int PARTICLE_LIFETIME_FRAMES = 255 / COLOR_FADE_STEP;
 
 class Particle: public Actor {

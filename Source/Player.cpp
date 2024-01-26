@@ -5,8 +5,10 @@
 #include <iostream>
 
 void Player::shoot(){
+    if(!m_canShoot) return;
     Game::getInstance()->spawn<Bullet>(m_pMapPosition->x, m_pMapPosition->y, 10, 10, "bullet");
-//    std::cout<<m_CollisionStack.top()<<"\n";
+    m_canShoot = false;
+    m_FramesRecharging = FIRE_DELAY_FRAMES;
 }
 
 void Player::handleCollisions() {
@@ -37,4 +39,15 @@ void Player::kill() {
          Game::getInstance()->setState(STATE_GAMEOVER);
     }
 //    Actor::kill();
+}
+
+void Player::update() {
+    if(m_FramesRecharging > 0){
+        --m_FramesRecharging;
+    }
+    else{
+        m_canShoot = true;
+    }
+
+    Actor::update();
 }

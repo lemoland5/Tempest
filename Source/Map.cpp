@@ -9,5 +9,5 @@ void Map::draw(SDL_Renderer *renderer) {
 
 Map::Map() {
     m_NodeList = MapLoader::getInstance()->load("../Assets/final.map");
-    m_Color = COLOR_MAP_PURPLE;
+    m_Color = COLOR_MAP_DEFAULT;
 }

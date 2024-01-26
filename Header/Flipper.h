@@ -2,8 +2,8 @@
 
 #include "Enemy.h"
 
-const int FLIP_TIME_FRAMES = 60;
-const float FLIP_ROTATION_DEGREES = 90;
+const int FLIP_TIME_FRAMES = 120;
+const float FLIP_ROTATION_DEGREES = 355;
 
 class Flipper: public Enemy {
 public:

@@ -16,11 +16,18 @@ const unsigned int WINDOW_CENTER_VERTICAL = WINDOW_HEIGHT / 2;
 const std::string WINDOW_NAME = "Tempest";
 const std::string PATH_HIGHSCORE = "../Data/highscore.txt";
 
+const int SCORE_QUOTA_DEFAULT = 1500;
+const int SCORE_QUOTA_INCREMENT = 300;
+
+const int TRANSITION_DURATION_FRAMES = 192; // 3.2s @ 60fps
+const int TRANSITION_FLASH_DURATION_FRAMES = TRANSITION_DURATION_FRAMES / (int)(TRANSITION_COLOR_ORDER.size());
+
 enum GameState{
     STATE_MENU,
     STATE_INGAME,
     STATE_PAUSED,
-    STATE_GAMEOVER
+    STATE_GAMEOVER,
+    STATE_TRANSITION
 };
 
 class Game {
@@ -49,6 +56,7 @@ public:
     void updateMenu();
     void updatePaused();
     void updateGameover();
+    void updateTransition();
 
     void renderIngame();
     void renderMenu();
@@ -59,6 +67,8 @@ public:
     void checkSpawn();
     void resetIngame();
     void cleanActors();
+
+    void changeLevel();
 
     template <class T>
     void spawn(int x, int y, int width, int height,std::string textureId) {
@@ -77,6 +87,9 @@ private:
 
     bool m_isRunning = true;
     bool m_isPaused = false;
+
+    int m_Level = 1;
+    int m_CurrentQuota = SCORE_QUOTA_DEFAULT;
 
     int m_FrameCount = 0;
     int m_FrameCountPaused = 0;

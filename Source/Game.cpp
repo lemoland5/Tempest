@@ -145,6 +145,9 @@ void Game::update() {
         case STATE_GAMEOVER:
             updateGameover();
             break;
+        case STATE_TRANSITION:
+            updateTransition();
+            break;
     }
 }
 
@@ -167,6 +170,10 @@ void Game::updateIngame() {
     }
 
     checkSpawn();
+
+    if(m_Score >= m_CurrentQuota){
+        changeLevel();
+    }
 }
 
 void Game::updateMenu() {
@@ -197,6 +204,22 @@ void Game::updatePaused() {
 void Game::updateGameover(){
     m_FrameCountPaused++;
 }
+
+void Game::updateTransition() {
+    m_FrameCountPaused++;
+    int currentColor = floor(m_FrameCountPaused / TRANSITION_FLASH_DURATION_FRAMES);
+    if(currentColor > TRANSITION_COLOR_ORDER.size() - 1){
+        currentColor -= 1;
+    }
+
+    m_pMap->setColor(TRANSITION_COLOR_ORDER[currentColor]);
+
+    if(m_FrameCountPaused >= TRANSITION_DURATION_FRAMES){
+        m_GameState = STATE_INGAME;
+    }
+}
+
+
 
 void Game::render() {
 //    std::cout<<m_pActors.size()<<"\n";
@@ -263,34 +286,34 @@ void Game::renderIngame() {
 
 
 void Game::checkSpawn() {
-//    if(m_FrameCount % 40 == 0){
-//        spawn<Flipper>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
-//    }
+    if(m_FrameCount % 100 == 0){
+        spawn<Flipper>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
+    }
 
 //    if(m_FrameCount % 120 == 0){
 //        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
 //    }
 
-//    if(m_FrameCount % 240 == 0){
-//        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
-//    }
+    if(m_FrameCount % 240 == 0){
+        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
+    }
 
 //    if(m_FrameCount % 120 == 0){
 //        spawn<FlipperTanker>(5,LINE_T_SCALE,80,30,"flipperTanker");
 //    }
-//    if(m_FrameCount % 40 == 0) {
-//        spawn<Fuseball>(rand() % (m_pMap->getNodeCount()),LINE_T_SCALE,30,30,"fuseball");
-//    }
-    if(m_FrameCount % 40 == 0) {
-        spawn<Fuseball>(4,LINE_T_SCALE,30,30,"fuseball");
+    if(m_FrameCount % 180 == 0) {
+        spawn<Fuseball>(rand() % (m_pMap->getNodeCount()),LINE_T_SCALE,30,30,"fuseball");
     }
+//    if(m_FrameCount % 40 == 0) {
+//        spawn<Fuseball>(4,LINE_T_SCALE,30,30,"fuseball");
+//    }
 
 //    if(m_FrameCount % 30 == 0) {
 //        spawn<Fuseball>(4,LINE_T_SCALE,30,30,"fuseball");
 //    }
-//    if(m_FrameCount % 180 == 0){
-//        spawn<Pulsar>(2,LINE_T_SCALE,9,30,"pulsar");
-//    }
+    if(m_FrameCount % 600 == 0){
+        spawn<Pulsar>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,9,30,"pulsar");
+    }
 }
 
 void Game::resetIngame() {
@@ -362,6 +385,12 @@ void Game::setState(GameState state) {
             resetScore();
             m_GameState = state;
             break;
+        case STATE_TRANSITION:
+            cleanActors();
+            m_GameState = state;
+            m_FrameCountPaused = 0;
+
+            break;
         case STATE_GAMEOVER:
             if(m_Score > m_HighScore){
                 setHighScore(m_Score);
@@ -420,3 +449,12 @@ void Game::setHighScore(int highscore) {
     file << std::to_string(highscore);
     file.close();
 }
+
+void Game::changeLevel() {
+    m_Level++;
+    m_CurrentQuota += SCORE_QUOTA_DEFAULT + SCORE_QUOTA_INCREMENT;  // 1500 -> 1800 -> 2100 -> 2400
+//    m_isRunning = false;
+    setState(STATE_TRANSITION);
+}
+
+
