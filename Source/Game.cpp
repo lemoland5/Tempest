@@ -6,8 +6,10 @@
 #include "../Header/MapLoader.h"
 #include "../Header/PathManager.h"
 #include "../Header/Pulsar.h"
+#include "../Header/SfxManager.h"
 #include <cstdlib>
 #include <fstream>
+#include <SDL_mixer.h>
 
 Game* Game::s_pInstance = nullptr;
 
@@ -19,7 +21,7 @@ Game* Game::getInstance() {
 }
 
 bool Game::initialise(const std::string& windowName, unsigned int width, unsigned int height) {
-    if(SDL_Init(SDL_INIT_EVERYTHING) == 0 && TTF_Init() == 0){
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == 0 && TTF_Init() == 0 && Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == 0){
         m_pWindow = SDL_CreateWindow(windowName.c_str(),SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (int)width, (int)height, SDL_WINDOW_SHOWN);
         m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 
@@ -43,6 +45,9 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         PathManager::getInstance()->loadPath("../Assets/fuseball.path", "fuseball");
         PathManager::getInstance()->loadPath("../Assets/bullet.path", "bullet");
         PathManager::getInstance()->loadPath("../Assets/particle.path", "particle");
+
+        SfxManager::getInstance()->loadSound("../Assets/shot.wav", "shot");
+        SfxManager::getInstance()->loadSound("../Assets/death.wav", "death");
 //        PathManager::getInstance()->loadPath("../Assets/player.path", "player");
 
         m_pPlayer = new Player(0,0,30,30,"player");

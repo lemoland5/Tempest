@@ -2,13 +2,16 @@
 #include "../Header/EventHandler.h"
 #include "../Header/Game.h"
 #include "../Header/Player.h"
+#include "../Header/SfxManager.h"
 #include <iostream>
 
 void Player::shoot(){
     if(!m_canShoot) return;
+
     Game::getInstance()->spawn<Bullet>(m_pMapPosition->x, m_pMapPosition->y, 10, 10, "bullet");
     m_canShoot = false;
     m_FramesRecharging = FIRE_DELAY_FRAMES;
+    SfxManager::getInstance()->playSound("shot");
 }
 
 void Player::handleCollisions() {
