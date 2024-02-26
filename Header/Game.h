@@ -17,7 +17,7 @@ const std::string WINDOW_NAME = "Tempest";
 const std::string PATH_HIGHSCORE = "../Data/highscore.txt";
 
 const int SCORE_QUOTA_DEFAULT = 1500;
-const int SCORE_QUOTA_INCREMENT = 300;
+const int SCORE_QUOTA_INCREMENT = 600;
 
 const int TRANSITION_DURATION_FRAMES = 192; // 3.2s @ 60fps
 const int TRANSITION_FLASH_DURATION_FRAMES = TRANSITION_DURATION_FRAMES / (int)(TRANSITION_COLOR_ORDER.size());
@@ -41,6 +41,7 @@ public:
     [[nodiscard]] bool isRunning() const;
     [[nodiscard]] Map* getMap() const;
     [[nodiscard]] int getFrameCount() const;
+    [[nodiscard]] Player* getPlayer() const;
 
     void loadHighScore();
 

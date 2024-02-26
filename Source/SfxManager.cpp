@@ -33,6 +33,6 @@ void SfxManager::loadSound(std::string path, std::string id) {
     }
 }
 
-void SfxManager::playSound(std::string id) {
-    Mix_PlayChannel(-1, m_pSounds[id], 0);
+int SfxManager::playSound(std::string id) {
+    return Mix_PlayChannel(-1, m_pSounds[id], 0);
 }

@@ -7,7 +7,7 @@ void Flipper::update() {
         moveY(-1);
     }
     else{
-        Enemy::kill();
+        Enemy::kill(TYPE_NONE);
     }
 
     if(Game::getInstance()->getFrameCount() % 70 == 0 && rand() % 2 == 0 && !m_isFlipping){

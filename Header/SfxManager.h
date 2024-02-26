@@ -8,7 +8,7 @@ class SfxManager {
 public:
 
     void loadSound(std::string path, std::string id);
-    void playSound(std::string id);
+    int playSound(std::string id);
 
     static SfxManager* getInstance();
 private:

@@ -9,7 +9,8 @@ public:
 
     void handleCollisions() override;
 
-    void kill() override;
+    virtual void kill(Type killerType);
+    using Actor::kill;
 
     Type getType() override {return TYPE_ENEMY;};
 

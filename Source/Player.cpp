@@ -17,7 +17,7 @@ void Player::shoot(){
 void Player::handleCollisions() {
 //    std::cout<<m_CollisionStack.size()<<"\n";
     while(!m_CollisionStack.empty()){
-        std::cout<<"I got touched \n";
+//        std::cout<<"I got touched \n";
 
         switch (m_CollisionStack.top()) {
             case TYPE_ENEMY:

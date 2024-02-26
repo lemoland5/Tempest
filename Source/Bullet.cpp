@@ -6,7 +6,7 @@ void Bullet::update() {
 
 
     if(m_pMapPosition->y < LINE_T_SCALE){
-        moveY(3);
+        moveY(4);
     }
     else{
         Actor::kill();

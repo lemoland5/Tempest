@@ -286,39 +286,66 @@ void Game::renderIngame() {
         PathManager::getInstance()->drawPath(m_pRenderer, "player", WINDOW_CENTER_HORIZONTAL - 300 + 40 + (i * 102),
                                              WINDOW_CENTER_VERTICAL + 175 + 100);
     }
+
+//    std::cout<<Game::getInstance()->m_Level<<"\n";
 }
 
 
 
 void Game::checkSpawn() {
-    if(m_FrameCount % 100 == 0){
-        spawn<Flipper>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
+    if(m_Level <= 1){
+        if(m_FrameCount % 130 == 0){
+            spawn<Flipper>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
+        }
+    }
+    if(m_Level == 2){
+        if(m_FrameCount % 130 == 0){
+            spawn<Flipper>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
+        }
+        if(m_FrameCount % 280 == 0){
+            spawn<FlipperTanker>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipperTanker");
+        }
+    }
+    if(m_Level == 3){
+        if(m_FrameCount % 243 == 0){
+            spawn<Flipper>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
+        }
+        if(m_FrameCount % 367 == 0){
+            spawn<FlipperTanker>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipperTanker");
+        }
+        if(m_FrameCount % 312 == 0){
+            spawn<Fuseball>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"fuseball");
+        }
+    }
+    if(m_Level == 4){
+        if(m_FrameCount % 279 == 0){
+            spawn<Flipper>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
+        }
+        if(m_FrameCount % 411 == 0){
+            spawn<FlipperTanker>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipperTanker");
+        }
+        if(m_FrameCount % 310 == 0){
+            spawn<Fuseball>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"fuseball");
+        }
+        if(m_FrameCount % 449 == 0){
+            spawn<Pulsar>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"pulsar");
+        }
+    }
+    if(m_Level >= 5){
+        if(m_FrameCount % 279 - (int)(1.8f * (float)m_Level) == 0){
+            spawn<Flipper>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipper");
+        }
+        if(m_FrameCount % 412 - (int)(1.3f * (float)m_Level) == 0){
+            spawn<FlipperTanker>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"flipperTanker");
+        }
+        if(m_FrameCount % 250 - (int)(1.9f * (float)m_Level) == 0){
+            spawn<Fuseball>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"fuseball");
+        }
+        if(m_FrameCount % 509 - (int)(2.1f * (float)m_Level) == 0){
+            spawn<Pulsar>(rand() % (int)m_pMap->getNodeCount(),LINE_T_SCALE,60,30,"pulsar");
+        }
     }
 
-//    if(m_FrameCount % 120 == 0){
-//        spawn<Flipper>(0,LINE_T_SCALE,60,30,"flipper");
-//    }
-
-    if(m_FrameCount % 240 == 0){
-        spawn<FlipperTanker>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,80,30,"flipperTanker");
-    }
-
-//    if(m_FrameCount % 120 == 0){
-//        spawn<FlipperTanker>(5,LINE_T_SCALE,80,30,"flipperTanker");
-//    }
-    if(m_FrameCount % 180 == 0) {
-        spawn<Fuseball>(rand() % (m_pMap->getNodeCount()),LINE_T_SCALE,30,30,"fuseball");
-    }
-//    if(m_FrameCount % 40 == 0) {
-//        spawn<Fuseball>(4,LINE_T_SCALE,30,30,"fuseball");
-//    }
-
-//    if(m_FrameCount % 30 == 0) {
-//        spawn<Fuseball>(4,LINE_T_SCALE,30,30,"fuseball");
-//    }
-    if(m_FrameCount % 600 == 0){
-        spawn<Pulsar>(rand() % m_pMap->getNodeCount(),LINE_T_SCALE,9,30,"pulsar");
-    }
 }
 
 void Game::resetIngame() {
@@ -460,6 +487,10 @@ void Game::changeLevel() {
     m_CurrentQuota += SCORE_QUOTA_DEFAULT + SCORE_QUOTA_INCREMENT;  // 1500 -> 1800 -> 2100 -> 2400
 //    m_isRunning = false;
     setState(STATE_TRANSITION);
+}
+
+Player *Game::getPlayer() const {
+    return m_pPlayer;
 }
 
 

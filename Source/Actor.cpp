@@ -21,7 +21,7 @@ void Actor::moveX(int x) {
         m_pMapPosition->x = 0;
     }
     correctRotation();
-    std::cout<<"New rotation: "<<m_Rotation<<"\n";
+//    std::cout<<"New rotation: "<<m_Rotation<<"\n";
 
 }
 void Actor::moveY(int y) {
@@ -68,7 +68,7 @@ void Actor::moveXAbs(int x) {
 }
 
 Actor::~Actor() {
-    std::cout<<"ima head out \n";
+//    std::cout<<"ima head out \n";
     delete m_pMapPosition;
     delete m_pPosition;
 }

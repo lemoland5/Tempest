@@ -1,4 +1,4 @@
-#include "../Header/FlipperTanker.h"
+#include "../Header/Fuseball.h"
 #include "../Header/Game.h"
 #include "../Header/Pulsar.h"
 
@@ -30,7 +30,7 @@ void Pulsar::zap() {
     }
 
     if(m_FramesCharging >= ZAP_TIME_FRAMES){
-        Game::getInstance()->spawn<FlipperTanker>((int)m_pMapPosition->x,COLLISION_DISTANCE,1,1,"bullet");
+        Game::getInstance()->spawn<Fuseball>((int)m_pMapPosition->x,COLLISION_DISTANCE,1,1,"fuseball");
         Enemy::kill();
     }
 }

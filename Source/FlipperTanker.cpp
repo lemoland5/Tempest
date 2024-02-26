@@ -5,10 +5,10 @@
 void FlipperTanker::update() {
 
     if(m_pMapPosition->y > 0){
-        moveY(-1);
+        moveY(-2);
     }
     else{
-        Enemy::kill();
+        Enemy::kill(TYPE_NONE);
     }
 
 //    if(Game::getInstance()->getFrameCount() % 70 == 0){
@@ -23,8 +23,12 @@ void FlipperTanker::update() {
     Actor::update();
 }
 
-void FlipperTanker::kill() {
+void FlipperTanker::kill(Type killerType) {
+
+    std::cout<<"Im here yo \n";
+
     Game::getInstance()->spawn<Flipper>(m_pMapPosition->x, m_pMapPosition->y + COLLISION_DISTANCE, m_Width, m_Height, "flipper");
     Game::getInstance()->spawn<Flipper>(m_pMapPosition->x, m_pMapPosition->y + COLLISION_DISTANCE + LINE_T_SCALE / 15, m_Width, m_Height, "flipper");
-    Actor::kill();
+    Enemy::kill(killerType);
 }
+
