@@ -15,6 +15,8 @@ Rekreacja automatowej gry Tempest z Atari 2600 w SDL na konkurs Motorola Science
 ### Grafika
 - Przemysław Smyczyk
 
+---
+
 AtariClassic Font by Mark Simonson
 
 Made using SDL2
