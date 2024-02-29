@@ -1,6 +1,5 @@
 #include "../Header/SfxManager.h"
 #include <filesystem>
-#include <iostream>
 
 SfxManager* SfxManager::m_pInstance = nullptr;
 
@@ -11,28 +10,16 @@ SfxManager* SfxManager::getInstance(){
     return m_pInstance;
 }
 
-void SfxManager::loadSound(std::string path, std::string id) {
+void SfxManager::loadSound(const std::string& path, const std::string& id) {
 
-    if(std::filesystem::exists(path.c_str())){
-        std::cout<<"Sound file exists chilllax \n";
-    }
-
-    m_pSounds[id] = NULL;
+    m_pSounds[id] = nullptr;
     m_pSounds[id] = Mix_LoadWAV(path.c_str());
 
-    testSound = Mix_LoadWAV(path.c_str());
-    if(testSound == NULL){
-        std::cout<<"testSound is fucked :3 \n";
-    }
-    else{
-        std::cout<<"testsound is cool \n";
-    }
-
-    if(m_pSounds[id] == NULL){
+    if(m_pSounds[id] == nullptr){
         printf( "Failed to load sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
     }
 }
 
-int SfxManager::playSound(std::string id) {
+int SfxManager::playSound(const std::string& id) {
     return Mix_PlayChannel(-1, m_pSounds[id], 0);
 }

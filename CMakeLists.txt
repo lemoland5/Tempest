@@ -18,8 +18,6 @@ add_executable(Tempest
         Header/Game.h
         Source/Actor.cpp
         Header/Actor.h
-        Source/EventHandler.cpp
-        Header/EventHandler.h
         Header/Player.h
         Source/Player.cpp
         Source/Shapes.cpp

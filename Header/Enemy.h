@@ -5,7 +5,7 @@
 class Enemy: public Actor {
 public:
 
-    Enemy(int x, int y, int width, int height, std::string id, int scoreValue): Actor(x, y, width, height, id), m_ScoreValue(scoreValue){};
+    Enemy(float x, float y, int width, int height, std::string id, int scoreValue): Actor(x, y, width, height, id), m_ScoreValue(scoreValue){};
 
     void handleCollisions() override;
 

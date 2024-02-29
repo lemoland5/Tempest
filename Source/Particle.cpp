@@ -1,16 +1,17 @@
 #include "../Header/Particle.h"
 #include "../Header/PathManager.h"
 #include <iostream>
+#include <utility>
 
-Particle::Particle(int x, int y, int width, int height, std::string id, Point *velocity, SDL_Color color): Actor(x, y, width, height, id), m_pVelocity(velocity),
+Particle::Particle(int x, int y, int width, int height, std::string id, Point *velocity, SDL_Color color): Actor((float)x, (float)y, width, height, std::move(id)), m_pVelocity(velocity),
                                                                                                            m_Color(color){
-    m_pPosition->x = x;
-    m_pPosition->y = y;
+    m_pPosition->x = (float)x;
+    m_pPosition->y = (float)y;
 }
 
 Particle::~Particle() {
     delete m_pVelocity;
-//    Actor::~Actor();
+
 }
 
 void Particle::update() {
@@ -35,7 +36,7 @@ void Particle::update() {
 }
 
 void Particle::draw(SDL_Renderer *renderer) {
-    PathManager::getInstance()->drawPath(renderer, m_TextureId, m_pPosition->x, m_pPosition->y, m_Rotation, m_Color);
+    PathManager::getInstance()->drawPath(renderer, m_TextureId, (int)m_pPosition->x, (int)m_pPosition->y, m_Rotation, m_Color);
 }
 
 void Particle::kill() {

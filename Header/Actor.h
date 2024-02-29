@@ -18,7 +18,7 @@ public:
     Actor() = default;
     Actor(float x, float y, int width, int height, std::string id);
     virtual ~Actor();
-//    Actor(Point* point, int width, int height): m_pMapPosition(point), m_Width(width), m_Height(height), m_MarkedForDeletion(false){};
+
 
     virtual void update();
     virtual void draw(SDL_Renderer* renderer);
@@ -30,7 +30,7 @@ public:
     [[nodiscard]] bool isMarkedForDeletion() const {return m_MarkedForDeletion;};
     [[nodiscard]] Point* getMapPosition() const {return m_pMapPosition;};
 
-    void moveX(int x);
+    virtual void moveX(int x);
     void moveXAbs(int x);
     void moveY(int y);
     void addCollision(Type type);

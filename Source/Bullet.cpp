@@ -1,5 +1,4 @@
 #include "../Header/Bullet.h"
-#include <iostream>
 
 void Bullet::update() {
 

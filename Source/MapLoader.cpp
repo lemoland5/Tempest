@@ -23,10 +23,10 @@ Node* stringToNode(std::string line) {
         line.erase(0, pos + delimiter.length());
         i++;
     }
-    return new Node(new Point(values[0], values[1]), new Point(values[2], values[3]), new Point(values[4], values[5]), new Point(values[6], values[7]));
+    return new Node(new Point((float)values[0], (float)values[1]), new Point((float)values[2], (float)values[3]), new Point((float)values[4], (float)values[5]), new Point((float)values[6], (float)values[7]));
 }
 
-std::vector<Node *> MapLoader::load(std::string filename) {
+std::vector<Node *> MapLoader::load(const std::string& filename) {
     std::ifstream file;
     std::string line;
     file.open(filename);

@@ -4,7 +4,7 @@
 #include <SDL.h>
 #include <vector>
 
-// ../Assets/tempest map transition colors.png
+
 const SDL_Color COLOR_PURPLE = {0, 9, 155, 255};
 const SDL_Color COLOR_GREY = {214, 214, 214, 255};
 const SDL_Color COLOR_BLUE = {116, 133, 245, 255};

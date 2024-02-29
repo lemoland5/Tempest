@@ -7,8 +7,8 @@
 class SfxManager {
 public:
 
-    void loadSound(std::string path, std::string id);
-    int playSound(std::string id);
+    void loadSound(const std::string& path, const std::string& id);
+    int playSound(const std::string& id);
 
     static SfxManager* getInstance();
 private:
@@ -16,6 +16,4 @@ private:
     static SfxManager* m_pInstance;
 
     std::map<std::string, Mix_Chunk*> m_pSounds;
-
-    Mix_Chunk* testSound = NULL;
 };

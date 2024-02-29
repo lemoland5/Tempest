@@ -1,28 +1,28 @@
 #include "../Header/Bullet.h"
-#include "../Header/EventHandler.h"
 #include "../Header/Game.h"
-#include "../Header/Player.h"
 #include "../Header/SfxManager.h"
 #include <iostream>
 
 void Player::shoot(){
     if(!m_canShoot) return;
 
-    Game::getInstance()->spawn<Bullet>(m_pMapPosition->x, m_pMapPosition->y, 10, 10, "bullet");
+    Game::getInstance()->spawn<Bullet>((int)m_pMapPosition->x, (int)m_pMapPosition->y, 10, 10, "bullet");
     m_canShoot = false;
     m_FramesRecharging = FIRE_DELAY_FRAMES;
-    SfxManager::getInstance()->playSound("shot");
+    SfxManager::getInstance()->playSound("player-shot");
+
+
 }
 
 void Player::handleCollisions() {
-//    std::cout<<m_CollisionStack.size()<<"\n";
+
     while(!m_CollisionStack.empty()){
-//        std::cout<<"I got touched \n";
+
 
         switch (m_CollisionStack.top()) {
             case TYPE_ENEMY:
                 kill();
-                 std::cout<<"Chinese person! \n";
+
                 m_CollisionStack.pop();
                 break;
             default:
@@ -34,14 +34,19 @@ void Player::handleCollisions() {
 
 
 void Player::kill() {
-    std::cout<<"I got killed \n";
+
     m_Lives--;
-    Game::getInstance()->setState(STATE_PAUSED);
+
+    if(m_Lives > 0){
+        Game::getInstance()->setState(STATE_PAUSED);
+        SfxManager::getInstance()->playSound("player-death");
+    }
 
     if(m_Lives <= 0){
          Game::getInstance()->setState(STATE_GAMEOVER);
+        SfxManager::getInstance()->playSound("gameover");
     }
-//    Actor::kill();
+
 }
 
 void Player::update() {
@@ -53,4 +58,9 @@ void Player::update() {
     }
 
     Actor::update();
+}
+
+void Player::moveX(int x) {
+    Actor::moveX(x);
+    SfxManager::getInstance()->playSound("player-moveX");
 }

@@ -10,18 +10,18 @@ class PathManager {
 public:
     void loadPath(const std::string& path, const std::string& id);
 
-    void drawPath(SDL_Renderer* renderer, std::string id);
-    void drawPath(SDL_Renderer* renderer, std::string id, int x, int y);
-    void drawPath(SDL_Renderer* renderer, std::string id, int x, int y, float angle);
-    void drawPath(SDL_Renderer* renderer, std::string id, int x, int y, float angle, SDL_Color color);
+    void drawPath(SDL_Renderer* renderer, const std::string& id);
+    void drawPath(SDL_Renderer* renderer, const std::string& id, int x, int y);
+    void drawPath(SDL_Renderer* renderer, const std::string& id, int x, int y, float angle);
+    void drawPath(SDL_Renderer* renderer, const std::string& id, int x, int y, float angle, SDL_Color color);
 
-    void movePathX(std::string id, float x);
-    void movePathXAbs(std::string id, float x);
-    void movePathY(std::string id, float y);
-    void movePathYAbs(std::string id, float y);
+    [[maybe_unused]] void movePathX(const std::string& id, float x);
+    [[maybe_unused]] void movePathXAbs(const std::string& id, float x);
+    [[maybe_unused]] void movePathY(const std::string& id, float y);
+    [[maybe_unused]] void movePathYAbs(const std::string& id, float y);
 
-//     TODO: MOVE TO PRIVATE
-//    std::map<std::string, Path*> m_pPaths;
+
+
 
     void destroy(){m_pPaths.clear();};
 

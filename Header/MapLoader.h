@@ -8,7 +8,7 @@
 class MapLoader {
 public:
     static MapLoader* getInstance();
-    std::vector<Node*> load(std::string);
+    std::vector<Node*> load(const std::string&);
 private:
     static MapLoader* s_pInstance;
     MapLoader(){};

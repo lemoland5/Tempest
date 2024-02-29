@@ -12,7 +12,7 @@ void Enemy::handleCollisions() {
                 m_CollisionStack.pop();
                 break;
             case TYPE_PLAYER:
-//                kill();
+
                 m_MarkedForDeletion = true;
                 m_CollisionStack.pop();
                 break;
@@ -26,15 +26,15 @@ void Enemy::handleCollisions() {
 void Enemy::kill(Type killerType) {
     if(killerType == TYPE_BULLET){
         for(int i = 0; i < 4; i++){
-            Game::getInstance()->spawn<Particle>(new Particle(m_pPosition->x, m_pPosition->y, 10, 10, "particle", new Point((rand()%11) - 4,(rand()%11) - 4), {255,0,0,255}));
+            Game::getInstance()->spawn<Particle>(new Particle((int)m_pPosition->x, (int)m_pPosition->y, 10, 10, "particle", new Point((float)(rand()%11) - 4,(float)(rand()%11) - 4), {255,0,0,255}));
         }
-        std::cout<<"Playing death sound... \n";
-        SfxManager::getInstance()->playSound("death");
+
+        SfxManager::getInstance()->playSound("enemy-death");
     }
     else{
         Game::getInstance()->getPlayer()->kill();
     }
-//    kill();
+
     Actor::kill();
 }
 

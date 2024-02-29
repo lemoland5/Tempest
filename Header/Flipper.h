@@ -7,13 +7,13 @@ const float FLIP_ROTATION_DEGREES = 355;
 
 class Flipper: public Enemy {
 public:
-    Flipper(int x, int y, int width, int height, std::string id): Enemy(x, y, width, height, id, 150){};
+    Flipper(float x, float y, int width, int height, std::string id): Enemy(x, y, width, height, id, 150){};
 
     void flip();
     void resetFlip();
 
     void update() override;
-//    void handleCollisions() override;
+
 private:
     bool m_isFlipping = false;
     int m_FramesFlipping = 0;

@@ -1,9 +1,7 @@
-#include "../Header/EventHandler.h"
 #include "../Header/Flipper.h"
 #include "../Header/FlipperTanker.h"
 #include "../Header/Fuseball.h"
 #include "../Header/Game.h"
-#include "../Header/MapLoader.h"
 #include "../Header/PathManager.h"
 #include "../Header/Pulsar.h"
 #include "../Header/SfxManager.h"
@@ -26,15 +24,11 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 
         m_pMenuOptions.push_back(new MenuOption("PLAY"));
+        m_pMenuOptions.push_back(new MenuOption("CREDITS"));
         m_pMenuOptions.push_back(new MenuOption("QUIT"));
 
-        HudManager::getInstance()->loadFont("../Assets/AtariClassic-gry3.ttf",24,"atari");
-//        SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 255, 255);
-//        m_pMap = new Map();
-
+        HudManager::getInstance()->loadFont("../Assets/AtariClassic-gry3.ttf",36,"atari");
         m_pMap = new Map();
-
-//         = new Path();
 
 
         PathManager::getInstance()->loadPath("../Assets/player.path", "player");
@@ -46,9 +40,17 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
         PathManager::getInstance()->loadPath("../Assets/bullet.path", "bullet");
         PathManager::getInstance()->loadPath("../Assets/particle.path", "particle");
 
-        SfxManager::getInstance()->loadSound("../Assets/shot.wav", "shot");
-        SfxManager::getInstance()->loadSound("../Assets/death.wav", "death");
-//        PathManager::getInstance()->loadPath("../Assets/player.path", "player");
+        SfxManager::getInstance()->loadSound("../Assets/player-shot.wav", "player-shot");
+        SfxManager::getInstance()->loadSound("../Assets/enemy-death.wav", "enemy-death");
+        SfxManager::getInstance()->loadSound("../Assets/gameover.wav", "gameover");
+        SfxManager::getInstance()->loadSound("../Assets/player-death.wav", "player-death");
+        SfxManager::getInstance()->loadSound("../Assets/level-change.wav", "level-change");
+        SfxManager::getInstance()->loadSound("../Assets/player-moveX.wav", "player-moveX");
+        SfxManager::getInstance()->loadSound("../Assets/menu-change.wav", "menu-change");
+        SfxManager::getInstance()->loadSound("../Assets/menu-select.wav", "menu-select");
+        SfxManager::getInstance()->loadSound("../Assets/pulsar-charge.wav", "pulsar-charge");
+        SfxManager::getInstance()->loadSound("../Assets/pulsar-shot.wav", "pulsar-shot");
+
 
         m_pPlayer = new Player(0,0,30,30,"player");
         m_pActors.push_back(m_pPlayer);
@@ -64,7 +66,7 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
         m_isRunning = true;
 
-        std::cout<<"inited \n";
+
         return true;
     }
     return false;
@@ -72,8 +74,6 @@ bool Game::initialise(const std::string& windowName, unsigned int width, unsigne
 
 
 void Game::handleInput() {
-    EventHandler::getInstance()->update();
-
     SDL_Event event;
     if(SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -100,15 +100,27 @@ void Game::handleInput() {
 
                 if(m_GameState == STATE_MENU){
                     if(event.key.keysym.sym == SDLK_UP){
-                        m_MenuSelected++;
+                        m_MenuSelected--;
+                        SfxManager::getInstance()->playSound("menu-change");
                     }
                     if(event.key.keysym.sym == SDLK_DOWN){
-                        m_MenuSelected--;
+                        m_MenuSelected++;
+                        SfxManager::getInstance()->playSound("menu-change");
                     }
                     if(event.key.keysym.sym == SDLK_SPACE || event.key.keysym.sym == SDLK_RETURN){
                         checkMenu();
+                        SfxManager::getInstance()->playSound("menu-select");
+                        break;
                     }
                 }
+
+                if(m_GameState == STATE_MENU_CREDITS){
+                    if(event.key.keysym.sym == SDLK_SPACE || event.key.keysym.sym == SDLK_RETURN){
+                        setState(STATE_MENU);
+                        SfxManager::getInstance()->playSound("menu-select");
+                    }
+                }
+
                 if(m_GameState == STATE_GAMEOVER){
                     if(event.key.keysym.sym == SDLK_SPACE || event.key.keysym.sym == SDLK_RETURN){
                         setState(STATE_INGAME);
@@ -121,23 +133,17 @@ void Game::handleInput() {
                 break;
         }
     }
-//    if(EventHandler::getInstance()->isKeyDown(SDL_SCANCODE_W)){
-//        std::cout<<"W \n";
-//    }
+
+
+
 
 }
 
 void Game::update() {
     m_FrameCount++;
 
-//    ->rotate(1);
-//    ->moveX(1);
-//    ->moveY(1);
-//
-//    PathManager::getInstance()->movePathXAbs("player",m_pPlayer->getX());
-//    PathManager::getInstance()->movePathYAbs("player",m_pPlayer->getY());
-
     switch (m_GameState) {
+        case STATE_MENU_CREDITS:
         case STATE_MENU:
             updateMenu();
             break;
@@ -165,11 +171,11 @@ void Game::updateIngame() {
 
     for(int i = 0; i < m_pActors.size(); i++){
         m_pActors[i]->update();
-        m_NodeRep[m_pActors[i]->getMapPosition()->x]++;
+        m_NodeRep[(size_t)m_pActors[i]->getMapPosition()->x]++;
         if(m_pActors[i]->isMarkedForDeletion()) {
-            m_NodeRep[m_pActors[i]->getMapPosition()->x]--;
+            m_NodeRep[(size_t)m_pActors[i]->getMapPosition()->x]--;
             delete m_pActors[i];
-//            m_pActors.pop_back(i);
+
             m_pActors.erase(m_pActors.begin() + i);
         }
     }
@@ -182,14 +188,15 @@ void Game::updateIngame() {
 }
 
 void Game::updateMenu() {
-//    std::cout<<"updatin \n";
-//    std::cout<<m_MenuSelected<<"\n";
+
+
 
     if(m_MenuSelected < 0) m_MenuSelected = (int)m_pMenuOptions.size() - 1;
     if(m_MenuSelected >= m_pMenuOptions.size()) m_MenuSelected = 0;
 
     resetMenuSelection();
     m_pMenuOptions[m_MenuSelected]->setSelected(true);
+
 }
 
 void Game::updatePaused() {
@@ -227,23 +234,17 @@ void Game::updateTransition() {
 
 
 void Game::render() {
-//    std::cout<<m_pActors.size()<<"\n";
-//    std::cout<<PathManager::getInstance()->m_pPaths.size()<<"\n";
-//    std::cout<<m_HighScore<<"\n";
+
     SDL_SetRenderDrawColor(m_pRenderer, m_BackgroundColor);
     SDL_RenderClear(m_pRenderer);
     SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
 
-    // SDL_RenderCopy( /* ... */ );
-//    SDL_RenderDrawLine(m_pRenderer, testLine);
-//    testNode->draw(m_pRenderer);
-
-//    TextureManager::getInstance()->draw(m_pRenderer, "player", 320, 240, 150, 150);
-
-
     switch (m_GameState) {
         case STATE_MENU:
             renderMenu();
+            break;
+        case STATE_MENU_CREDITS:
+            renderCredits();
             break;
         case STATE_GAMEOVER:
             renderGameover();
@@ -253,10 +254,6 @@ void Game::render() {
             break;
     }
 
-//    ->draw(m_pRenderer);
-
-//    PathManager::getInstance()->drawPath(m_pRenderer, "player", 500, 100);
-
     SDL_RenderPresent(m_pRenderer);
 }
 
@@ -265,7 +262,7 @@ void Game::renderMenu() {
     HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, 45, WINDOW_WIDTH, 100, "atari", "TEMPEST MMXXIV", COLOR_TEXT_SELECTED);
 
     for(int i = 0; i < m_pMenuOptions.size(); i++){
-        m_pMenuOptions[i]->draw(m_pRenderer, WINDOW_CENTER_HORIZONTAL, (int)WINDOW_CENTER_VERTICAL + (100 * i) - 35, 300, 100, "atari");
+        m_pMenuOptions[i]->draw(m_pRenderer, WINDOW_CENTER_HORIZONTAL, (int)WINDOW_CENTER_VERTICAL + (100 * i) - 80, 300, 100, "atari");
     }
 
     HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_HEIGHT - 50, WINDOW_WIDTH, 100, "atari", "HIGH SCORE: " + std::to_string(m_HighScore), COLOR_TEXT_SELECTED);
@@ -283,11 +280,11 @@ void Game::renderIngame() {
     HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 175, (int)m_DisplayScore.length() * 100, 100, "atari", m_DisplayScore, {255,255,255});
 
     for(int i = 0; i < m_pPlayer->getLives(); i++) {
-        PathManager::getInstance()->drawPath(m_pRenderer, "player", WINDOW_CENTER_HORIZONTAL - 300 + 40 + (i * 102),
+        PathManager::getInstance()->drawPath(m_pRenderer, "player", (int)WINDOW_CENTER_HORIZONTAL - 300 + 40 + (i * 102),
                                              WINDOW_CENTER_VERTICAL + 175 + 100);
     }
 
-//    std::cout<<Game::getInstance()->m_Level<<"\n";
+
 }
 
 
@@ -346,15 +343,16 @@ void Game::checkSpawn() {
         }
     }
 
+
 }
 
 void Game::resetIngame() {
     m_pPlayer->moveXAbs(0);
-//    for(int i = 0; i < m_pActors.size(); i++){
-//        m_pActors[i]->markForDeletion();
-//    }
+
+
+
     cleanActors();
-//    m_pActors.clear();
+
 }
 
 void Game::NodeRepUpdate() {
@@ -385,7 +383,7 @@ void Game::addScore(int score) {
     }
 
     m_DisplayScore = prefix + std::to_string(m_Score);
-//    std::cout<<m_DisplayScore<<"\n";
+
 }
 
 void Game::resetScore() {
@@ -405,6 +403,9 @@ void Game::checkMenu() {
             setState(STATE_INGAME);
             break;
         case 1:
+            setState(STATE_MENU_CREDITS);
+            break;
+        case 2:
             m_isRunning = false;
             break;
     }
@@ -421,12 +422,13 @@ void Game::setState(GameState state) {
             cleanActors();
             m_GameState = state;
             m_FrameCountPaused = 0;
-
+            SfxManager::getInstance()->playSound("level-change");
             break;
         case STATE_GAMEOVER:
             if(m_Score > m_HighScore){
                 setHighScore(m_Score);
             }
+            cleanActors();
         case STATE_PAUSED:
             m_FrameCountPaused = 0;
         default:
@@ -443,12 +445,12 @@ void Game::quit() {
 
 void Game::renderGameover() {
     if(m_FrameCountPaused % 50 > 0 && m_FrameCountPaused % 50 < 25 && m_FrameCountPaused < 150){
-//        m_BackgroundColor = {127,127,127,255};
+
         HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL, WINDOW_WIDTH, 200, "atari", "GAME OVER!", COLOR_TEXT);
     }
     if(m_FrameCountPaused >= 150){
-//        m_isRunning = false;
-//        HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 200, WINDOW_WIDTH, 300, "atari", "GAME OVER!", COLOR_TEXT);
+
+
         HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 200, WINDOW_WIDTH, 140, "atari", "SCORE: " + m_DisplayScore, COLOR_TEXT);
         HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL, WINDOW_WIDTH - 300, 70, "atari", "[ESC] - MAIN MENU", COLOR_TEXT);
         HudManager::getInstance()->drawText(m_pRenderer,WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 170, WINDOW_WIDTH - 150, 70, "atari", "[SPACE/ENTER] - PLAY AGAIN", COLOR_TEXT);
@@ -485,12 +487,36 @@ void Game::setHighScore(int highscore) {
 void Game::changeLevel() {
     m_Level++;
     m_CurrentQuota += SCORE_QUOTA_DEFAULT + SCORE_QUOTA_INCREMENT;  // 1500 -> 1800 -> 2100 -> 2400
-//    m_isRunning = false;
+
     setState(STATE_TRANSITION);
 }
 
 Player *Game::getPlayer() const {
     return m_pPlayer;
+}
+
+void Game::renderCredits() {
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, 45, WINDOW_WIDTH, 100, "atari", "TEMPEST MMXXIV", COLOR_TEXT_SELECTED);
+
+
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 225, WINDOW_WIDTH, 35, "atari", "FOR MOTOROLA SCIENCE CUP", COLOR_TEXT_SELECTED);
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 160, WINDOW_WIDTH - 100, 35, "atari", "PROGRAMMING:", COLOR_TEXT_CREDITS);
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 120, WINDOW_WIDTH - 100, 35, "atari", "PRZEMYSLAW SMYCZYK", COLOR_TEXT_CREDITS);
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 90, WINDOW_WIDTH - 100, 35, "atari", "MAKSYMILIAN DYNUS", COLOR_TEXT_CREDITS);
+
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 35, WINDOW_WIDTH - 100, 35, "atari", "SOUND DESIGN:", COLOR_TEXT_CREDITS);
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL - 5, WINDOW_WIDTH - 100, 35, "atari", "BARTOSZ BARTOCHA", COLOR_TEXT_CREDITS);
+
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 50, WINDOW_WIDTH - 100, 35, "atari", "ARTWORK:", COLOR_TEXT_CREDITS);
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 80, WINDOW_WIDTH - 100, 35, "atari", "PRZEMYSLAW SMYCZYK", COLOR_TEXT_CREDITS);
+
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 145, WINDOW_WIDTH - 100, 35, "atari", "ATARI CLASSIC FONT BY MARK SIMONSON", COLOR_TEXT_SELECTED);
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 180, WINDOW_WIDTH - 100, 35, "atari", "MADE USING SDL2", COLOR_TEXT_SELECTED);
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_CENTER_VERTICAL + 215, WINDOW_WIDTH - 100, 35, "atari", "MADE @ ZSTI GLIWICE", COLOR_TEXT_SELECTED);
+
+
+    HudManager::getInstance()->drawText(m_pRenderer, WINDOW_CENTER_HORIZONTAL, WINDOW_HEIGHT - 50, WINDOW_WIDTH, 100, "atari", "[SPACE/ENTER] - MAIN MENU", COLOR_TEXT_SELECTED);
+
 }
 
 

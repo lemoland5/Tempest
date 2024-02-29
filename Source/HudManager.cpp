@@ -10,16 +10,16 @@ HudManager *HudManager::getInstance() {
     return s_pInstance;
 }
 
-void HudManager::loadFont(std::string path, int size, std::string id) {
-    TTF_Font* font = TTF_OpenFont(path.c_str(), 24);
+void HudManager::loadFont(const std::string& path, int size, const std::string& id) {
+    TTF_Font* font = TTF_OpenFont(path.c_str(), size);
     m_pFonts[id] = font;
     if(m_pFonts[id]){
-        std::cout<<"font loaded \n";
+
     }
-    else std::cout<<"font couldnt load \n";
+
 }
 
-void HudManager::drawText(SDL_Renderer* renderer, int x, int y, int w, int h, std::string fontId, std::string text, SDL_Color color){
+void HudManager::drawText(SDL_Renderer* renderer, int x, int y, int w, int h, const std::string& fontId, const std::string& text, SDL_Color color){
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(m_pFonts[fontId], text.c_str(), color);
     SDL_Texture* textureMessage = SDL_CreateTextureFromSurface(renderer,surfaceMessage);
 
@@ -29,15 +29,15 @@ void HudManager::drawText(SDL_Renderer* renderer, int x, int y, int w, int h, st
     destRect.w = w;
     destRect.h = h;
 
-    SDL_RenderCopy(renderer, textureMessage, NULL, &destRect);
-//    SDL_RenderCopy(renderer, textureMessage, &srcRect, &destRect);
+    SDL_RenderCopy(renderer, textureMessage, nullptr, &destRect);
+
 
     SDL_FreeSurface(surfaceMessage);
     SDL_DestroyTexture(textureMessage);
 
 }
 
-void HudManager::drawText(SDL_Renderer *renderer, int x, int y, int w, int h, std::string fontId, std::string text) {
+[[maybe_unused]] void HudManager::drawText(SDL_Renderer *renderer, int x, int y, int w, int h, const std::string& fontId, const std::string& text) {
     drawText(renderer, x, y, w, h, fontId, text, {255,255,255,255});
 }
 
@@ -47,7 +47,7 @@ void HudManager::destroy() {
     }
 }
 
-void MenuOption::draw(SDL_Renderer *renderer, int x, int y, int w, int h, std::string fontId) {
+void MenuOption::draw(SDL_Renderer *renderer, int x, int y, int w, int h, const std::string& fontId) {
     if(m_isSelected){
         HudManager::getInstance()->drawText(renderer, x, y, w, h, fontId, m_Text, COLOR_TEXT_SELECTED);
     }

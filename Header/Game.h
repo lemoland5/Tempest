@@ -17,13 +17,14 @@ const std::string WINDOW_NAME = "Tempest";
 const std::string PATH_HIGHSCORE = "../Data/highscore.txt";
 
 const int SCORE_QUOTA_DEFAULT = 1500;
-const int SCORE_QUOTA_INCREMENT = 600;
+const int SCORE_QUOTA_INCREMENT = 750;
 
 const int TRANSITION_DURATION_FRAMES = 192; // 3.2s @ 60fps
 const int TRANSITION_FLASH_DURATION_FRAMES = TRANSITION_DURATION_FRAMES / (int)(TRANSITION_COLOR_ORDER.size());
 
 enum GameState{
     STATE_MENU,
+    STATE_MENU_CREDITS,
     STATE_INGAME,
     STATE_PAUSED,
     STATE_GAMEOVER,
@@ -61,6 +62,7 @@ public:
 
     void renderIngame();
     void renderMenu();
+    void renderCredits();
     void renderGameover();
 
     void NodeRepUpdate();
@@ -87,7 +89,6 @@ private:
     Game() = default;
 
     bool m_isRunning = true;
-    bool m_isPaused = false;
 
     int m_Level = 1;
     int m_CurrentQuota = SCORE_QUOTA_DEFAULT;

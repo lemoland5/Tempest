@@ -1,6 +1,7 @@
 #include "../Header/Fuseball.h"
 #include "../Header/Game.h"
 #include "../Header/Pulsar.h"
+#include "../Header/SfxManager.h"
 
 void Pulsar::update() {
 
@@ -20,6 +21,10 @@ void Pulsar::update() {
 }
 
 void Pulsar::zap() {
+    if(m_FramesCharging == 0){
+        SfxManager::getInstance()->playSound("pulsar-charge");
+    }
+
     m_FramesCharging++;
 
     if(m_FramesCharging % ZAP_PULSE_TIME_FRAMES * 2 > 0 && m_FramesCharging % ZAP_PULSE_TIME_FRAMES * 2 < ZAP_PULSE_TIME_FRAMES){
@@ -31,11 +36,7 @@ void Pulsar::zap() {
 
     if(m_FramesCharging >= ZAP_TIME_FRAMES){
         Game::getInstance()->spawn<Fuseball>((int)m_pMapPosition->x,COLLISION_DISTANCE,1,1,"fuseball");
+        SfxManager::getInstance()->playSound("pulsar-shot");
         Enemy::kill();
     }
-}
-
-void Pulsar::resetZap() {
-    m_isCharging = false;
-    m_FramesCharging = false;
 }
